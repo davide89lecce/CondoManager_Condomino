@@ -60,7 +60,7 @@ public class DetailsSegnalazione extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_segnalazione);
+        setContentView(R.layout.activity_segnalazione_old);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         amministratore = sharedPrefs.getString(LOGGED_USER, "").toString();
@@ -168,7 +168,7 @@ public class DetailsSegnalazione extends AppCompatActivity
                     descrizioneStatoT.setText("Questa richiesta è in corso d'opera");
                     imageStatoI.setImageResource(R.drawable.wrench);
                 }else if(stato.equals("D")){
-                    descrizioneStatoT.setText("Questa richiesta è stata rifiutata.\nSelezionare cambia fornitore per \ninviarla ad un altro fornitore");
+                    descrizioneStatoT.setText("Questa richiesta è stata rifiutata.\nSelezionare cambia fornitore per \ninviarla ad un Altro fornitore");
                     imageStatoI.setImageResource(R.drawable.error);
                 }else if(stato.equals("E") || stato.equals("G")){
                     descrizioneStatoT.setText("I lavori per questo intervento sono stati conclusi");

@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.gambino_serra.condomanager_condomino.tesi.R;
-import com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity;
+import com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity;
 
 public class DialogSegnalazioneInviata extends DialogFragment {
 
@@ -37,7 +37,7 @@ public class DialogSegnalazioneInviata extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_segnalazione_inviata, null))
+        builder.setView(inflater.inflate(R.layout.dialog_segnalazione_inviata_old, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

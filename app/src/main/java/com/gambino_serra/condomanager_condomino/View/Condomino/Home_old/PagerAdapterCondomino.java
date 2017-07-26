@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.View.Condomino.Home;
+package com.gambino_serra.condomanager_condomino.View.Condomino.Home_old;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

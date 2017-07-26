@@ -49,7 +49,7 @@ public class AdapterCardsInteventiCompletati extends RecyclerView.Adapter<Adapte
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_fornitore_home, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_fornitore_home_old, parent, false);
 
         view.setOnClickListener(InterventiCompletati.myOnClickListener);
 

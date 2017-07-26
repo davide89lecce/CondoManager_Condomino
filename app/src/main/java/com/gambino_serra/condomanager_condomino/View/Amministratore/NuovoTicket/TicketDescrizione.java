@@ -40,7 +40,7 @@ public class TicketDescrizione extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_descrizione);
+        setContentView(R.layout.activity_ticket_descrizione_old);
         context = getApplicationContext();
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);

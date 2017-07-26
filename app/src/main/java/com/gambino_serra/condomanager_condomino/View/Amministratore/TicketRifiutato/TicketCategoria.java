@@ -43,7 +43,7 @@ public class TicketCategoria extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_segnalazione_categoria);
+        setContentView(R.layout.activity_segnalazione_categoria_old);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();

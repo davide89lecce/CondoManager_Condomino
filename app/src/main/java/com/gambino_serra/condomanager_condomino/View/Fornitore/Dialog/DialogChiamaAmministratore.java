@@ -30,7 +30,7 @@ public class DialogChiamaAmministratore extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.dialog_chiama, null))
+        builder.setView(inflater.inflate(R.layout.dialog_chiama_old, null))
 
                 .setPositiveButton(R.string.chiama_amministratore_si, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

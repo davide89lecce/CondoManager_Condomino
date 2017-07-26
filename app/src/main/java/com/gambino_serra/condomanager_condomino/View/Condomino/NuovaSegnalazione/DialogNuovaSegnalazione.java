@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.gambino_serra.condomanager_condomino.Model.HTTPRequest.Condomino.HTTPRequestCondominio;
 import com.gambino_serra.condomanager_condomino.tesi.R;
-import com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity;
+import com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -50,7 +50,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_nuova_segnalazione, null))
+        builder.setView(inflater.inflate(R.layout.dialog_nuova_segnalazione_old, null))
 
                 .setPositiveButton(R.string.nuova_segnalazione_conferma, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

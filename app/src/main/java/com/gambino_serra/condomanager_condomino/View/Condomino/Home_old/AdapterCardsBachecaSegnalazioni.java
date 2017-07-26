@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.View.Condomino.Home;
+package com.gambino_serra.condomanager_condomino.View.Condomino.Home_old;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,7 +49,7 @@ public class AdapterCardsBachecaSegnalazioni extends RecyclerView.Adapter<Adapte
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_condomino_home, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_condomino_home_old, parent, false);
 
         view.setOnClickListener(BachecaSegnalazioni.myOnClickListener);
 

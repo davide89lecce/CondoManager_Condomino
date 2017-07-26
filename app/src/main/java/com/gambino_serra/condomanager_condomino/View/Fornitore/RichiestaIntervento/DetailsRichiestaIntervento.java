@@ -68,7 +68,7 @@ public class DetailsRichiestaIntervento extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_richiesta_intervento);
+        setContentView(R.layout.activity_richiesta_intervento_old);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         fornitore = sharedPrefs.getString(LOGGED_USER, "").toString();

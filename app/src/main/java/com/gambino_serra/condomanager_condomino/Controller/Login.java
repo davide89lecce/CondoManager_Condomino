@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.gambino_serra.condomanager_condomino.Model.HTTPRequest.Utente.HTTPRequestLogin;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity;
-import com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity;
+import com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity;
 import com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity;
 import com.gambino_serra.condomanager_condomino.View.Utente.RegisterActivity;
 

@@ -46,7 +46,7 @@ public class AdapterListTicketCategoria extends RecyclerView.Adapter<AdapterList
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_categoria, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_categoria_old, parent, false);
 
         view.setOnClickListener(TicketCategoria.myOnClickListener);
 

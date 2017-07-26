@@ -42,7 +42,7 @@ public class SegnalazioneDescrizione extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_segnalazione_descrizione);
+        setContentView(R.layout.activity_segnalazione_descrizione_old);
         context = getApplicationContext();
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);

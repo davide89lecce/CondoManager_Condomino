@@ -48,7 +48,7 @@ public class TicketCondomino extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_condomino);
+        setContentView(R.layout.activity_ticket_condomino_old);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();

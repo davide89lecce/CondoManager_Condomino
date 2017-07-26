@@ -1,5 +1,44 @@
 <resources>
 
+
+    <!--Navigation Drawer-->
+    <string name="app_name">CondoManager</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_storico_interventi">Storico interventi</string>
+    <string name="nav_informazioni_personali">Informazioni personali</string>
+    <string name="nav_altro">Altro</string>
+
+    <string name="nav_photos">Photos</string>
+    <string name="nav_movies">Movies</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about_us">About Us</string>
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Storico interventi</item>
+        <item>Informazioni personali</item>
+        <item>Altro</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_mark_all_read">Mark All as Read</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+
+    <!--Old condomanager-->
     <string name="menu">Menu</string>
     <string name="action_search">Search</string>
     <string name="action_cart">Cart</string>
@@ -11,8 +50,6 @@
     <string name="hot_deals_fragment">Hot Deals Fragment</string>
 
 
-    <string name="app_name">CondomiNew</string>
-
     <!-- title activity -->
     <string name="title_login">Login</string>
     <string name="title_register">Registration</string>
@@ -21,7 +58,7 @@
     <string name="title_condomino_home">Condomino home</string>
     <string name="title_details_segnalazione">Dettagli segnalazione</string>
 
-    <!-- content_login -->
+    <!-- content_login_old -->
     <string name="enter_mail"> Enter mail</string>
     <string name="enter_password">Enter password</string>
     <string name="str_login">LOGIN</string>
@@ -46,7 +83,7 @@
     <string name="connection_failed">Connection failded!</string>
     <string name="ok">ok</string>
 
-    <!-- activity_amministratore_register -->
+    <!-- activity_amministratore_register_old -->
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_studio">Studio di amministrazione</string>
@@ -59,7 +96,7 @@
     <string name="radiogroup_fornitore">FORNITORE</string>
     <string name="confirm">CONFIRM</string>
 
-    <!-- activity_fornitore_register -->
+    <!-- activity_fornitore_register_old -->
     <string name="hint_username_f">Username</string>
     <string name="hint_password_f">Password</string>
     <string name="hint_azienda_f">Azienda</string>
@@ -126,7 +163,7 @@
     <string name="registration_success">Registration successfully occurred.\n\nPress
         ok to enter in your personal area. </string>
 
-    <!-- splash_layout-->
+    <!-- splash_layout_old-->
     <string name="splash_descr">image load app</string>
     <string name="title_activity_main">MainActivity</string>
 

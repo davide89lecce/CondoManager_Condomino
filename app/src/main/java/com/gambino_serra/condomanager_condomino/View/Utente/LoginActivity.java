@@ -13,7 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity;
-import com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity;
+import com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity;
 import com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity;
 
 import static com.gambino_serra.condomanager_condomino.Controller.Login.checkFields;
@@ -39,12 +39,12 @@ public class LoginActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_old);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo);
+        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
 
         userState();
 

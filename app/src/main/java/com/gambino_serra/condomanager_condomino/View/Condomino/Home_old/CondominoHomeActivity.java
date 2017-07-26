@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.View.Condomino.Home;
+package com.gambino_serra.condomanager_condomino.View.Condomino.Home_old;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -48,12 +48,12 @@ public class CondominoHomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_condomino_home);
+        setContentView(R.layout.activity_condomino_home_old);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo);
+        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Bacheca\nsegnalazioni"));
@@ -141,7 +141,7 @@ public class CondominoHomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.botton_menu, menu);
+        inflater.inflate(R.menu.botton_menu_old, menu);
         return true;
     }
 

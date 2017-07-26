@@ -37,7 +37,7 @@ public class DialogInterventoAccettato extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_conferma_intervento_accettato, null))
+        builder.setView(inflater.inflate(R.layout.dialog_conferma_intervento_accettato_old, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

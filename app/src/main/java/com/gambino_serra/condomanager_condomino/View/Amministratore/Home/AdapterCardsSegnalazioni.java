@@ -49,7 +49,7 @@ public class AdapterCardsSegnalazioni extends RecyclerView.Adapter<AdapterCardsS
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_amministratore_home, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_amministratore_home_old, parent, false);
 
         view.setOnClickListener(Segnalazioni.myOnClickListener);
 

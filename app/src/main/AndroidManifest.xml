@@ -19,14 +19,23 @@
         android:label="CondoManager Condomino"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.AboutUsActivity"
+            android:label="@string/activity_title_about_us" />
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.PrivacyPolicyActivity"
+            android:label="@string/activity_title_privacy_policy" />
+
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Utente.SplashScreen"
-            android:screenOrientation="portrait">
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -49,7 +58,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
@@ -151,12 +160,12 @@
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.Condomino.BachecaSegnalazione.DetailsBachecaSegnalazione"
             android:label="Dettaglio segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.Condomino.SegnalazioneRisolta.DetailsSegnalazioneRisolta"
             android:label="Dettaglio segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Condomino.Home.CondominoHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity"
             android:screenOrientation="portrait"/>
 
     </application>

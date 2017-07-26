@@ -29,10 +29,10 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_old);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo);
+        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
 
         amministratorebtn = (RadioButton) findViewById(R.id.amministratoreBtn);
         fornitorebtn = (RadioButton) findViewById(R.id.fornitoreBtn);

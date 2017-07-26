@@ -37,7 +37,7 @@ public class DialogInterventoRifiutato extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_conferma_intervento_rifiutato, null))
+        builder.setView(inflater.inflate(R.layout.dialog_conferma_intervento_rifiutato_old, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

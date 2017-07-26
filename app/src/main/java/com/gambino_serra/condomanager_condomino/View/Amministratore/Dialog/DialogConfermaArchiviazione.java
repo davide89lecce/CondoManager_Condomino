@@ -37,7 +37,7 @@ public class DialogConfermaArchiviazione extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_conferma_archiviazione, null))
+        builder.setView(inflater.inflate(R.layout.dialog_conferma_archiviazione_old, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

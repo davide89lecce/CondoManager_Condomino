@@ -30,12 +30,12 @@ public class AmministratoreHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_amministratore_home);
+        setContentView(R.layout.activity_amministratore_home_old);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo);
+        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Segnalazioni"));
@@ -85,7 +85,7 @@ public class AmministratoreHomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.botton_menu, menu);
+        inflater.inflate(R.menu.botton_menu_old, menu);
         return true;
     }
 

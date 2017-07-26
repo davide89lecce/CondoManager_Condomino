@@ -49,7 +49,7 @@ public class SegnalazioneFornitore extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_segnalazione_fornitore);
+        setContentView(R.layout.activity_segnalazione_fornitore_old);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();

@@ -71,10 +71,10 @@ public class RegisterFornitoreActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fornitore_register);
+        setContentView(R.layout.activity_fornitore_register_old);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo);
+        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
 
         etUsername = (EditText) findViewById(R.id.username);
         etPassword = (EditText) findViewById(R.id.password);

@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.View.Condomino.Home;
+package com.gambino_serra.condomanager_condomino.View.Condomino.Home_old;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +42,7 @@ public class SegnalazioniRisolte extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_segnalazioni_risolte, container, false);
+        View view = inflater.inflate(R.layout.tab_segnalazioni_risolte_old, container, false);
 
         return view;
     }

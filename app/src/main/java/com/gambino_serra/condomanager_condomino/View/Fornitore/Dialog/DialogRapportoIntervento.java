@@ -43,7 +43,7 @@ public class DialogRapportoIntervento extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_rapporto_intervento, null))
+        builder.setView(inflater.inflate(R.layout.dialog_rapporto_intervento_old, null))
 
                 .setPositiveButton(R.string.rapporto_intervento_conferma, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)
