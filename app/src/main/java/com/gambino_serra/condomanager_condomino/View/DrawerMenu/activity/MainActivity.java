@@ -23,12 +23,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Altro;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.HomeFragment;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.InformazioniPersonali;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.StoricoInterventi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.SettingsFragment;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.StoricoInterventi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 
 
 
@@ -42,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton fab;
 
-    FloatingActionMenu materialDesignFAM;
-    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
+
 
 
     // urls to load navigation header background image
@@ -56,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
-    private static final String TAG_PHOTOS = "photos";
-    private static final String TAG_MOVIES = "movies";
-    private static final String TAG_NOTIFICATIONS = "notifications";
+    private static final String TAG_PHOTOS = "storicoInterventi";
+    private static final String TAG_MOVIES = "informazioniPersonali";
+    private static final String TAG_NOTIFICATIONS = "altro";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
 
@@ -93,29 +91,7 @@ public class MainActivity extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
-        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
-        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
 
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO something when floating action menu first item clicked
-
-            }
-        });
-        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO something when floating action menu second item clicked
-
-            }
-        });
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO something when floating action menu third item clicked
-
-            }
-        });
 
         //fab.setOnClickListener(new View.OnClickListener() {
         //    @Override
@@ -171,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
      * selected from navigation menu
      */
     private void loadHomeFragment() {
+
         // selecting appropriate nav menu item
         selectNavMenu();
 
@@ -262,11 +239,10 @@ public class MainActivity extends AppCompatActivity {
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.home:
+                    case R.id.nav_home:
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
@@ -307,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
                     menuItem.setChecked(true);
                 }
                 menuItem.setChecked(true);
-
                 loadHomeFragment();
 
                 return true;

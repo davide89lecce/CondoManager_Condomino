@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_old);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         amministratorebtn = (RadioButton) findViewById(R.id.amministratoreBtn);
         fornitorebtn = (RadioButton) findViewById(R.id.fornitoreBtn);

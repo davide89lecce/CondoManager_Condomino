@@ -20,7 +20,7 @@ import static com.gambino_serra.condomanager_condomino.Controller.Login.checkFie
 import static com.gambino_serra.condomanager_condomino.Controller.Login.checkLogin;
 import static com.gambino_serra.condomanager_condomino.Controller.Login.startRegisterActivity;
 
-public class LoginActivity extends BaseActivity
+public class LoginActivity_old extends BaseActivity
         implements Response.Listener<String>, Response.ErrorListener {
 
     EditText etUsername, etPassword;
@@ -39,12 +39,12 @@ public class LoginActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_old);
+        setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         userState();
 

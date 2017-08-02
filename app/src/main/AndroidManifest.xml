@@ -21,6 +21,11 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity"
+            android:label="@string/activity_title_privacy_policy"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
             android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.AboutUsActivity"
             android:label="@string/activity_title_about_us" />
         <activity
@@ -28,12 +33,12 @@
             android:label="@string/activity_title_privacy_policy" />
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity_old"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View.Login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

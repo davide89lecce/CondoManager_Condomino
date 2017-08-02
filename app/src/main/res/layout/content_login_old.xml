@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:isScrollContainer="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity"
-    tools:showIn="@layout/activity_login_old">
+    tools:context="com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity_old"
+    tools:showIn="@layout/activity_login">
 
 
     <Button

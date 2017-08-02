@@ -26,7 +26,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splash_layout_old);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         ImageView img = (ImageView) findViewById(R.id.icon_img);
 
@@ -34,7 +34,7 @@ public class SplashScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent in = new Intent(SplashScreen.this, LoginActivity.class);
+                Intent in = new Intent(SplashScreen.this, LoginActivity_old.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(in);
                 finish();

@@ -21,7 +21,7 @@ import com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.Condomin
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DialogNuovaSegnalazione extends DialogFragment {
+public class DialogNuovaSegnalazione_old extends DialogFragment {
 
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
@@ -30,7 +30,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     String descrizioneSegnalazione;
     String username;
 
-    public DialogNuovaSegnalazione() {
+    public DialogNuovaSegnalazione_old() {
     }
 
     @Override

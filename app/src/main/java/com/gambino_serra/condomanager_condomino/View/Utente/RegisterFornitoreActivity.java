@@ -74,7 +74,7 @@ public class RegisterFornitoreActivity extends BaseActivity
         setContentView(R.layout.activity_fornitore_register_old);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         etUsername = (EditText) findViewById(R.id.username);
         etPassword = (EditText) findViewById(R.id.password);

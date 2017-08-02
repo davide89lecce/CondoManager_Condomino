@@ -13,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity_old;
 import com.gambino_serra.condomanager_condomino.tesi.R;
-import com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity;
 
 
 public class FornitoreHomeActivity extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class FornitoreHomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Richieste intervento"));
@@ -100,7 +100,7 @@ public class FornitoreHomeActivity extends AppCompatActivity {
                 editor.apply();
 
                 Intent logout;
-                logout = new Intent(getApplicationContext(), LoginActivity.class);
+                logout = new Intent(getApplicationContext(), LoginActivity_old.class);
                 startActivity(logout);
                 check = true;
                 break;

@@ -20,10 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gambino_serra.condomanager_condomino.Model.HTTPRequest.Amministratore.HTTPRequestSegnalazioni;
 import com.gambino_serra.condomanager_condomino.Model.JsonSerializable.JsonCondominio;
+import com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity_old;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.gambino_serra.condomanager_condomino.View.Condomino.Dialog.DialogSegnalazioneInviata;
-import com.gambino_serra.condomanager_condomino.View.Condomino.NuovaSegnalazione.DialogNuovaSegnalazione;
-import com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity;
+import com.gambino_serra.condomanager_condomino.View.Condomino.NuovaSegnalazione.DialogNuovaSegnalazione_old;
 import com.kosalgeek.android.json.JsonConverter;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class CondominoHomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Bacheca\nsegnalazioni"));
@@ -87,7 +87,7 @@ public class CondominoHomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                DialogFragment newFragment = new DialogNuovaSegnalazione();
+                DialogFragment newFragment = new DialogNuovaSegnalazione_old();
                 newFragment.show(getFragmentManager(), "NuovaSegnalazione");
                 overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 
@@ -169,7 +169,7 @@ public class CondominoHomeActivity extends AppCompatActivity
                 editor.apply();
 
                 Intent logout;
-                logout = new Intent(getApplicationContext(), LoginActivity.class);
+                logout = new Intent(getApplicationContext(), LoginActivity_old.class);
                 startActivity(logout);
                 check = true;
                 break;

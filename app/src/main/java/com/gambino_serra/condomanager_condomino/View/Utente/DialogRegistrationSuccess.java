@@ -37,7 +37,7 @@ public class DialogRegistrationSuccess extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent in = new Intent(getActivity(), LoginActivity.class);
+                        Intent in = new Intent(getActivity(), LoginActivity_old.class);
                         startActivity(in);
                     }
                 });

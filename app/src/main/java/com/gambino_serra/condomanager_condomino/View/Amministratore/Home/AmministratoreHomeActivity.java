@@ -15,9 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity_old;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCondominio;
-import com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity;
 
 
 public class AmministratoreHomeActivity extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class AmministratoreHomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_logo_old);
+        getSupportActionBar().setCustomView(R.layout.custom_logo);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Segnalazioni"));
@@ -113,7 +113,7 @@ public class AmministratoreHomeActivity extends AppCompatActivity {
                 editor.apply();
 
                 Intent logout;
-                logout = new Intent(getApplicationContext(), LoginActivity.class);
+                logout = new Intent(getApplicationContext(), LoginActivity_old.class);
                 startActivity(logout);
                 check = true;
                 break;
