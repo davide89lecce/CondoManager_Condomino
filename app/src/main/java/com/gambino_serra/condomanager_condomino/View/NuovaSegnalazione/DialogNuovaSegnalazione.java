@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
+import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
@@ -67,33 +71,20 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                     @TargetApi(Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int id) {
 
-                        //firebaseDB = FirebaseDB.getFirebase();
-                        //firebaseDB = firebaseDB.child("Segnalazione").child("Counter");
-                        //if(firebaseDB.getValue() == null) {
-                        //firebaseDB.setValue(1);
-                       // } else {
-                        //firebaseDB.setValue((Long) firebaseDB.getValue() + 1);
-                        //}
-                     //   firebaseDB = FirebaseDB.getFirebase();
-                     //   firebaseDB = firebaseDB.child("Segnalazione");
-                      //  firebaseDB.child("Segnalazione").setValue("");
-                      //  firebaseDB.child("Condomino").setValue("");
-                      //  firebaseDB.child("Condominio").setValue("");
-                      //  firebaseDB.child("Fornitore").setValue("");
-                      //  firebaseDB.child("Stato").setValue("");
-
                         firebaseDatabase = FirebaseDatabase.getInstance();
-                        databaseReference = firebaseDatabase.getReference("Segnalazioni").child("Counter"); //FirebaseDatabase.getInstance().getReference();
-                        segnalazioneIncrementCounter(databaseReference);
+                        databaseReference = firebaseDatabase.getReference("MessaggiCondomino");
 
-                        descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString().replace("'", "\\'");
+
+                        descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
+
+                        addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
+
+
 
                         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPrefs.edit();
                         editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
                         editor.apply();
-
-                       // HTTPRequestCondominio.getCondominioFromCondomino(username, ((CondominoHomeActivity) getActivity()), ((CondominoHomeActivity) getActivity()), ((CondominoHomeActivity) getActivity()));
 
                         dismiss();
                     }
@@ -149,30 +140,31 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     }
 
 
-    private void segnalazioneIncrementCounter(DatabaseReference postRef) {
+    private void addMessaggioCondomino(DatabaseReference postRef, final String descrizioneSegnalazione) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
-                //
-                // Segnalazione s = mutableData.getValue(Segnalazione.class);
-                Integer counter = mutableData.getValue(Integer.class);
+
+                Integer counter = mutableData.child("Counter").getValue(Integer.class);
                 if (counter == null) {
                     return Transaction.success(mutableData);
                 }
 
-                //if (s.counter.containsKey(getUid())) {
-                    // Unstar the post and remove self from stars
-                   // p.starCount = p.starCount - 1;
-                   // p.stars.remove(getUid());
-               // } else {
-                    // Star the post and add self to stars
-                    //s.setIdSegnalazione(s.getIdSegnalazione() + 1);
-                    //s.counter.put(getUid(), true);
-               // }
                 counter = counter + 1;
+
+
+                MessaggioCondomino m = new MessaggioCondomino(counter, "0","Segnalazione",descrizioneSegnalazione,2,3);
                 // Set value and report transaction success
-                mutableData.setValue(counter);
+                mutableData.child("Messaggio"+counter).setValue(m);
+                mutableData.child("Counter").setValue(counter);
+
+                Date newDate = new Date(new Date().getTime());
+                SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm ");
+                String stringdate = dt.format(newDate);
+
+                mutableData.child("Messaggio"+counter).child("data").setValue(stringdate);
                 return Transaction.success(mutableData);
+
             }
 
             @Override
