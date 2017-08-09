@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,12 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.View.Utente.BaseActivity;
 import com.gambino_serra.condomanager_condomino.View.Utente.RegisterAmministratoreActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
@@ -34,6 +40,8 @@ public class LoginActivity extends BaseActivity
     private FirebaseUser utente;                    //oggetto per definire l'utente del DB
     private Firebase userRef;       // posso conservare altri riferimenti ad oggetto che punto a piacere
 
+    String Tipologia = new String("N");
+    Boolean check = false ;
 
     EditText etUsername, etPassword;
     Button btnLogin;
@@ -60,6 +68,9 @@ public class LoginActivity extends BaseActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        Firebase.setAndroidContext(this);
+
+
         // if(firebaseAuth.getCurrentUser() != null){
         //     //leggere dati e login dell'utente
         // }
@@ -72,70 +83,7 @@ public class LoginActivity extends BaseActivity
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
 
-            /**
-             * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi
-             * di testo non siano vuoti ed effettua il login.
-             *
-             * @param v istanza della View
-             */
-            @Override
-            public void onClick(View v) {
-
-                username = etUsername.getText().toString().trim();;
-                password = etPassword.getText().toString().trim();;
-
-                showProgressDialog();
-
-                firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful()) {
-
-                            hideProgressDialog();
-                            /**
-                             * Ad operazione effettuata, tramite l'if controllo che l'utente  restituito
-                             * non sia null, ovvero che io abbia effettivmento immesso i miei dati
-                             */
-                            if (firebaseAuth.getCurrentUser() != null) {
-
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "LOGIN EFFETTUATO",
-                                        Toast.LENGTH_SHORT
-                                ).show();
-                                // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
-                                utente = firebaseAuth.getCurrentUser();
-
-                                //scrittura dati nelle shared e intent a home
-                                writeSharedPreferences(username, password, "A");
-
-                                Intent in = new Intent(getApplicationContext(), com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity.class);
-                                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(in);
-
-                            } else {
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "DATI NON CORRETTI",
-                                        Toast.LENGTH_SHORT
-                                ).show();
-                            }
-                        }else{
-                            hideProgressDialog();
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "DATI NON CORRETTI",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                        }
-                    }
-                });
-
-            }
-        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
 
@@ -154,6 +102,100 @@ public class LoginActivity extends BaseActivity
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi
+             * di testo non siano vuoti ed effettua il login.
+             *
+             * @param v istanza della View
+             */
+            @Override
+            public void onClick(View v) {
+
+                username = etUsername.getText().toString().trim();
+                password = etPassword.getText().toString().trim();
+
+                showProgressDialog();
+
+                firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if(task.isSuccessful()) {
+
+                            hideProgressDialog();
+
+                            // Ad operazione effettuata, tramite l'if controllo che l'utente  restituito
+                            // non sia null, ovvero che i dati siano validi
+
+                            if (firebaseAuth.getCurrentUser() != null) {
+
+
+                                // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
+                                utente = firebaseAuth.getCurrentUser();
+
+                                check = checkTipologia(utente.getUid().toString());
+
+                                if ( check )
+                                {
+
+                                    Log.d( "HEY", "Sono qui");
+                                    //scrittura dati nelle shared e intent a home
+                                    writeSharedPreferences(username, password, "C");
+
+
+                                    Toast.makeText(
+                                            getApplicationContext(),
+                                            "LOGIN EFFETTUATO",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+
+
+                                    Intent in = new Intent(getApplicationContext(), com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity.class);
+                                    in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(in);
+
+                                }else {
+                                    Toast.makeText(
+                                            getApplicationContext(),
+                                            "UTENTE DI ALTRA TIPOLOGIA",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+                                }
+                            } else {
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "UTENTE NON VALIDO",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                        }else{
+                            hideProgressDialog();
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "DATI NON CORRETTI",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    }
+                });
+
+            }
+        });
     }
 
     /**
@@ -217,4 +259,63 @@ public class LoginActivity extends BaseActivity
         editor.putString(LOGGED_USER,username);
         editor.apply();
     }
+
+
+    private Boolean checkTipologia(String UID){
+
+
+        //PUNTO NELLA TABELLA "UTENTI" ALL'UTENTE LOGGATO
+        userRef = FirebaseDB.getUtenti().child( UID );
+
+
+        userRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if ( dataSnapshot.getKey().equals("TipologiaUtente") )
+                {
+                    Log.d("HEY", dataSnapshot.getKey().toString());
+                    if ( dataSnapshot.getValue().equals("C") )
+                    {
+                        Log.d("HEY", dataSnapshot.getValue().toString());
+                        check = true;
+                        Log.d ( "HEY", check.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                if ( dataSnapshot.getKey().equals("TipologiaUtente") )
+                {
+                    Log.d("HEY", dataSnapshot.getKey().toString());
+                    if ( dataSnapshot.getValue().equals("C") )
+                    {
+                        Log.d("HEY", dataSnapshot.getValue().toString());
+                        check = true;
+                        Log.d ( "HEY", check.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
+        return check;
+
+    }
 }
+//a.serra11@studenti.uniba.it
