@@ -67,4 +67,5 @@ public class MessaggioCondomino {
     public void setIdAmministratore(Integer idAmministratore) {
         this.idAmministratore = idAmministratore;
     }
+
 }
