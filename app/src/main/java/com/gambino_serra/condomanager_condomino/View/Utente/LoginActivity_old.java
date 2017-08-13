@@ -8,20 +8,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity;
 import com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity;
 import com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity;
-
 import static com.gambino_serra.condomanager_condomino.Controller.Login.checkFields;
 import static com.gambino_serra.condomanager_condomino.Controller.Login.checkLogin;
 import static com.gambino_serra.condomanager_condomino.Controller.Login.startRegisterActivity;
 
-public class LoginActivity_old extends BaseActivity
-        implements Response.Listener<String>, Response.ErrorListener {
+public class LoginActivity_old extends BaseActivity implements Response.Listener<String>, Response.ErrorListener {
 
     EditText etUsername, etPassword;
     Button btnLogin;
@@ -42,24 +39,19 @@ public class LoginActivity_old extends BaseActivity
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_logo);
-
         userState();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             /**
              * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi
              * di testo non siano vuoti ed effettua il login.
-             *
-             * @param v istanza della View
              */
             @Override
             public void onClick(View v) {
@@ -75,16 +67,13 @@ public class LoginActivity_old extends BaseActivity
         btnRegister.setOnClickListener(new View.OnClickListener() {
 
             /**
-             * Il metodo permette di accedere alla schermata di registrazione
-             * di un nuovo utente.
-             * @param v istanza della View
+             * Il metodo permette di accedere alla schermata di registrazione di un nuovo utente.
              */
             @Override
             public void onClick(View v) {
                 startRegisterActivity(getApplicationContext());
-            }
+                }
         });
-
     }
 
     /**
@@ -97,33 +86,27 @@ public class LoginActivity_old extends BaseActivity
 
     /**
      * Il metodo e' invocato alla risposta (dati ricevuti da database altervista) della richiesta di autenticazione.
-     * @param response
      */
     @Override
     public void onResponse(String response) {
-
         hideProgressDialog();
         checkLogin(response, getApplicationContext(),username);
-    }
+        }
 
     /**
      * Il metodo viene invocato in caso di problemi nella ricezione della risposta.
-     * @param error
      */
     @Override
-    public void onErrorResponse(VolleyError error) {
-
-    }
+    public void onErrorResponse(VolleyError error) { }
 
     /**
      *  Il metodo verifica che le SharedPreferences contengano dati, nel caso contrario l'utente risulterà non connesso.
      */
     public void userState(){
-
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         if (!sharedPrefs.getAll().isEmpty()) {
             getStatusAndGoHome();
-        }
+            }
     }
 
     /**
@@ -141,14 +124,16 @@ public class LoginActivity_old extends BaseActivity
             Intent in = new Intent(this, AmministratoreHomeActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
-        } else if (sharedPrefs.getString(TIPO_UTENTE, "").equals("F")) {
+            }
+        else if (sharedPrefs.getString(TIPO_UTENTE, "").equals("F")) {
             Intent in = new Intent(this, FornitoreHomeActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
-        } else if (sharedPrefs.getString(TIPO_UTENTE, "").equals("C")) {
+            }
+        else if (sharedPrefs.getString(TIPO_UTENTE, "").equals("C")) {
             Intent in = new Intent(this, CondominoHomeActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
-        }
+            }
     }
 }
