@@ -17,17 +17,17 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.View.Utente.BaseActivity;
-import com.gambino_serra.condomanager_condomino.View.Utente.RegisterAmministratoreActivity;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity;
+import com.gambino_serra.condomanager_condomino.View_old.Utente.BaseActivity;
+import com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterAmministratoreActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-//import static com.gambino_serra.condomanager_condomino.Controller.Login.checkLogin;
+//import static com.gambino_serra.condomanager_condomino.Controller_old.Login.checkLogin;
 
 public class LoginActivity extends BaseActivity implements Response.Listener<String>, Response.ErrorListener {
 
@@ -125,7 +125,7 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
                         if(task.isSuccessful()) {
 
-                            hideProgressDialog();
+
 
                             // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
                             // non sia null, ovvero che i dati siano validi
@@ -136,24 +136,9 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
                                 // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
                                 utente = firebaseAuth.getCurrentUser();
 
-                                check = checkTipologia(utente.getUid().toString());
+                                checkTipologia(utente.getUid().toString());
 
-                                if ( check )
-                                {
-                                    Log.d( "HEY", "Sono qui");
-                                    //scrittura dati nelle shared e intent a home
-                                    writeSharedPreferences(username, password, "C");
 
-                                    Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
-
-                                    Intent in = new Intent(getApplicationContext(), com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity.class);
-                                    in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(in);
-                                }
-                                else
-                                    {
-                                    Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
-                                    }
                             }
                             else
                                 {
@@ -214,7 +199,7 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         if (sharedPrefs.getString(TIPO_UTENTE, "").equals("C"))
             {
-            Intent in = new Intent(this, com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity.class);
+            Intent in = new Intent(this, MainActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
             }
@@ -230,39 +215,71 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
         }
 
 
-    private Boolean checkTipologia(String UID){
+    private void checkTipologia(String UID){
 
         //PUNTO NELLA TABELLA "UTENTI" ALL'UTENTE LOGGATO
+
+        hideProgressDialog();
+
         userRef = FirebaseDB.getUtenti().child( UID );
 
-        userRef.addChildEventListener(new ChildEventListener() {
+        if(true) {
 
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if ( dataSnapshot.getKey().equals("TipologiaUtente") )
-                {
-                    Log.d("HEY", dataSnapshot.getKey().toString());
-                    if ( dataSnapshot.getValue().equals("C") )
-                    {
-                        Log.d("HEY", dataSnapshot.getValue().toString());
-                        check = true;
-                        Log.d ( "HEY", check.toString());
+
+
+            userRef.addChildEventListener(new ChildEventListener() {
+
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                    Log.d("HEY", userRef.toString());
+
+                    if (dataSnapshot.getKey().equals("TipologiaUtente")) {
+                        Log.d("HEY", dataSnapshot.getKey().toString());
+                        if (dataSnapshot.getValue().equals("C")) {
+                            Log.d("HEY", dataSnapshot.getValue().toString());
+
+                            Log.d("HEY", "Sono qui");
+                            //scrittura dati nelle shared e intent a home
+                            writeSharedPreferences(username, password, "C");
+
+                            Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
+
+                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(in);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
+                        }
+
+                        Log.d("HEY", check.toString());
+
                     }
                 }
-            }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) { }
-        });
-        return check;
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                }
+            });
+
+        }else{
+
+            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

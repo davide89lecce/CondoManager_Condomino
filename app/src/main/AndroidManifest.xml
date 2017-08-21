@@ -33,7 +33,7 @@
             android:label="@string/activity_title_privacy_policy" />
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Utente.LoginActivity_old"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Utente.LoginActivity_old"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -47,130 +47,130 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Utente.RegisterActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterActivity"
             android:label="@string/title_register"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Utente.RegisterAmministratoreActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterAmministratoreActivity"
             android:label="@string/title_register"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Utente.RegisterFornitoreActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterFornitoreActivity"
             android:label="@string/title_register"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Fornitore.Home.FornitoreHomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Condomino.Home_old.CondominoHomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.DetailsSegnalazione"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.DetailsSegnalazione"
             android:label="@string/title_details_segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Home.AmministratoreHomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Home.AmministratoreHomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.SegnalazioneCategoria"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.SegnalazioneCategoria"
             android:label="Nuovo ticket da segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.DetailsSegnalazione"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.DetailsSegnalazione"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.SegnalazioneFornitore"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.SegnalazioneFornitore"
             android:label="Nuovo ticket da segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.SegnalazioneCategoria"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.SegnalazioneCategoria"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.SegnalazioneDescrizione"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.SegnalazioneDescrizione"
             android:label="Nuovo ticket da segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Segnalazione.SegnalazioneFornitore"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Segnalazione.SegnalazioneFornitore"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketInCorso.DetailsTicketInCorso"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketInCorso.DetailsTicketInCorso"
             android:label="Dettaglio ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Home.AmministratoreHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.DetailsTicketRifiutato"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.DetailsTicketRifiutato"
             android:label="Dettaglio ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Home.AmministratoreHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.TicketCategoria"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.TicketCategoria"
             android:label="Rinvia ticket segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.DetailsTicketRifiutato"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.DetailsTicketRifiutato"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.TicketFornitore"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.TicketFornitore"
             android:label="Rinvia ticket segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.TicketCategoria"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.TicketCategoria"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.TicketDescrizione"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.TicketDescrizione"
             android:label="Rinvia ticket segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketRifiutato.TicketFornitore"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketRifiutato.TicketFornitore"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.TicketCompletato.DetailsTicketCompletato"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.TicketCompletato.DetailsTicketCompletato"
             android:label="Dettaglio ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Home.AmministratoreHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCondominio"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketCondominio"
             android:label="Nuovo Ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.Home.AmministratoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.Home.AmministratoreHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCondomino"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketCondomino"
             android:label="Nuovo Ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCondominio"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketCondominio"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCategoria"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketCategoria"
             android:label="Nuovo Ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCondomino"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketCondomino"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketFornitore"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketFornitore"
             android:label="Nuovo Ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketCategoria"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketCategoria"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketDescrizione"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketDescrizione"
             android:label="Nuovo Ticket"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Amministratore.NuovoTicket.TicketFornitore"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Amministratore.NuovoTicket.TicketFornitore"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Fornitore.RichiestaIntervento.DetailsRichiestaIntervento"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Fornitore.RichiestaIntervento.DetailsRichiestaIntervento"
             android:label="Descrizione intervento"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Fornitore.Home.FornitoreHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Fornitore.InterventoInProgramma.DetailsInterventoInProgramma"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Fornitore.InterventoInProgramma.DetailsInterventoInProgramma"
             android:label="Descrizione intervento"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Fornitore.Home.FornitoreHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Fornitore.InterventoCompletato.DetailsInterventoCompletato"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Fornitore.InterventoCompletato.DetailsInterventoCompletato"
             android:label="Rapporto intervento"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Fornitore.Home.FornitoreHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Fornitore.Home.FornitoreHomeActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Condomino.BachecaSegnalazione.DetailsBachecaSegnalazione"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Condomino.BachecaSegnalazione.DetailsBachecaSegnalazione"
             android:label="Dettaglio segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Condomino.Home_old.CondominoHomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Condomino.SegnalazioneRisolta.DetailsSegnalazioneRisolta"
+            android:name="com.gambino_serra.condomanager_condomino.View_old.Condomino.SegnalazioneRisolta.DetailsSegnalazioneRisolta"
             android:label="Dettaglio segnalazione"
-            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Condomino.Home_old.CondominoHomeActivity"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View_old.Condomino.Home_old.CondominoHomeActivity"
             android:screenOrientation="portrait"/>
 
     </application>

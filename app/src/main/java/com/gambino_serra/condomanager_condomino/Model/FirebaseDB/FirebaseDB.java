@@ -3,6 +3,7 @@ package com.gambino_serra.condomanager_condomino.Model.FirebaseDB;
 import android.content.Context;
 
 import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
 
 /**
  * Created by Antonio on 15/06/17.
@@ -11,6 +12,7 @@ import com.firebase.client.Firebase;
 public class FirebaseDB {
 
     private static Firebase firebase;
+    private static DatabaseReference databaseReference;
     private static Context mCtx;
     private static String DB = new String ("https://condomanager-a5aa6.firebaseio.com/");
 
@@ -19,17 +21,19 @@ public class FirebaseDB {
     }
 
     public static synchronized Firebase getFirebase(){
-        //if(firebase == null) {
+        if(firebase == null) {
             firebase = new Firebase(DB);
-        //}
+        }
         return firebase;
     }
+
 
 
     public static synchronized Firebase getUtenti(){
         firebase = new Firebase(DB + "Utenti");
         return firebase;
     }
+
 
 
 }
