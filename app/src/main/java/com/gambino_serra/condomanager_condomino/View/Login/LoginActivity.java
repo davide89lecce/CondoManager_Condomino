@@ -17,6 +17,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity;
 import com.gambino_serra.condomanager_condomino.View_old.Utente.BaseActivity;
@@ -222,10 +223,9 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         userRef = FirebaseDB.getCondomini().child(UID);
 
-        userRef.addChildEventListener(new ChildEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if ( dataSnapshot.exists() )
                 {
                     Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
@@ -238,66 +238,37 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+            public void onCancelled(FirebaseError firebaseError) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) { }
+            }
         });
 
-            //.child( UID );
-
-//        if( exist == true ) {
+/**UTILIZZO TIPICO DI VALUE_EVENT_LISTENER
+//        public void searchemail(String email){
 //
-//            userRef.addChildEventListener(new ChildEventListener() {
+//            Firebase ref = new Firebase("https://<myfirebase>.firebaseio.com/users");
+//            Query queryRef = ref.orderByChild("Email").equalTo(email);
+//
+//
+//            ValueEventListener listener = new ValueEventListener() {
 //
 //                @Override
-//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//                    Log.d("HEY", userRef.toString());
-//
-//                    if (dataSnapshot.getKey().equals("TipologiaUtente")) {
-//                        Log.d("HEY", dataSnapshot.getKey().toString());
-//                        if (dataSnapshot.getValue().equals("C")) {
-//                            Log.d("HEY", dataSnapshot.getValue().toString());
-//
-//                            Log.d("HEY", "Sono qui");
-//                            //scrittura dati nelle shared e intent a home
-//                            writeSharedPreferences(username, password, "C");
-//
-//                            Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
-//
-//                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-//                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            startActivity(in);
-//
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
-//                              }
+//                public void onDataChanged(DataSnapshot snapshot) {
+//                    if (snapshot.exists()) {
+//                        for (DataSnapshot child: snapshot.getChildren()) {
+//                            homeintent.putExtra("key", child.getKey());
+//                            startActivity(homeintent);
+//                            break; // exit for loop, we only want one match
+//                        }
+//                    }
+//                    else {
+//                        Toast toast = Toast.makeText(this, "email not found", Toast.LENGTH_SHORT);
 //                    }
 //                }
-//
-//                @Override
-//                public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
-//
-//                @Override
-//                public void onChildRemoved(DataSnapshot dataSnapshot) { }
-//
-//                @Override
-//                public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-//
-//                @Override
-//                public void onCancelled(FirebaseError firebaseError) { }
-//            });
-//
-//        }else{
-//            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
-//              }
+//            };
+//            queryRef.addValueEventListener(listener);
+//        }
+   */
 
     }
 }
