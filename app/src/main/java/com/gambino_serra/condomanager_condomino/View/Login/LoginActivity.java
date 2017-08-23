@@ -17,6 +17,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity;
 import com.gambino_serra.condomanager_condomino.View_old.Utente.BaseActivity;
@@ -68,10 +69,19 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         Firebase.setAndroidContext(this);
 
+/**
+ *  Effettua il LogIn anche se l'app viene chiusa e riaperta
+ *  non abbiamo bisogno delle Shared perchè l'utente firebase viene salvato
+ *  una volta effettuato il primo accesso
+ */
+        if (firebaseAuth.getCurrentUser() != null) {
+            // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
 
-        // if(firebaseAuth.getCurrentUser() != null){
-        //     //leggere dati e login dell'utente
-        // }
+            //controllo nel caso in cui l'utente sia loggato con un altra app
+            //che utilizza lo stesso DB
+            checkTipologia( firebaseAuth.getCurrentUser().getUid().toString() );
+
+        }
 
         userState();
         //firebaseAuth.signOut();
@@ -101,57 +111,60 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
     @Override
     protected void onStart() {
         super.onStart();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+        /**
+         * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi di testo non siano vuoti ed effettua il login.
+         */
+        @Override
+        public void onClick(View v) {
+
+            username = etUsername.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
+
+            showProgressDialog();
+
+            firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if(task.isSuccessful()) {
+
+                        // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
+                        // non sia null, ovvero che i dati siano validi
+
+                        if (firebaseAuth.getCurrentUser() != null) {
+
+                            // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
+                            utente = firebaseAuth.getCurrentUser();
+
+                            checkTipologia(utente.getUid().toString());
+
+
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else
+                    {
+                        hideProgressDialog();
+                        Toast.makeText(getApplicationContext(), "DATI NON CORRETTI", Toast.LENGTH_SHORT).show();
+                    }
+                 }
+            });
+            }
+        });
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
 
-            /**
-             * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi di testo non siano vuoti ed effettua il login.
-             */
-            @Override
-            public void onClick(View v) {
-
-                username = etUsername.getText().toString().trim();
-                password = etPassword.getText().toString().trim();
-
-                showProgressDialog();
-
-                firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful()) {
-
-                            // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
-                            // non sia null, ovvero che i dati siano validi
-
-                            if (firebaseAuth.getCurrentUser() != null) {
-
-                                // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
-                                utente = firebaseAuth.getCurrentUser();
-
-                                checkTipologia(utente.getUid().toString());
-
-
-                            }
-                            else
-                                {
-                                Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
-                                }
-                        }
-                        else
-                            {
-                            hideProgressDialog();
-                            Toast.makeText(getApplicationContext(), "DATI NON CORRETTI", Toast.LENGTH_SHORT).show();
-                            }
-                    }
-                });
-            }
-        });
     }
 
     /**
@@ -222,10 +235,9 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         userRef = FirebaseDB.getCondomini().child(UID);
 
-        userRef.addChildEventListener(new ChildEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if ( dataSnapshot.exists() )
                 {
                     Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
@@ -238,66 +250,37 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+            public void onCancelled(FirebaseError firebaseError) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) { }
+            }
         });
 
-            //.child( UID );
-
-//        if( exist == true ) {
+/**UTILIZZO TIPICO DI VALUE_EVENT_LISTENER
+//        public void searchemail(String email){
 //
-//            userRef.addChildEventListener(new ChildEventListener() {
+//            Firebase ref = new Firebase("https://<myfirebase>.firebaseio.com/users");
+//            Query queryRef = ref.orderByChild("Email").equalTo(email);
+//
+//
+//            ValueEventListener listener = new ValueEventListener() {
 //
 //                @Override
-//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//                    Log.d("HEY", userRef.toString());
-//
-//                    if (dataSnapshot.getKey().equals("TipologiaUtente")) {
-//                        Log.d("HEY", dataSnapshot.getKey().toString());
-//                        if (dataSnapshot.getValue().equals("C")) {
-//                            Log.d("HEY", dataSnapshot.getValue().toString());
-//
-//                            Log.d("HEY", "Sono qui");
-//                            //scrittura dati nelle shared e intent a home
-//                            writeSharedPreferences(username, password, "C");
-//
-//                            Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
-//
-//                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-//                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            startActivity(in);
-//
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
-//                              }
+//                public void onDataChanged(DataSnapshot snapshot) {
+//                    if (snapshot.exists()) {
+//                        for (DataSnapshot child: snapshot.getChildren()) {
+//                            homeintent.putExtra("key", child.getKey());
+//                            startActivity(homeintent);
+//                            break; // exit for loop, we only want one match
+//                        }
+//                    }
+//                    else {
+//                        Toast toast = Toast.makeText(this, "email not found", Toast.LENGTH_SHORT);
 //                    }
 //                }
-//
-//                @Override
-//                public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
-//
-//                @Override
-//                public void onChildRemoved(DataSnapshot dataSnapshot) { }
-//
-//                @Override
-//                public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-//
-//                @Override
-//                public void onCancelled(FirebaseError firebaseError) { }
-//            });
-//
-//        }else{
-//            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
-//              }
+//            };
+//            queryRef.addValueEventListener(listener);
+//        }
+   */
 
     }
 }
