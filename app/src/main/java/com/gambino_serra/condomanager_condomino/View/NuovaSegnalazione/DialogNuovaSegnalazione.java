@@ -49,7 +49,8 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private FirebaseDatabase firebaseDatabase;
 
     private String uidCondomino;
-    private  String stabile;
+    private String stabile;
+    private String uidAmministratore;
 
     EditText descrizioneSegnalazioneE;
     String descrizioneSegnalazione;
@@ -124,17 +125,43 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
-        Log.d("Ciao","ciccio" + uidCondomino);
-        firebaseDB = FirebaseDB.getFirebase().child("Condomini").child(uidCondomino);
-        Log.d("Ciao","ciccio" + firebaseDB);
+        firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
         firebaseDB.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
 
-                Log.d("Ciao","ciccio" + stabile);
                 if(dataSnapshot.getKey().toString().equals("stabile")){
                     stabile = dataSnapshot.getValue().toString();
-                    Log.d("Ciao","ciccio" + stabile);
+
+                    firebaseDB = FirebaseDB.getStabili().child(stabile);
+                    firebaseDB.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                            if(dataSnapshot.getKey().toString().equals("amministratore")) {
+                                uidAmministratore = dataSnapshot.getValue().toString();
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+
+                        }
+                    });
                 }
             }
 
@@ -203,7 +230,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
                 // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
-                MessaggioCondomino m = new MessaggioCondomino(counter, "0","Segnalazione",descrizioneSegnalazione,2,3);
+                MessaggioCondomino m = new MessaggioCondomino(counter, "0","Segnalazione",descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile);
                 // Set value and report transaction success
 
                 //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto

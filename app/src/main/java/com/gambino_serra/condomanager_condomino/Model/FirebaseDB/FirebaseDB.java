@@ -34,6 +34,9 @@ public class FirebaseDB {
         return firebase;
     }
 
-
+    public static synchronized Firebase getStabili(){
+        firebase = new Firebase(DB + "Stabili");
+        return firebase;
+    }
 
 }

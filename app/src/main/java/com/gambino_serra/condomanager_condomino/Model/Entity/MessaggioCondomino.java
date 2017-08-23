@@ -7,17 +7,18 @@ public class MessaggioCondomino {
     private String data;
     private String tipologia;
     private String messaggio;
-    private Integer idCondomino;
-    private Integer idAmministratore;
+    private String uidCondomino;
+    private String uidAmministratore;
+    private String stabile;
 
-
-    public MessaggioCondomino(Integer idMessaggio, String data, String tipologia, String messaggio, Integer idCondomino, Integer idAmministratore) {
+    public MessaggioCondomino(Integer idMessaggio, String data, String tipologia, String messaggio, String uidCondomino, String uidAmministratore, String stabile) {
         this.idMessaggio = idMessaggio;
         this.data = data;
         this.tipologia = tipologia;
         this.messaggio = messaggio;
-        this.idCondomino = idCondomino;
-        this.idAmministratore = idAmministratore;
+        this.uidCondomino = uidCondomino;
+        this.uidAmministratore = uidAmministratore;
+        this.stabile = stabile;
     }
 
     public Integer getIdMessaggio() {
@@ -52,20 +53,27 @@ public class MessaggioCondomino {
         this.messaggio = messaggio;
     }
 
-    public Integer getIdCondomino() {
-        return idCondomino;
+    public String getUidCondomino() {
+        return uidCondomino;
     }
 
-    public void setIdCondomino(Integer idCondomino) {
-        this.idCondomino = idCondomino;
+    public void setUidCondomino(String uidCondomino) {
+        this.uidCondomino = uidCondomino;
     }
 
-    public Integer getIdAmministratore() {
-        return idAmministratore;
+    public String getUidAmministratore() {
+        return uidAmministratore;
     }
 
-    public void setIdAmministratore(Integer idAmministratore) {
-        this.idAmministratore = idAmministratore;
+    public void setUidAmministratore(String uidAmministratore) {
+        this.uidAmministratore = uidAmministratore;
     }
 
+    public String getStabile() {
+        return stabile;
+    }
+
+    public void setStabile(String stabile) {
+        this.stabile = stabile;
+    }
 }
