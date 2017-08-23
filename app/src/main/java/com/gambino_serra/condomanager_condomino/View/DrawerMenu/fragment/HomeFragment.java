@@ -18,6 +18,7 @@ import com.gambino_serra.condomanager_condomino.View.Home.ItemOneFragment;
 import com.gambino_serra.condomanager_condomino.View.Home.ItemThreeFragment;
 import com.gambino_serra.condomanager_condomino.View.Home.ItemTwoFragment;
 import com.gambino_serra.condomanager_condomino.View.NuovaSegnalazione.DialogNuovaSegnalazione;
+import com.gambino_serra.condomanager_condomino.View.NuovoMessaggio.DialogNuovoMessaggio;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -172,7 +173,11 @@ public class HomeFragment extends Fragment {
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //TODO something when floating action menu second item clicked
+
+                DialogFragment newFragment = new DialogNuovoMessaggio();
+                newFragment.show(getActivity().getFragmentManager(), "NuovoMessaggio");
+                getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+                materialDesignFAM.close(true);
 
             }
         });

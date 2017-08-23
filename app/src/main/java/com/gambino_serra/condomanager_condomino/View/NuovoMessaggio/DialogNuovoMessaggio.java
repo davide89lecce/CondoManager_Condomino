@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.View.NuovaSegnalazione;
+package com.gambino_serra.condomanager_condomino.View.NuovoMessaggio;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -37,7 +37,7 @@ import java.util.Date;
 import static android.content.Context.MODE_PRIVATE;
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
-public class DialogNuovaSegnalazione extends DialogFragment {
+public class DialogNuovoMessaggio extends DialogFragment {
 
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
@@ -52,11 +52,11 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private String stabile;
     private String uidAmministratore;
 
-    EditText descrizioneSegnalazioneE;
-    String descrizioneSegnalazione;
+    EditText descrizioneMessaggioE;
+    String descrizioneMessaggio;
     String username;
 
-    public DialogNuovaSegnalazione() {
+    public DialogNuovoMessaggio() {
     }
 
     @Override
@@ -71,7 +71,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         TextView title = new TextView(getActivity());
-        title.setText(R.string.title_nuova_segnalazione);
+        title.setText(R.string.title_nuovo_messaggio);
         title.setGravity(Gravity.CENTER);
         title.setTextSize(30);
         title.setBackgroundResource(R.color.primarySegnalazione);
@@ -88,15 +88,15 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                         databaseReference = firebaseDatabase.getReference("Messaggi_condomino");
 
 
-                        descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
+                        descrizioneMessaggio = descrizioneMessaggioE.getText().toString();
 
-                        addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
+                        addMessaggioCondomino(databaseReference, descrizioneMessaggio);
 
 
                         // DA CHIEDERE SE SERVE ANCORA
                         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPrefs.edit();
-                        editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
+                        editor.putString("descrizioneMessaggio", descrizioneMessaggio);
                         editor.apply();
 
                         dismiss();
@@ -119,9 +119,9 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     public void onStart() {
         super.onStart();
         TextView testo = (TextView) this.getDialog().findViewById(R.id.textNuovaSegnalazione);
-        testo.setText(R.string.nuova_segnalazione);
+        testo.setText(R.string.nuovo_messaggio);
 
-        descrizioneSegnalazioneE = (EditText) this.getDialog().findViewById(R.id.textDescrizioneSegnalazione);
+        descrizioneMessaggioE = (EditText) this.getDialog().findViewById(R.id.textDescrizioneSegnalazione);
 
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
@@ -215,7 +215,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     }
 
 
-    private void addMessaggioCondomino(DatabaseReference postRef, final String descrizioneSegnalazione) {
+    private void addMessaggioCondomino(DatabaseReference postRef, final String descrizioneMessaggio) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -236,7 +236,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
                 // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
-                MessaggioCondomino m = new MessaggioCondomino(stringdate,"segnalazione",descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile);
+                MessaggioCondomino m = new MessaggioCondomino(stringdate,"messaggio", DialogNuovoMessaggio.this.descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
                 // Set value and report transaction success
 
                 //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto
