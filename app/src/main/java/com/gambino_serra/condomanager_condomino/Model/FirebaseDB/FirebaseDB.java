@@ -29,8 +29,8 @@ public class FirebaseDB {
 
 
 
-    public static synchronized Firebase getUtenti(){
-        firebase = new Firebase(DB + "Utenti");
+    public static synchronized Firebase getCondomini(){
+        firebase = new Firebase(DB + "Condomini");
         return firebase;
     }
 
