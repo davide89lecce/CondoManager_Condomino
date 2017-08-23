@@ -37,8 +37,9 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
     private FirebaseUser utente;            //oggetto per definire l'utente del DB
     private Firebase userRef;               //posso conservare altri riferimenti ad oggetto che punto a piacere
 
+    boolean exist;
     String Tipologia = new String("N");
-    Boolean check = false ;
+    boolean check = false ;
 
     EditText etUsername, etPassword;
     Button btnLogin;
@@ -125,13 +126,10 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
                         if(task.isSuccessful()) {
 
-
-
                             // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
                             // non sia null, ovvero che i dati siano validi
 
                             if (firebaseAuth.getCurrentUser() != null) {
-
 
                                 // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
                                 utente = firebaseAuth.getCurrentUser();
@@ -215,71 +213,91 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
         }
 
 
-    private void checkTipologia(String UID){
+    private void checkTipologia(final String UID){
 
-        //PUNTO NELLA TABELLA "UTENTI" ALL'UTENTE LOGGATO
+
+        //PUNTO NELLA TABELLA "CONDOMINI" ALL'UTENTE LOGGATO
 
         hideProgressDialog();
 
-        userRef = FirebaseDB.getUtenti().child( UID );
+        userRef = FirebaseDB.getCondomini().child(UID);
 
-        if(true) {
+        userRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-
-
-            userRef.addChildEventListener(new ChildEventListener() {
-
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                    Log.d("HEY", userRef.toString());
-
-                    if (dataSnapshot.getKey().equals("TipologiaUtente")) {
-                        Log.d("HEY", dataSnapshot.getKey().toString());
-                        if (dataSnapshot.getValue().equals("C")) {
-                            Log.d("HEY", dataSnapshot.getValue().toString());
-
-                            Log.d("HEY", "Sono qui");
-                            //scrittura dati nelle shared e intent a home
-                            writeSharedPreferences(username, password, "C");
-
-                            Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
-
-                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(in);
-
-                        } else {
-
-                            Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
-                        }
-
-                        Log.d("HEY", check.toString());
-
-                    }
+                if ( dataSnapshot.exists() )
+                {
+                    Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(in);
+                }else{
+                    Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-                }
-            });
+            @Override
+            public void onCancelled(FirebaseError firebaseError) { }
+        });
 
-        }else{
+            //.child( UID );
 
-            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
-        }
+//        if( exist == true ) {
+//
+//            userRef.addChildEventListener(new ChildEventListener() {
+//
+//                @Override
+//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//
+//                    Log.d("HEY", userRef.toString());
+//
+//                    if (dataSnapshot.getKey().equals("TipologiaUtente")) {
+//                        Log.d("HEY", dataSnapshot.getKey().toString());
+//                        if (dataSnapshot.getValue().equals("C")) {
+//                            Log.d("HEY", dataSnapshot.getValue().toString());
+//
+//                            Log.d("HEY", "Sono qui");
+//                            //scrittura dati nelle shared e intent a home
+//                            writeSharedPreferences(username, password, "C");
+//
+//                            Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
+//
+//                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+//                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            startActivity(in);
+//
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
+//                              }
+//                    }
+//                }
+//
+//                @Override
+//                public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+//
+//                @Override
+//                public void onChildRemoved(DataSnapshot dataSnapshot) { }
+//
+//                @Override
+//                public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+//
+//                @Override
+//                public void onCancelled(FirebaseError firebaseError) { }
+//            });
+//
+//        }else{
+//            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
+//              }
 
     }
 }
