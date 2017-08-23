@@ -77,8 +77,7 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
         if (firebaseAuth.getCurrentUser() != null) {
             // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
 
-            //controllo nel caso in cui l'utente sia loggato con un altra app
-            //che utilizza lo stesso DB
+            //controllo nel caso in cui l'utente sia loggato con un altra app che utilizza lo stesso DB
             checkTipologia( firebaseAuth.getCurrentUser().getUid().toString() );
 
         }

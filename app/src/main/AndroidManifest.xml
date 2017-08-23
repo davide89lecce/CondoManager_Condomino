@@ -18,7 +18,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="CondoManager Condomino"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="com.gambino_serra.condomanager_condomino.condomanager_condomino"
+        >
 
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity"
