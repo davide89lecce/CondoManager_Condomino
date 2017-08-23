@@ -17,9 +17,14 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
+import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.tesi.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,8 +43,13 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private static final String LOGGED_USER = "username";
 
     private Firebase firebaseDB;
+    private FirebaseUser firebaseUser;
+    private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
+
+    private String uidCondomino;
+    private  String stabile;
 
     EditText descrizioneSegnalazioneE;
     String descrizioneSegnalazione;
@@ -110,6 +120,38 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
         descrizioneSegnalazioneE = (EditText) this.getDialog().findViewById(R.id.textDescrizioneSegnalazione);
 
+        //lettura uid condomino -->  codice fiscale stabile, uid amministratore
+        uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
+        firebaseDB = FirebaseDB.getFirebase().child("Condomini").child(uidCondomino);
+        firebaseDB.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.getKey().toString().equals("stabile")){
+                    stabile = dataSnapshot.getValue().toString();
+                    Log.d("Ciao",stabile);
+                }
+            }
+
+            @Override
+            public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     @Override

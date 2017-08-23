@@ -20,15 +20,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.gambino_serra.condomanager_condomino.Controller_old.Login;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Altro;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.InformazioniPersonali;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.HomeFragment;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.InformazioniPersonali;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.SettingsFragment;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.StoricoInterventi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
-
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtName, txtWebsite;
     private Toolbar toolbar;
     private FloatingActionButton fab;
-
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -269,8 +270,11 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_privacy_policy:
                         // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
+                       // startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
                         drawer.closeDrawers();
+
+                        firebaseAuth.signOut();
+                        startActivity(new Intent(MainActivity.this, Login.class));
                         return true;
                     default:
                         navItemIndex = 0;
