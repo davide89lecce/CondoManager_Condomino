@@ -69,10 +69,19 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         Firebase.setAndroidContext(this);
 
+/**
+ *  Effettua il LogIn anche se l'app viene chiusa e riaperta
+ *  non abbiamo bisogno delle Shared perchè l'utente firebase viene salvato
+ *  una volta effettuato il primo accesso
+ */
+        if (firebaseAuth.getCurrentUser() != null) {
+            // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
 
-        // if(firebaseAuth.getCurrentUser() != null){
-        //     //leggere dati e login dell'utente
-        // }
+            //controllo nel caso in cui l'utente sia loggato con un altra app
+            //che utilizza lo stesso DB
+            checkTipologia( firebaseAuth.getCurrentUser().getUid().toString() );
+
+        }
 
         userState();
         //firebaseAuth.signOut();
@@ -102,57 +111,60 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
     @Override
     protected void onStart() {
         super.onStart();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+        /**
+         * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi di testo non siano vuoti ed effettua il login.
+         */
+        @Override
+        public void onClick(View v) {
+
+            username = etUsername.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
+
+            showProgressDialog();
+
+            firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if(task.isSuccessful()) {
+
+                        // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
+                        // non sia null, ovvero che i dati siano validi
+
+                        if (firebaseAuth.getCurrentUser() != null) {
+
+                            // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
+                            utente = firebaseAuth.getCurrentUser();
+
+                            checkTipologia(utente.getUid().toString());
+
+
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else
+                    {
+                        hideProgressDialog();
+                        Toast.makeText(getApplicationContext(), "DATI NON CORRETTI", Toast.LENGTH_SHORT).show();
+                    }
+                 }
+            });
+            }
+        });
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
 
-            /**
-             * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi di testo non siano vuoti ed effettua il login.
-             */
-            @Override
-            public void onClick(View v) {
-
-                username = etUsername.getText().toString().trim();
-                password = etPassword.getText().toString().trim();
-
-                showProgressDialog();
-
-                firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful()) {
-
-                            // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
-                            // non sia null, ovvero che i dati siano validi
-
-                            if (firebaseAuth.getCurrentUser() != null) {
-
-                                // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
-                                utente = firebaseAuth.getCurrentUser();
-
-                                checkTipologia(utente.getUid().toString());
-
-
-                            }
-                            else
-                                {
-                                Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
-                                }
-                        }
-                        else
-                            {
-                            hideProgressDialog();
-                            Toast.makeText(getApplicationContext(), "DATI NON CORRETTI", Toast.LENGTH_SHORT).show();
-                            }
-                    }
-                });
-            }
-        });
     }
 
     /**
