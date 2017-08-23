@@ -85,7 +85,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
 
                         firebaseDatabase = FirebaseDatabase.getInstance();
-                        databaseReference = firebaseDatabase.getReference("Messaggi");
+                        databaseReference = firebaseDatabase.getReference("Messaggi_condomino");
 
 
                         descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
@@ -220,30 +220,30 @@ public class DialogNuovaSegnalazione extends DialogFragment {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
 
-                Integer counter = mutableData.child("Counter").getValue(Integer.class);
+                Integer counter = mutableData.child("counter").getValue(Integer.class);
                 if (counter == null) {
                     return Transaction.success(mutableData);
                 }
 
                 counter = counter + 1;
 
-
-                // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
-                // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
-                MessaggioCondomino m = new MessaggioCondomino(counter, "0","Segnalazione",descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile);
-                // Set value and report transaction success
-
-                //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto
-                mutableData.child("Messaggio"+counter).setValue(m);
-                mutableData.child("Counter").setValue(counter);
-
-
                 //PER INSERIRE LA DATA NEL FORMATO CORRETTO
                 Date newDate = new Date(new Date().getTime());
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm ");
                 String stringdate = dt.format(newDate);
 
-                mutableData.child("Messaggio"+counter).child("data").setValue(stringdate);
+                //mutableData.child(counter.toString()).child("data").setValue(stringdate);
+
+                // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
+                // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
+                MessaggioCondomino m = new MessaggioCondomino(stringdate,"Segnalazione",descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile);
+                // Set value and report transaction success
+
+                //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto
+                mutableData.child(counter.toString()).setValue(m);
+                mutableData.child("counter").setValue(counter);
+
+
                 return Transaction.success(mutableData);
 
             }
