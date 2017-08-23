@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.gambino_serra.condomanager_condomino.Controller_old.Login;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Altro;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.HomeFragment;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.InformazioniPersonali;
@@ -75,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         mHandler = new Handler();
 
@@ -274,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawers();
 
                         firebaseAuth.signOut();
-                        startActivity(new Intent(MainActivity.this, Login.class));
+                        startActivity(new Intent(MainActivity.this, com.gambino_serra.condomanager_condomino.View.Login.LoginActivity.class));
                         return true;
                     default:
                         navItemIndex = 0;

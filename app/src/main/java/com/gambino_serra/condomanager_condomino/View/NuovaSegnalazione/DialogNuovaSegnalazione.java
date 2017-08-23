@@ -64,6 +64,8 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
@@ -122,13 +124,17 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
+        Log.d("Ciao","ciccio" + uidCondomino);
         firebaseDB = FirebaseDB.getFirebase().child("Condomini").child(uidCondomino);
+        Log.d("Ciao","ciccio" + firebaseDB);
         firebaseDB.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                Log.d("Ciao","ciccio" + stabile);
                 if(dataSnapshot.getKey().toString().equals("stabile")){
                     stabile = dataSnapshot.getValue().toString();
-                    Log.d("Ciao",stabile);
+                    Log.d("Ciao","ciccio" + stabile);
                 }
             }
 
