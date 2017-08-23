@@ -21,11 +21,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Altro;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.HomeFragment;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.InformazioniPersonali;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.HomeFragment;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.SettingsFragment;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.StoricoInterventi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
 

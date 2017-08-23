@@ -6,34 +6,39 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.gambino_serra.condomanager_condomino.View.Utente.BaseActivity;
-import com.gambino_serra.condomanager_condomino.View.Utente.RegisterAmministratoreActivity;
+import com.firebase.client.FirebaseError;
+import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity;
+import com.gambino_serra.condomanager_condomino.View_old.Utente.BaseActivity;
+import com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterAmministratoreActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+//import static com.gambino_serra.condomanager_condomino.Controller_old.Login.checkLogin;
 
-import static com.gambino_serra.condomanager_condomino.Controller.Login.checkLogin;
-
-public class LoginActivity extends BaseActivity
-        implements Response.Listener<String>, Response.ErrorListener {
+public class LoginActivity extends BaseActivity implements Response.Listener<String>, Response.ErrorListener {
 
     //Firebase
-    private Firebase DBref;                         //Riferimento al DB
+    private Firebase DBref;                 //Riferimento al DB
     private FirebaseAuth firebaseAuth;      //Oggetto per l'autenticazione
-    private FirebaseUser utente;                    //oggetto per definire l'utente del DB
-    private Firebase userRef;       // posso conservare altri riferimenti ad oggetto che punto a piacere
+    private FirebaseUser utente;            //oggetto per definire l'utente del DB
+    private Firebase userRef;               //posso conservare altri riferimenti ad oggetto che punto a piacere
 
+    String Tipologia = new String("N");
+    Boolean check = false ;
 
     EditText etUsername, etPassword;
     Button btnLogin;
@@ -60,6 +65,9 @@ public class LoginActivity extends BaseActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        Firebase.setAndroidContext(this);
+
+
         // if(firebaseAuth.getCurrentUser() != null){
         //     //leggere dati e login dell'utente
         // }
@@ -72,19 +80,42 @@ public class LoginActivity extends BaseActivity
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
 
+
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Il metodo permette di accedere alla schermata di registrazione di un nuovo utente.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), RegisterAmministratoreActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(in);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             /**
-             * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi
-             * di testo non siano vuoti ed effettua il login.
-             *
-             * @param v istanza della View
+             * Il metodo permette di acquisire i dati inseriti dall'utente, verifica che i campi di testo non siano vuoti ed effettua il login.
              */
             @Override
             public void onClick(View v) {
 
-                username = etUsername.getText().toString().trim();;
-                password = etPassword.getText().toString().trim();;
+                username = etUsername.getText().toString().trim();
+                password = etPassword.getText().toString().trim();
 
                 showProgressDialog();
 
@@ -94,66 +125,35 @@ public class LoginActivity extends BaseActivity
 
                         if(task.isSuccessful()) {
 
-                            hideProgressDialog();
-                            /**
-                             * Ad operazione effettuata, tramite l'if controllo che l'utente  restituito
-                             * non sia null, ovvero che io abbia effettivmento immesso i miei dati
-                             */
+
+
+                            // Ad operazione effettuata, tramite l'if controllo che l'utente restituito
+                            // non sia null, ovvero che i dati siano validi
+
                             if (firebaseAuth.getCurrentUser() != null) {
 
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "LOGIN EFFETTUATO",
-                                        Toast.LENGTH_SHORT
-                                ).show();
+
                                 // PRENDO IL RIFERIMENTO DELL'UTENTE LOGGATO
                                 utente = firebaseAuth.getCurrentUser();
 
-                                //scrittura dati nelle shared e intent a home
-                                writeSharedPreferences(username, password, "A");
+                                checkTipologia(utente.getUid().toString());
 
-                                Intent in = new Intent(getApplicationContext(), com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity.class);
-                                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(in);
 
-                            } else {
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "DATI NON CORRETTI",
-                                        Toast.LENGTH_SHORT
-                                ).show();
                             }
-                        }else{
-                            hideProgressDialog();
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "DATI NON CORRETTI",
-                                    Toast.LENGTH_SHORT
-                            ).show();
+                            else
+                                {
+                                Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
+                                }
                         }
+                        else
+                            {
+                            hideProgressDialog();
+                            Toast.makeText(getApplicationContext(), "DATI NON CORRETTI", Toast.LENGTH_SHORT).show();
+                            }
                     }
                 });
-
             }
         });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-
-            /**
-             * Il metodo permette di accedere alla schermata di registrazione
-             * di un nuovo utente.
-             * @param v istanza della View
-             */
-            @Override
-            public void onClick(View v) {
-
-                Intent in = new Intent(getApplicationContext(), RegisterAmministratoreActivity.class);
-                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(in);
-
-            }
-        });
-
     }
 
     /**
@@ -162,27 +162,22 @@ public class LoginActivity extends BaseActivity
     @Override
     protected void setMessage() {
         mProgressDialog.setMessage(getString(R.string.login));
-    }
+        }
 
     /**
      * Il metodo e' invocato alla risposta (dati ricevuti da database altervista) della richiesta di autenticazione.
-     * @param response
      */
     @Override
     public void onResponse(String response) {
-
-        hideProgressDialog();
-        checkLogin(response, getApplicationContext(),username);
-    }
+//        hideProgressDialog();
+//        checkLogin(response, getApplicationContext(),username);
+        }
 
     /**
      * Il metodo viene invocato in caso di problemi nella ricezione della risposta.
-     * @param error
      */
     @Override
-    public void onErrorResponse(VolleyError error) {
-
-    }
+    public void onErrorResponse(VolleyError error) { }
 
     /**
      *  Il metodo verifica che le SharedPreferences contengano dati, nel caso contrario l'utente risulterà non connesso.
@@ -192,8 +187,8 @@ public class LoginActivity extends BaseActivity
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         if (!sharedPrefs.getAll().isEmpty()) {
             getStatusAndGoHome();
+            }
         }
-    }
 
     /**
      * Il metodo verifica il tipo di utente e lo indirizza nella sua Home Activity.
@@ -202,11 +197,12 @@ public class LoginActivity extends BaseActivity
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
 
-        if (sharedPrefs.getString(TIPO_UTENTE, "").equals("A")) {
-            Intent in = new Intent(this, com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity.class);
+        if (sharedPrefs.getString(TIPO_UTENTE, "").equals("C"))
+            {
+            Intent in = new Intent(this, MainActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
-        }
+            }
     }
 
     private void writeSharedPreferences(String username, String password, String tipo_utente){
@@ -216,5 +212,74 @@ public class LoginActivity extends BaseActivity
         editor.putString(TIPO_UTENTE,tipo_utente);
         editor.putString(LOGGED_USER,username);
         editor.apply();
+        }
+
+
+    private void checkTipologia(String UID){
+
+        //PUNTO NELLA TABELLA "UTENTI" ALL'UTENTE LOGGATO
+
+        hideProgressDialog();
+
+        userRef = FirebaseDB.getUtenti().child( UID );
+
+        if(true) {
+
+
+
+            userRef.addChildEventListener(new ChildEventListener() {
+
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                    Log.d("HEY", userRef.toString());
+
+                    if (dataSnapshot.getKey().equals("TipologiaUtente")) {
+                        Log.d("HEY", dataSnapshot.getKey().toString());
+                        if (dataSnapshot.getValue().equals("C")) {
+                            Log.d("HEY", dataSnapshot.getValue().toString());
+
+                            Log.d("HEY", "Sono qui");
+                            //scrittura dati nelle shared e intent a home
+                            writeSharedPreferences(username, password, "C");
+
+                            Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
+
+                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(in);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "UTENTE DI ALTRA TIPOLOGIA", Toast.LENGTH_SHORT).show();
+                        }
+
+                        Log.d("HEY", check.toString());
+
+                    }
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                }
+            });
+
+        }else{
+
+            Toast.makeText(getApplicationContext(), "UTENTE NON VALIDO", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

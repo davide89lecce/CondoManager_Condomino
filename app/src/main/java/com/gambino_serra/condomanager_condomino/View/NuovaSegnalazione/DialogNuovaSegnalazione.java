@@ -72,7 +72,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
 
                         firebaseDatabase = FirebaseDatabase.getInstance();
-                        databaseReference = firebaseDatabase.getReference("MessaggiCondomino");
+                        databaseReference = firebaseDatabase.getReference("Messaggi");
 
 
                         descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
@@ -80,7 +80,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                         addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
 
 
-
+                        // DA CHIEDERE SE SERVE ANCORA
                         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPrefs.edit();
                         editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
@@ -153,11 +153,17 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                 counter = counter + 1;
 
 
+                // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
+                // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
                 MessaggioCondomino m = new MessaggioCondomino(counter, "0","Segnalazione",descrizioneSegnalazione,2,3);
                 // Set value and report transaction success
+
+                //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto
                 mutableData.child("Messaggio"+counter).setValue(m);
                 mutableData.child("Counter").setValue(counter);
 
+
+                //PER INSERIRE LA DATA NEL FORMATO CORRETTO
                 Date newDate = new Date(new Date().getTime());
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm ");
                 String stringdate = dt.format(newDate);
