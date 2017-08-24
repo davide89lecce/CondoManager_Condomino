@@ -20,11 +20,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Altro;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.HomeFragment;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.InformazioniPersonali;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.SettingsFragment;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.StoricoInterventi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Fragment_home;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Fragment_lista_fornitori;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Fragment_storico_avvisi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Fragment_storico_interventi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.fragment.Fragment_informazioni_personali;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    // urls to load navigation header background image
-    // and profile image
+    // urls to load navigation header background image and profile image TODO: CAMBIARE IMMAGINI
     private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
     private static final String urlProfileImg = "https://lh3.googleusercontent.com/eCtE_G34M9ygdkmOpYvCag1vBARCmZwnVS6rS5t4JLzJ6QgQSBquM0nuTsCpLhYbKljoyS-txg";
 
@@ -54,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
-    private static final String TAG_PHOTOS = "storicoInterventi";
-    private static final String TAG_MOVIES = "informazioniPersonali";
-    private static final String TAG_NOTIFICATIONS = "altro";
-    private static final String TAG_SETTINGS = "settings";
+    private static final String TAG_INFO = "info_personali";
+    private static final String TAG_STORICO_INTERVENTI = "storico_interventi";
+    private static final String TAG_STORICO_AVVISI = "storico_avvisi";
+    private static final String TAG_LISTA_FORNITORI = "lista_fornitori";
     public static String CURRENT_TAG = TAG_HOME;
 
     // toolbar titles respected to selected nav menu item
@@ -123,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadNavHeader() {
         // name, website
-        txtName.setText("Ravi Tamada");
-        txtWebsite.setText("www.androidhive.info");
+        txtName.setText("NOME DELL'UTENTE"); //TODO: IMPOSTARE NOME DELL'UTENTE LOGGATO
+        //txtWebsite.setText("www.androidhive.info");
 
         // loading header background image
         Glide.with(this).load(urlNavHeaderBg)
@@ -202,27 +201,26 @@ public class MainActivity extends AppCompatActivity {
         switch (navItemIndex) {
             case 0:
                 // home
-                HomeFragment homeFragment = new HomeFragment();
+                Fragment_home homeFragment = new Fragment_home();
                 return homeFragment;
             case 1:
-                // photos
-                StoricoInterventi photosFragment = new StoricoInterventi();
-                return photosFragment;
+                // info personali
+                Fragment_informazioni_personali infoFragment = new Fragment_informazioni_personali();
+                return infoFragment;
             case 2:
-                // movies fragment
-                InformazioniPersonali moviesFragment = new InformazioniPersonali();
-                return moviesFragment;
+                // storico inteventi
+                Fragment_storico_interventi interventiFragment = new Fragment_storico_interventi();
+                return interventiFragment;
             case 3:
-                // notifications fragment
-                Altro notificationsFragment = new Altro();
-                return notificationsFragment;
-
+                // storico avvisi
+                Fragment_storico_avvisi avvisiFragment = new Fragment_storico_avvisi();
+                return avvisiFragment;
             case 4:
-                // settings fragment
-                SettingsFragment settingsFragment = new SettingsFragment();
-                return settingsFragment;
+                // lista fornitori
+                Fragment_lista_fornitori listaFornitoriFragment = new Fragment_lista_fornitori();
+                return listaFornitoriFragment;
             default:
-                return new HomeFragment();
+                return new Fragment_home();
         }
     }
 
@@ -248,32 +246,31 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    case R.id.nav_storico_interventi:
+                    case R.id.nav_info_personali:
                         navItemIndex = 1;
-                        CURRENT_TAG = TAG_PHOTOS;
+                        CURRENT_TAG = TAG_INFO;
                         break;
-                    case R.id.nav_informazioni_personali:
+                    case R.id.nav_storico_interventi:
                         navItemIndex = 2;
-                        CURRENT_TAG = TAG_MOVIES;
+                        CURRENT_TAG = TAG_STORICO_INTERVENTI;
                         break;
-                    case R.id.nav_altro:
+                    case R.id.nav_storico_avvisi:
                         navItemIndex = 3;
-                        CURRENT_TAG = TAG_NOTIFICATIONS;
+                        CURRENT_TAG = TAG_STORICO_AVVISI;
                         break;
-                    case R.id.nav_settings:
+                    case R.id.nav_lista_fornitori:
                         navItemIndex = 4;
-                        CURRENT_TAG = TAG_SETTINGS;
+                        CURRENT_TAG = TAG_LISTA_FORNITORI;
                         break;
-                    case R.id.nav_about_us:
-                        // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
-                        drawer.closeDrawers();
-                        return true;
-                    case R.id.nav_privacy_policy:
+//                    case R.id.nav_about_us:
+//                        // launch new intent instead of loading fragment
+//                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+//                        drawer.closeDrawers();
+//                        return true;
+                    case R.id.nav_logout:
                         // launch new intent instead of loading fragment
                        // startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
                         drawer.closeDrawers();
-
                         firebaseAuth.signOut();
                         startActivity(new Intent(MainActivity.this, com.gambino_serra.condomanager_condomino.View.Login.LoginActivity.class));
                         return true;
@@ -365,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "Altro user!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Fragment_storico_avvisi user!", Toast.LENGTH_LONG).show();
             return true;
         }
 

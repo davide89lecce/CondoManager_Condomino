@@ -177,7 +177,7 @@ public class DetailsTicketRifiutato extends AppCompatActivity
                     descrizioneStatoT.setText("Questa richiesta è in corso d'opera");
                     imageStatoI.setImageResource(R.drawable.wrench);
                 }else if(stato.equals("D")){
-                    descrizioneStatoT.setText("Questa richiesta è stata rifiutata.\nSelezionare cambia fornitore per \ninviarla ad un Altro fornitore");
+                    descrizioneStatoT.setText("Questa richiesta è stata rifiutata.\nSelezionare cambia fornitore per \ninviarla ad un Fragment_storico_avvisi fornitore");
                     imageStatoI.setImageResource(R.drawable.error);
                 }else if(stato.equals("E") || stato.equals("G")){
                     descrizioneStatoT.setText("I lavori per questo intervento sono stati conclusi");
