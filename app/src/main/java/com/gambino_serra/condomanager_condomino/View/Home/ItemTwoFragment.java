@@ -42,7 +42,7 @@ public class ItemTwoFragment extends Fragment {
     String username;
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private ArrayList<Segnalazione> data;
     public static View.OnClickListener myOnClickListener;
     Context context;
@@ -71,8 +71,7 @@ public class ItemTwoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_bacheca_segnalazioni_old, container, false);
     }
 
@@ -184,7 +183,7 @@ public class ItemTwoFragment extends Fragment {
 
     }
 
-    private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
+    private class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
 
         private final Context context;
 
@@ -199,9 +198,9 @@ public class ItemTwoFragment extends Fragment {
 
         private void detailsSegnalazione(View v) {
             Log.d("ciao","ciao");
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder
-                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
+            int selectedItemPosition = recyclerView.getChildAdapterPosition(v);
+            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
+
             TextView textViewName
                     = (TextView) viewHolder.itemView.findViewById(R.id.textViewIdSegnalazione);
             String selectedName = (String) textViewName.getText();

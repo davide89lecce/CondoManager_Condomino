@@ -6,20 +6,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainDrawer;
 import com.gambino_serra.condomanager_condomino.View_old.Utente.BaseActivity;
 import com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterAmministratoreActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
@@ -209,7 +207,7 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         if (sharedPrefs.getString(TIPO_UTENTE, "").equals("C"))
             {
-            Intent in = new Intent(this, MainActivity.class);
+            Intent in = new Intent(this, MainDrawer.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
             }
@@ -240,7 +238,7 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
                 if ( dataSnapshot.exists() )
                 {
                     Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
-                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent in = new Intent(getApplicationContext(), MainDrawer.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
                 }else{
