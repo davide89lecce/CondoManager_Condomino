@@ -47,7 +47,7 @@ public class BachecaSegnalazioni extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_bacheca_segnalazioni_old, container, false);
+        View view = inflater.inflate(R.layout.tab_bacheca_interventi, container, false);
         return view;
     }
 

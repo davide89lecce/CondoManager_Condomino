@@ -43,4 +43,5 @@ public class FirebaseDB {
         firebase = new Firebase(DB + "Ticket_intervento");
         return firebase;
     }
+
 }

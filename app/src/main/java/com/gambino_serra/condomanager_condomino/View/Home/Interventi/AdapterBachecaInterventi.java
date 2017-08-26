@@ -16,16 +16,14 @@ import java.util.ArrayList;
 import static com.gambino_serra.condomanager_condomino.tesi.R.id.imageView;
 
 
-public class AdapterCardsBachecaSegnalazioni extends RecyclerView.Adapter<AdapterCardsBachecaSegnalazioni.MyViewHolder> {
+public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachecaInterventi.MyViewHolder> {
 
-    //private ArrayList<Segnalazione> dataSet;
     private ArrayList<TicketIntervento> dataset;
 
     int row;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-       // TextView textViewCondominio;
         TextView textViewSegnalazione;
         ImageView imageViewIcon;
         TextView textViewIdSegnalazione;
@@ -35,7 +33,6 @@ public class AdapterCardsBachecaSegnalazioni extends RecyclerView.Adapter<Adapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
-           // this.textViewCondominio = (TextView) itemView.findViewById(R.id.textViewCondominio);
             this.textViewSegnalazione = (TextView) itemView.findViewById(R.id.textViewSegnalazione);
             this.imageViewIcon = (ImageView) itemView.findViewById(imageView);
             this.textViewIdSegnalazione = (TextView) itemView.findViewById(R.id.textViewIdSegnalazione);
@@ -45,7 +42,7 @@ public class AdapterCardsBachecaSegnalazioni extends RecyclerView.Adapter<Adapte
         }
     }
 
-    public AdapterCardsBachecaSegnalazioni(ArrayList<TicketIntervento> dataset) {
+    public AdapterBachecaInterventi(ArrayList<TicketIntervento> dataset) {
         this.dataset = dataset;
     }
 
@@ -53,7 +50,8 @@ public class AdapterCardsBachecaSegnalazioni extends RecyclerView.Adapter<Adapte
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_condomino_home_old, parent, false);
 
-        view.setOnClickListener(BachecaSegnalazioni.myOnClickListener);
+        //Setta l'onclick sulla recycler view presente nella classe Interventi
+        view.setOnClickListener(BachecaInterventi.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -62,14 +60,12 @@ public class AdapterCardsBachecaSegnalazioni extends RecyclerView.Adapter<Adapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
-     //   TextView textViewCondominio = holder.textViewCondominio;
         TextView textViewSegnalazione = holder.textViewSegnalazione;
         ImageView imageView = holder.imageViewIcon;
         TextView textViewIdSegnalazione = holder.textViewIdSegnalazione;
         TextView textViewData = holder.textViewData;
         TextView textStato = holder.textStato;
 
-        //textViewCondominio.setText(dataSet.get(listPosition).getCondominio());
         textViewSegnalazione.setText( dataset.get(listPosition).getOggetto());
         textViewIdSegnalazione.setText(dataset.get(listPosition).getIdTicketIntervento().toString());
         textViewData.setText(dataset.get(listPosition).getDataTicket());

@@ -28,6 +28,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.gambino_serra.condomanager_condomino.View.Home.Interventi.BachecaInterventi;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                                 selectedFragment = ItemOneFragment.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = ItemTwoFragment.newInstance();
+                                selectedFragment = BachecaInterventi.newInstance();
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = ItemThreeFragment.newInstance();

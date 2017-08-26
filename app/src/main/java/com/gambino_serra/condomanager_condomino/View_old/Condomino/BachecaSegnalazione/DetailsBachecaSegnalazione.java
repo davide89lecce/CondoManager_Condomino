@@ -68,7 +68,7 @@ public class DetailsBachecaSegnalazione extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bacheca_segnalazione_old);
+        setContentView(R.layout.activity_dettaglio_intervento);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();

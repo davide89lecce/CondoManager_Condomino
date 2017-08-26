@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.gambino_serra.condomanager_condomino.View.Home.ItemOneFragment;
 import com.gambino_serra.condomanager_condomino.View.Home.ItemThreeFragment;
-import com.gambino_serra.condomanager_condomino.View.Home.ItemTwoFragment;
+import com.gambino_serra.condomanager_condomino.View.Home.Interventi.BachecaInterventi;
 import com.gambino_serra.condomanager_condomino.View.NuovaSegnalazione.DialogNuovaSegnalazione;
 import com.gambino_serra.condomanager_condomino.View.NuovoMessaggio.DialogNuovoMessaggio;
 import com.gambino_serra.condomanager_condomino.tesi.R;
@@ -90,7 +90,7 @@ public class Fragment_home extends Fragment {
                                 selectedFragment = ItemOneFragment.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = ItemTwoFragment.newInstance();
+                                selectedFragment = BachecaInterventi.newInstance();
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = ItemThreeFragment.newInstance();
@@ -105,7 +105,8 @@ public class Fragment_home extends Fragment {
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ItemOneFragment.newInstance());
+        //transaction.replace(R.id.frame_layout, ItemOneFragment.newInstance());
+        transaction.replace(R.id.frame_layout, BachecaInterventi.newInstance());
         transaction.commit();
 
         //Used to select an item programmatically

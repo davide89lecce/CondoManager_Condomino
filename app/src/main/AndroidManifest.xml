@@ -48,6 +48,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.Home.Interventi.DettaglioIntervento"
+            android:label="@string/title_details_segnalazione"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.Home.MainActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterActivity"
             android:label="@string/title_register"
