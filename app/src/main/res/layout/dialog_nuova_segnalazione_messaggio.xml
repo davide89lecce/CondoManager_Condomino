@@ -24,4 +24,10 @@
         android:fontFamily="sans-serif"
         android:layout_weight="0.15" />
 
+    <Button
+        android:id="@+id/insertImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inserisci foto" />
+
 </LinearLayout>

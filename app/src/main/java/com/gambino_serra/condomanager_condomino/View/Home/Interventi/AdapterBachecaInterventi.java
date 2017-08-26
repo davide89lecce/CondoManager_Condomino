@@ -1,7 +1,6 @@
 package com.gambino_serra.condomanager_condomino.View.Home.Interventi;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,6 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
         textViewIdSegnalazione.setText(dataset.get(listPosition).getIdTicketIntervento().toString());
         textViewData.setText(dataset.get(listPosition).getDataTicket());
         textStato.setText(dataset.get(listPosition).getStato());
-        Log.d("ciao",dataset.get(listPosition).getIdTicketIntervento().toString());
 
         String stato = dataset.get(listPosition).getStato();
 

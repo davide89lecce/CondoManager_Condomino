@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
@@ -14,6 +15,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,6 +34,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Date;
 
@@ -56,6 +61,10 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     String descrizioneSegnalazione;
     String username;
 
+    private Button mSelectedImage;
+    private StorageReference mStorage;
+    private static final int GALLERY_INTENT = 2;
+
     public DialogNuovaSegnalazione() {
     }
 
@@ -66,6 +75,8 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mStorage = FirebaseStorage.getInstance().getReference();
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -182,6 +193,18 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mSelectedImage = (Button) this.getDialog().findViewById(R.id.insertImage);
+        mSelectedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,GALLERY_INTENT);
 
             }
         });
