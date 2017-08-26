@@ -31,7 +31,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainDrawer extends AppCompatActivity {
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout._activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -175,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 // update the main content by replacing fragments
                 Fragment fragment = getHomeFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
             }
@@ -264,15 +263,15 @@ public class MainActivity extends AppCompatActivity {
                         break;
 //                    case R.id.nav_about_us:
 //                        // launch new intent instead of loading fragment
-//                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+//                        startActivity(new Intent(MainDrawer.this, AboutUsActivity.class));
 //                        drawer.closeDrawers();
 //                        return true;
                     case R.id.nav_logout:
                         // launch new intent instead of loading fragment
-                       // startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
+                       // startActivity(new Intent(MainDrawer.this, PrivacyPolicyActivity.class));
                         drawer.closeDrawers();
                         firebaseAuth.signOut();
-                        startActivity(new Intent(MainActivity.this, com.gambino_serra.condomanager_condomino.View.Login.LoginActivity.class));
+                        startActivity(new Intent(MainDrawer.this, com.gambino_serra.condomanager_condomino.View.Login.LoginActivity.class));
                         return true;
                     default:
                         navItemIndex = 0;

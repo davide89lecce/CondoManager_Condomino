@@ -23,7 +23,7 @@
         >
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainActivity"
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainDrawer"
             android:label="@string/activity_title_privacy_policy"
             android:theme="@style/AppTheme.NoActionBar"/>
 
@@ -39,6 +39,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.Login.LoginActivity"
             android:screenOrientation="portrait"
