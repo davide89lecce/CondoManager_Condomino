@@ -8,17 +8,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.Firebase;
@@ -26,6 +33,8 @@ import com.firebase.client.FirebaseError;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.tesi.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,9 +45,13 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
@@ -61,9 +74,14 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     String descrizioneSegnalazione;
     String username;
 
-    private Button mSelectedImage;
+    private Button mSelectImage;
+    private Button mSelectCamera;
+    private ImageView mImmagine;
     private StorageReference mStorage;
-    private static final int GALLERY_INTENT = 2;
+    private static final int GALLERY_INTENT = 2; // Codice per definire l'intent specifico per la Galleria
+    private static final int CAMERA_REQUEST_CODE = 1; // Codice per definire l'intent specifico per la Camera
+
+    private Uri percorsoImm = null; //per sovrascrivere il percorso nel quale sarà presente l'immagine selezionata
 
     public DialogNuovaSegnalazione() {
     }
@@ -89,7 +107,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_nuova_segnalazione_messaggio, null))
+        builder.setView(inflater.inflate(R.layout._dialog_nuova_segnalazione_messaggio, null))
 
                 .setPositiveButton(R.string.nuova_segnalazione_conferma, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)
@@ -103,6 +121,20 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                         addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
 
+                        //SALVA IMMAGINE IN STORAGE FIREBASE
+                        StorageReference filepath = mStorage.child("Photo").child(percorsoImm.getLastPathSegment());
+
+                        filepath.putFile(percorsoImm).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                //Toast.makeText( contesto , "Immagine Salvata", Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) { //TODO: problemi su contesto Toast
+                                //Toast.makeText( contesto , "Immagine Salvata", Toast.LENGTH_LONG).show();
+                            }
+                        });
 
                         // DA CHIEDERE SE SERVE ANCORA
                         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
@@ -197,17 +229,31 @@ public class DialogNuovaSegnalazione extends DialogFragment {
             }
         });
 
-        mSelectedImage = (Button) this.getDialog().findViewById(R.id.insertImage);
-        mSelectedImage.setOnClickListener(new View.OnClickListener() {
+        mSelectImage = (Button) this.getDialog().findViewById(R.id.insertImage);
+        mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,GALLERY_INTENT);
+                Intent intentGallery = new Intent(Intent.ACTION_PICK);
+                intentGallery.setType("image/*");
+                startActivityForResult(intentGallery,GALLERY_INTENT);
 
             }
         });
+
+
+        mSelectCamera = (Button) this.getDialog().findViewById(R.id.takeImage);
+        mSelectCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCamera = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intentCamera,CAMERA_REQUEST_CODE);
+
+            }
+        });
+
+        mImmagine = (ImageView) this.getDialog().findViewById(R.id.ImmagineAnteprima);
+
     }
 
     @Override
@@ -279,5 +325,48 @@ public class DialogNuovaSegnalazione extends DialogFragment {
             }
         });
     }
+
+
+    /**
+     * Funzione che si attiverà una volta che l'activity chiamata per catturare un'immagine restituirà un risultato
+     * ovvero appunto l'immagine che si desidera inserire nel db
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == GALLERY_INTENT || requestCode == CAMERA_REQUEST_CODE) {
+                percorsoImm = data.getData(); //Sovrascrive la fonte ad ogni immagine recuperata
+
+                // ci sercirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase
+                InputStream inputStream;
+
+
+                // blocco richiesto per controllare se l'immagine sarà "leggibile" o meno
+                // in caso negativo, crea un messaggio di errore
+                try {
+                    inputStream = getContext().getContentResolver().openInputStream(percorsoImm);
+
+                    // Mappiamo la view per visualizzare l'inpit stream a schermo
+                    Bitmap bt = BitmapFactory.decodeStream(inputStream);
+                    mImmagine.setImageBitmap(bt);
+
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
+                }
+
+                //Picasso.with( getActivity().getApplicationContext() ).load(percorsoImm).centerCrop().resize(200,300).into(mImmagine);
+
+            }
+        }
+    }
+
 
 }

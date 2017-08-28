@@ -74,7 +74,7 @@ public class DettaglioIntervento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dettaglio_intervento);
+        setContentView(R.layout._OLDactivity_dettaglio_intervento);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
