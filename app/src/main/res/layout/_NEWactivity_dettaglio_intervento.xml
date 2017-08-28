@@ -42,326 +42,6 @@
 
     </LinearLayout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/scrollView2"
-        android:background="@color/grey_300"
-        android:layout_width="0dp"
-        android:layout_height="422dp"
-        android:fillViewport="true"
-        android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical"
-        tools:context="com.gambino_serra.condomanager_condomino.View.Home.Interventi.DettaglioIntervento"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/btnChiama"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginBottom="62dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/grey_300"
-            android:weightSum="1">
-
-            <!-- Prima card  -->
-
-            <android.support.v7.widget.CardView android:id="@+id/card_dati_segnalazione"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardBackgroundColor="@color/color_white"
-                card_view:cardCornerRadius="5dp"
-                card_view:cardElevation="5dp"
-                card_view:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="vertical"
-                    android:background="@color/color_white"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:text="Segnalazione"
-                        android:layout_marginTop="10dip"
-                        android:layout_marginLeft="10dip"
-                        android:layout_marginBottom="10dip"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <android.support.v7.widget.CardView android:id="@+id/card_data"
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="@color/color_white"
-                        card_view:cardCornerRadius="1dp"
-                        card_view:cardElevation="1dp"
-                        card_view:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <ImageView
-                                    android:id="@+id/imageData"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_width="25dp"
-                                    android:layout_height="match_parent"
-                                    app:srcCompat="@mipmap/ic_data" />
-
-                                <TextView
-                                    android:text="Data segnalazione"
-                                    android:layout_marginTop="10dip"
-                                    android:layout_marginLeft="2dip"
-                                    android:fontFamily="sans-serif"
-                                    android:textStyle="bold"
-                                    android:textSize="16sp"
-                                    android:textAppearance="?android:attr/textAppearanceLarge"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="20"></TextView>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:text=""
-                                android:layout_marginTop="10dip"
-                                android:layout_marginLeft="30dip"
-                                android:layout_marginBottom="10dip"
-                                android:fontFamily="sans-serif"
-                                android:textSize="18sp"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:id="@+id/dataD"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"></TextView>
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/card_condominio"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/color_white"
-                        app:cardCornerRadius="1dp"
-                        app:cardElevation="1dp"
-                        app:cardUseCompatPadding="true">
-
-                        <android.support.constraint.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:weightSum="1"
-                            tools:layout_editor_absoluteY="3dp"
-                            tools:layout_editor_absoluteX="2dp">
-
-
-                            <ImageView
-                                android:id="@+id/imageCondominio"
-                                android:layout_width="25dp"
-                                android:layout_height="20dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:srcCompat="@mipmap/ic_condominio"
-                                card_view:layout_constraintBottom_toBottomOf="@+id/textView3"
-                                card_view:layout_constraintTop_toTopOf="parent"
-                                android:layout_marginTop="8dp"
-                                tools:layout_editor_absoluteX="32dp" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif"
-                                android:text="Condominio"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                app:layout_constraintLeft_toRightOf="@+id/imageCondominio"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:layout_conversion_absoluteX="76dp"
-                                tools:layout_conversion_absoluteY="191dp"
-                                tools:layout_conversion_absoluteWidth="87dp"
-                                tools:layout_conversion_absoluteHeight="19dp"
-                                android:layout_marginLeft="70dp"
-                                android:layout_marginTop="8dp"></TextView>
-
-
-                            <TextView
-                                android:id="@+id/condominioD"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif"
-                                android:text=""
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:textSize="18sp"
-                                tools:layout_editor_absoluteY="294dp"
-                                tools:layout_editor_absoluteX="32dp"></TextView>
-
-                        </android.support.constraint.ConstraintLayout>
-
-                    </android.support.v7.widget.CardView>
-
-
-                    <android.support.v7.widget.CardView android:id="@+id/card_condomino"
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="@color/color_white"
-                        card_view:cardCornerRadius="1dp"
-                        card_view:cardElevation="1dp"
-                        card_view:cardUseCompatPadding="true">
-
-                        <android.support.constraint.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-
-
-                            <ImageView
-                                android:id="@+id/imageCondomino"
-                                android:layout_width="25dp"
-                                android:layout_height="20dp"
-                                app:srcCompat="@drawable/ic_person_white"
-                                card_view:layout_constraintBottom_toBottomOf="@+id/textView2"
-                                card_view:layout_constraintLeft_toLeftOf="parent"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginStart="16dp" />
-
-                            <TextView
-                                android:text="Condomino"
-                                android:fontFamily="sans-serif"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                card_view:layout_constraintTop_toTopOf="parent"
-                                card_view:layout_constraintLeft_toRightOf="@+id/imageCondomino"
-                                android:id="@+id/textView2"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginStart="16dp"></TextView>
-
-
-                            <TextView
-                                android:text=""
-                                android:fontFamily="sans-serif"
-                                android:textSize="18sp"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:id="@+id/condominoD"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                card_view:layout_constraintTop_toBottomOf="@+id/imageCondomino"
-                                android:layout_marginRight="8dp"
-                                card_view:layout_constraintRight_toRightOf="parent"
-                                android:layout_marginLeft="8dp"
-                                card_view:layout_constraintLeft_toLeftOf="parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"></TextView>
-
-                        </android.support.constraint.ConstraintLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView android:id="@+id/card_segnalazione"
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="@color/color_white"
-                        card_view:cardCornerRadius="1dp"
-                        card_view:cardElevation="1dp"
-                        card_view:cardUseCompatPadding="true">
-
-                        <android.support.constraint.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:weightSum="1"
-                            tools:layout_editor_absoluteY="3dp"
-                            tools:layout_editor_absoluteX="2dp">
-
-
-                            <ImageView
-                                android:id="@+id/imageSegnalazione"
-                                android:layout_width="25dp"
-                                android:layout_height="20dp"
-                                app:srcCompat="@mipmap/ic_segnalazione"
-                                android:layout_marginLeft="16dp"
-                                card_view:layout_constraintLeft_toLeftOf="parent"
-                                card_view:layout_constraintBottom_toBottomOf="@+id/textView"
-                                android:layout_marginStart="16dp" />
-
-                            <TextView
-                                android:text="Segnalazione"
-                                android:fontFamily="sans-serif"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                card_view:layout_constraintTop_toTopOf="parent"
-                                android:layout_marginTop="8dp"
-                                android:id="@+id/textView"
-                                android:layout_marginStart="16dp"
-                                card_view:layout_constraintLeft_toRightOf="@+id/imageSegnalazione"
-                                android:layout_marginLeft="16dp"></TextView>
-
-
-                            <TextView
-                                android:text=""
-                                android:fontFamily="sans-serif"
-                                android:textSize="18sp"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:id="@+id/segnalazioneD"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="8dp"
-                                card_view:layout_constraintLeft_toLeftOf="parent"
-                                android:layout_marginTop="16dp"
-                                card_view:layout_constraintTop_toBottomOf="@+id/imageSegnalazione"
-                                android:layout_marginRight="8dp"
-                                card_view:layout_constraintRight_toRightOf="parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"></TextView>
-
-                        </android.support.constraint.ConstraintLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-            <!-- Fine prima card  -->
-
-        </LinearLayout>
-
-    </ScrollView>
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -410,5 +90,345 @@
             tools:layout_constraintLeft_creator="1" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="422dp"
+        android:layout_marginBottom="55dp"
+        android:background="@color/grey_300"
+        android:fillViewport="true"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnChiama"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:context="com.gambino_serra.condomanager_condomino.View.Home.Interventi.DettaglioIntervento"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_300"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <!-- Prima card  -->
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_dati_segnalazione"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/color_white"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardElevation="5dp"
+                card_view:cardUseCompatPadding="true">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_white"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="Segnalazione"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="26dp"
+                        tools:layout_editor_absoluteY="8dp" />
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_condominio"
+                        android:layout_width="331dp"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/color_white"
+                        app:cardCornerRadius="1dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="106dp">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:weightSum="1"
+                            tools:layout_editor_absoluteX="2dp"
+                            tools:layout_editor_absoluteY="3dp">
+
+
+                            <ImageView
+                                android:id="@+id/imageCondominio"
+                                android:layout_width="25dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:srcCompat="@mipmap/ic_condominio"
+                                card_view:layout_constraintBottom_toBottomOf="@+id/textView3"
+                                card_view:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Condominio"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintLeft_toRightOf="@+id/imageCondominio"
+                                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                            <TextView
+                                android:id="@+id/condominioD"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="sans-serif"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="18sp"
+                                card_view:layout_constraintHorizontal_bias="0.0"
+                                card_view:layout_constraintLeft_toLeftOf="parent"
+                                card_view:layout_constraintRight_toRightOf="parent"
+                                card_view:layout_constraintTop_toBottomOf="@+id/imageCondominio"></TextView>
+
+                        </android.support.constraint.ConstraintLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/card_condomino"
+                        android:layout_width="331dp"
+                        android:layout_height="wrap_content"
+                        card_view:cardBackgroundColor="@color/color_white"
+                        card_view:cardCornerRadius="1dp"
+                        card_view:cardElevation="1dp"
+                        card_view:cardUseCompatPadding="true"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="184dp">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:weightSum="1">
+
+
+                            <ImageView
+                                android:id="@+id/imageCondomino"
+                                android:layout_width="25dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                app:srcCompat="@drawable/ic_person_white"
+                                card_view:layout_constraintBottom_toBottomOf="@+id/textView2"
+                                card_view:layout_constraintLeft_toLeftOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Condomino"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                card_view:layout_constraintLeft_toRightOf="@+id/imageCondomino"
+                                card_view:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                            <TextView
+                                android:id="@+id/condominoD"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="18sp"
+                                card_view:layout_constraintLeft_toLeftOf="parent"
+                                card_view:layout_constraintRight_toRightOf="parent"
+                                card_view:layout_constraintTop_toBottomOf="@+id/imageCondomino"></TextView>
+
+                        </android.support.constraint.ConstraintLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/card_segnalazione"
+                        android:layout_width="331dp"
+                        android:layout_height="wrap_content"
+                        card_view:cardBackgroundColor="@color/color_white"
+                        card_view:cardCornerRadius="1dp"
+                        card_view:cardElevation="1dp"
+                        card_view:cardUseCompatPadding="true"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="249dp">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:weightSum="1"
+                            tools:layout_editor_absoluteX="2dp"
+                            tools:layout_editor_absoluteY="3dp">
+
+
+                            <ImageView
+                                android:id="@+id/imageSegnalazione"
+                                android:layout_width="25dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                app:srcCompat="@mipmap/ic_segnalazione"
+                                card_view:layout_constraintBottom_toBottomOf="@+id/textView"
+                                card_view:layout_constraintLeft_toLeftOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Segnalazione"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                card_view:layout_constraintLeft_toRightOf="@+id/imageSegnalazione"
+                                card_view:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                            <TextView
+                                android:id="@+id/segnalazioneD"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="18sp"
+                                card_view:layout_constraintLeft_toLeftOf="parent"
+                                card_view:layout_constraintRight_toRightOf="parent"
+                                card_view:layout_constraintTop_toBottomOf="@+id/imageSegnalazione"></TextView>
+
+                        </android.support.constraint.ConstraintLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_data"
+                        android:layout_width="329dp"
+                        android:layout_height="59dp"
+                        app:cardBackgroundColor="@color/color_white"
+                        app:cardCornerRadius="1dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true"
+                        tools:layout_editor_absoluteY="49dp"
+                        android:layout_marginRight="8dp"
+                        card_view:layout_constraintRight_toRightOf="parent"
+                        android:layout_marginLeft="8dp"
+                        card_view:layout_constraintLeft_toLeftOf="parent">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:weightSum="1">
+
+
+                            <ImageView
+                                android:id="@+id/imageData"
+                                android:layout_width="25dp"
+                                android:layout_height="20dp"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView4"
+                                app:srcCompat="@mipmap/ic_data"
+                                card_view:layout_constraintBottom_toBottomOf="@+id/textView4" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Data segnalazione"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintLeft_toRightOf="@+id/imageData"
+                                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                            <TextView
+                                android:id="@+id/dataD"
+                                android:layout_width="198dp"
+                                android:layout_height="55dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="18sp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/imageData"
+                                tools:layout_editor_absoluteX="27dp"
+                                tools:layout_editor_absoluteY="12dp"></TextView>
+
+                        </android.support.constraint.ConstraintLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+            <!-- Fine prima card  -->
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
