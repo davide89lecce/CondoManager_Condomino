@@ -9,12 +9,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,7 +24,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.Firebase;
@@ -46,7 +45,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -79,7 +78,9 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 2; // Codice per definire l'intent specifico per la Galleria
     private static final int CAMERA_REQUEST_CODE = 1; // Codice per definire l'intent specifico per la Camera
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
 
+    File sdImageMainDirectory;
     private Uri percorsoImm = null; //per sovrascrivere il percorso nel quale sarà presente l'immagine selezionata
 
     public DialogNuovaSegnalazione() {
@@ -228,6 +229,8 @@ public class DialogNuovaSegnalazione extends DialogFragment {
             }
         });
 
+        mImmagine = (ImageView) this.getDialog().findViewById(R.id.ImmagineAnteprima);
+
         mSelectImage = (Button) this.getDialog().findViewById(R.id.insertImage);
         mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,13 +248,14 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         mSelectCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentCamera = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intentCamera,CAMERA_REQUEST_CODE);
+
+                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intentCamera,CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
             }
         });
 
-        mImmagine = (ImageView) this.getDialog().findViewById(R.id.ImmagineAnteprima);
+
 
     }
 
@@ -283,32 +287,33 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     }
 
 
-    private void addMessaggioCondomino(DatabaseReference postRef, final String descrizioneSegnalazione) {
+    private void addMessaggioCondomino(DatabaseReference postRef, final String descrizioneMessaggio) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
 
+                //Legge il valore del nodo counter
                 Integer counter = mutableData.child("counter").getValue(Integer.class);
+
                 if (counter == null) {
                     return Transaction.success(mutableData);
                 }
 
+                //Incrementa counter
                 counter = counter + 1;
 
-                //PER INSERIRE LA DATA NEL FORMATO CORRETTO
+                //Ricava la data e la formatta nel formato appropriato
                 Date newDate = new Date(new Date().getTime());
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm ");
                 String stringdate = dt.format(newDate);
 
-                //mutableData.child(counter.toString()).child("data").setValue(stringdate);
+                //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
+                //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
+                MessaggioCondomino m = new MessaggioCondomino(stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
 
-                // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
-                // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
-                MessaggioCondomino m = new MessaggioCondomino(stringdate,"segnalazione",descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile);
-                // Set value and report transaction success
-
-                //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto
+                //Setta il nome del nodo del messaggio (key)
                 mutableData.child(counter.toString()).setValue(m);
+                //Setta il counter del nodo Messaggi_condomino
                 mutableData.child("counter").setValue(counter);
 
 
@@ -339,27 +344,33 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == GALLERY_INTENT || requestCode == CAMERA_REQUEST_CODE) {
-                percorsoImm = data.getData(); //Sovrascrive la fonte ad ogni immagine recuperata
+            if (requestCode == GALLERY_INTENT || requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+                //percorsoImm = data.getData(); //Sovrascrive la fonte ad ogni immagine recuperata
 
-                // ci sercirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase
+                // ci servirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase
                 InputStream inputStream;
 
 
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                mImmagine.setImageBitmap(photo);
+
                 // blocco richiesto per controllare se l'immagine sarà "leggibile" o meno
                 // in caso negativo, crea un messaggio di errore
-                try {
-                    inputStream = getContext().getContentResolver().openInputStream(percorsoImm);
+              //  try {
+                   // inputStream = getContext().getContentResolver().openInputStream(percorsoImm);
+
+
+
 
                     // Mappiamo la view per visualizzare l'inpit stream a schermo
-                    Bitmap bt = BitmapFactory.decodeStream(inputStream);
-                    mImmagine.setImageBitmap(bt);
+                   // Bitmap bt = BitmapFactory.decodeStream(inputStream);
+                    // mImmagine.setImageBitmap(bt);
 
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
-                }
+              //  } catch (FileNotFoundException e) {
+              //      e.printStackTrace();
+              //      Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
+              //  }
 
                 //Picasso.with( getActivity().getApplicationContext() ).load(percorsoImm).centerCrop().resize(200,300).into(mImmagine);
 

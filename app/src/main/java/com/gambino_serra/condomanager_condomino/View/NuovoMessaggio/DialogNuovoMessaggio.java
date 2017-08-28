@@ -93,12 +93,6 @@ public class DialogNuovoMessaggio extends DialogFragment {
                         addMessaggioCondomino(databaseReference, descrizioneMessaggio);
 
 
-                        // DA CHIEDERE SE SERVE ANCORA
-                        final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPrefs.edit();
-                        editor.putString("descrizioneMessaggio", descrizioneMessaggio);
-                        editor.apply();
-
                         dismiss();
                     }
                 })
@@ -124,20 +118,30 @@ public class DialogNuovoMessaggio extends DialogFragment {
         descrizioneMessaggioE = (EditText) this.getDialog().findViewById(R.id.textDescrizioneSegnalazione);
 
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
+        //ricava l'UID dell'utente loggato
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
+        //Ricava il riferimento del nodo con UID uidCondomino da firebase
         firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
+        //Prende tutti i child del nodo uidCondomino
         firebaseDB.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
 
+                //Se la chiave del nodo è stabile..
                 if(dataSnapshot.getKey().toString().equals("stabile")){
+
+                    //..salva il valore del nodo stabile
                     stabile = dataSnapshot.getValue().toString();
 
+                    //Prende il riferimento del nodo stabile
                     firebaseDB = FirebaseDB.getStabili().child(stabile);
+                    //Prende tutti i child del nodo stabile
                     firebaseDB.addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                            //Se la chiave è uguale ad amministratore allora...
                             if(dataSnapshot.getKey().toString().equals("amministratore")) {
+                                //..salva il valore del nodo amministratore (UID)
                                 uidAmministratore = dataSnapshot.getValue().toString();
                             }
                         }
@@ -220,27 +224,28 @@ public class DialogNuovoMessaggio extends DialogFragment {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
 
+                //Legge il valore del nodo counter
                 Integer counter = mutableData.child("counter").getValue(Integer.class);
+
                 if (counter == null) {
                     return Transaction.success(mutableData);
                 }
 
+                //Incrementa counter
                 counter = counter + 1;
 
-                //PER INSERIRE LA DATA NEL FORMATO CORRETTO
+                //Ricava la data e la formatta nel formato appropriato
                 Date newDate = new Date(new Date().getTime());
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm ");
                 String stringdate = dt.format(newDate);
 
-                //mutableData.child(counter.toString()).child("data").setValue(stringdate);
+                //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
+                //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
+                MessaggioCondomino m = new MessaggioCondomino(stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
 
-                // SETTIAMO INIZIALMENT LA DATA A 0 PER POI ANDARLA AD INSERIRE COME CHILD SINGOLO
-                // E TENERLA AGGIORNATA CON LA DATA PRECISA DI INSERIMENTO DEL MSG NEL DB
-                MessaggioCondomino m = new MessaggioCondomino(stringdate,"messaggio", DialogNuovoMessaggio.this.descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
-                // Set value and report transaction success
-
-                //Firebase legge le coppie chiave-valore tramite i metodi get della classe di appartenenza dell'oggetto
+                //Setta il nome del nodo del messaggio (key)
                 mutableData.child(counter.toString()).setValue(m);
+                //Setta il counter del nodo Messaggi_condomino
                 mutableData.child("counter").setValue(counter);
 
 

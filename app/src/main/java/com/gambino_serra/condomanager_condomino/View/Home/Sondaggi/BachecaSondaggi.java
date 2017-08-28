@@ -18,7 +18,7 @@
  *
  */
 
-package com.gambino_serra.condomanager_condomino.View.Home;
+package com.gambino_serra.condomanager_condomino.View.Home.Sondaggi;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,9 +28,9 @@ import android.view.ViewGroup;
 
 import com.gambino_serra.condomanager_condomino.tesi.R;
 
-public class ItemThreeFragment extends Fragment {
-    public static ItemThreeFragment newInstance() {
-        ItemThreeFragment fragment = new ItemThreeFragment();
+public class BachecaSondaggi extends Fragment {
+    public static BachecaSondaggi newInstance() {
+        BachecaSondaggi fragment = new BachecaSondaggi();
         return fragment;
     }
 

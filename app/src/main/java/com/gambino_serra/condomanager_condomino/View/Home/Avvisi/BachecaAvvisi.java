@@ -18,7 +18,7 @@
  *
  */
 
-package com.gambino_serra.condomanager_condomino.View.Home;
+package com.gambino_serra.condomanager_condomino.View.Home.Avvisi;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,9 +28,9 @@ import android.view.ViewGroup;
 
 import com.gambino_serra.condomanager_condomino.tesi.R;
 
-public class ItemOneFragment extends Fragment {
-    public static ItemOneFragment newInstance() {
-        ItemOneFragment fragment = new ItemOneFragment();
+public class BachecaAvvisi extends Fragment {
+    public static BachecaAvvisi newInstance() {
+        BachecaAvvisi fragment = new BachecaAvvisi();
         return fragment;
     }
 

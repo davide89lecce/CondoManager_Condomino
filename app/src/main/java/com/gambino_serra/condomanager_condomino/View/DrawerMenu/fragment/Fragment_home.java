@@ -13,8 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import com.gambino_serra.condomanager_condomino.View.Home.ItemOneFragment;
-import com.gambino_serra.condomanager_condomino.View.Home.ItemThreeFragment;
+import com.gambino_serra.condomanager_condomino.View.Home.Avvisi.BachecaAvvisi;
+import com.gambino_serra.condomanager_condomino.View.Home.Sondaggi.BachecaSondaggi;
 import com.gambino_serra.condomanager_condomino.View.Home.Interventi.BachecaInterventi;
 import com.gambino_serra.condomanager_condomino.View.NuovaSegnalazione.DialogNuovaSegnalazione;
 import com.gambino_serra.condomanager_condomino.View.NuovoMessaggio.DialogNuovoMessaggio;
@@ -87,13 +87,13 @@ public class Fragment_home extends Fragment {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = ItemOneFragment.newInstance();
+                                selectedFragment = BachecaAvvisi.newInstance();
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = BachecaInterventi.newInstance();
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = ItemThreeFragment.newInstance();
+                                selectedFragment = BachecaSondaggi.newInstance();
                                 break;
                         }
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -105,9 +105,8 @@ public class Fragment_home extends Fragment {
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        //transaction.replace(R.id.frame_layout, ItemOneFragment.newInstance());
-        transaction.replace(R.id.frame_layout, BachecaInterventi.newInstance());
-        transaction.commit();
+        transaction.replace(R.id.frame_layout, BachecaAvvisi.newInstance());
+         transaction.commit();
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);

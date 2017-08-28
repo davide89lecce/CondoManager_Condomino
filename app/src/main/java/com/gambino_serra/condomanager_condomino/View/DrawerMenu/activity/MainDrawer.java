@@ -76,6 +76,8 @@ public class MainDrawer extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+
         mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
