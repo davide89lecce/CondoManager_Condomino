@@ -32,7 +32,7 @@ public class DialogRegistrationSuccess extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setTitle(R.string.registration_detail);
 
-        builder.setView(inflater.inflate(R.layout.dialog_registration_success_old, null))
+        builder.setView(inflater.inflate(R.layout.old_dialog_registration_success, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

@@ -64,7 +64,7 @@
     <string name="title_condomino_home">Condomino home</string>
     <string name="title_details_segnalazione">Dettagli segnalazione</string>
 
-    <!-- content_login_old -->
+    <!-- old_content_login -->
     <string name="enter_mail"> Enter mail</string>
     <string name="enter_password">Enter password</string>
     <string name="str_login">LOGIN</string>
@@ -102,7 +102,7 @@
     <string name="radiogroup_fornitore">FORNITORE</string>
     <string name="confirm">CONFIRM</string>
 
-    <!-- activity_fornitore_register_old -->
+    <!-- old_activity_fornitore_register -->
     <string name="hint_username_f">Username</string>
     <string name="hint_password_f">Password</string>
     <string name="hint_azienda_f">Azienda</string>

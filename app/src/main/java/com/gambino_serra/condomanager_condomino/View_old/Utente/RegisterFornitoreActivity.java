@@ -71,7 +71,7 @@ public class RegisterFornitoreActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fornitore_register_old);
+        setContentView(R.layout.old_activity_fornitore_register);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_logo);

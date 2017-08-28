@@ -47,7 +47,7 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_condomino_home_old, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.old_cards_condomino_home, parent, false);
 
         //Setta l'onclick sulla recycler view presente nella classe Interventi
         view.setOnClickListener(BachecaInterventi.myOnClickListener);

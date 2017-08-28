@@ -37,7 +37,7 @@ public class DialogConfermaSegnalazioneRifiutata extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_conferma_segnalazione_rifiutata_old, null))
+        builder.setView(inflater.inflate(R.layout.old_dialog_conferma_segnalazione_rifiutata, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

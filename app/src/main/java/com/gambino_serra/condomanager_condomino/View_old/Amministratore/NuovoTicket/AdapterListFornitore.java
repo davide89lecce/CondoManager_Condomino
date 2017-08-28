@@ -51,7 +51,7 @@ public class AdapterListFornitore extends RecyclerView.Adapter<AdapterListFornit
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_fornitore_old, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.old_list_fornitore, parent, false);
 
         view.setOnClickListener(SegnalazioneCategoria.myOnClickListener);
 

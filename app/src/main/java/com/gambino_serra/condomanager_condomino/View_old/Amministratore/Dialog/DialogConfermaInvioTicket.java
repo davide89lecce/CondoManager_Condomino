@@ -38,7 +38,7 @@ public class DialogConfermaInvioTicket extends DialogFragment {
         builder.setCustomTitle(title);
 
         //builder.setTitle(R.string.title_conferma_invio_ticket);
-        builder.setView(inflater.inflate(R.layout.dialog_conferma_invio_ticket_old, null))
+        builder.setView(inflater.inflate(R.layout.old_dialog_conferma_invio_ticket, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

@@ -66,7 +66,7 @@ public class DetailsTicketRifiutato extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_rifiutato_old);
+        setContentView(R.layout.old_activity_ticket_rifiutato);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         amministratore = sharedPrefs.getString(LOGGED_USER, "").toString();

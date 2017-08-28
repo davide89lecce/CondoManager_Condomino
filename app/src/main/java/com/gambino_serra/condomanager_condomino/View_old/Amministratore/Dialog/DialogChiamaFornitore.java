@@ -30,7 +30,7 @@ public class DialogChiamaFornitore extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.dialog_chiama_old, null))
+        builder.setView(inflater.inflate(R.layout.old_dialog_chiama, null))
 
                 .setPositiveButton(R.string.chiama_fornitore_si, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

@@ -43,7 +43,7 @@ public class RichiesteIntervento extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_richieste_intervento_old, container, false);
+        View view = inflater.inflate(R.layout.old_tab_richieste_intervento, container, false);
         return view;
     }
 

@@ -50,7 +50,7 @@ public class DialogNuovaSegnalazione_old extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout._dialog_nuova_segnalazione_messaggio, null))
+        builder.setView(inflater.inflate(R.layout.dialog_nuova_segnalazione_messaggio, null))
 
                 .setPositiveButton(R.string.nuova_segnalazione_conferma, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

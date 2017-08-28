@@ -50,7 +50,7 @@ public class AdapterListCondomino extends RecyclerView.Adapter<AdapterListCondom
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_condomino_old, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.old_list_condomino, parent, false);
 
         view.setOnClickListener(SegnalazioneCategoria.myOnClickListener);
 

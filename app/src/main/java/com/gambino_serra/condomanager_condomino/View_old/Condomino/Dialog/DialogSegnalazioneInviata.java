@@ -37,7 +37,7 @@ public class DialogSegnalazioneInviata extends DialogFragment {
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
-        builder.setView(inflater.inflate(R.layout.dialog_segnalazione_inviata_old, null))
+        builder.setView(inflater.inflate(R.layout.old_dialog_segnalazione_inviata, null))
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)

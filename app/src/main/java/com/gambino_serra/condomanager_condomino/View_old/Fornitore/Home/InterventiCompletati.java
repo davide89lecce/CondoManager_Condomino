@@ -42,7 +42,7 @@ public class InterventiCompletati extends Fragment
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.tab_interventi_completati_old, container, false);
+            View view = inflater.inflate(R.layout.old_tab_interventi_completati, container, false);
             return view;
         }
 

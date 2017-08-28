@@ -74,7 +74,7 @@ public class DetailsSegnalazioneRisolta extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_segnalazione_risolta_old);
+        setContentView(R.layout.old_activity_segnalazione_risolta);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         amministratore = sharedPrefs.getString(LOGGED_USER, "").toString();

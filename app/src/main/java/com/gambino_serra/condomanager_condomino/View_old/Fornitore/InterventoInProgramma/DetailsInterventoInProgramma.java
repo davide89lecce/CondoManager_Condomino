@@ -68,7 +68,7 @@ public class DetailsInterventoInProgramma extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intervento_in_programma_old);
+        setContentView(R.layout.old_activity_intervento_in_programma);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         fornitore = sharedPrefs.getString(LOGGED_USER, "").toString();
