@@ -9,11 +9,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -46,6 +48,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -81,7 +84,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
 
     File sdImageMainDirectory;
-    private Uri percorsoImm = null; //per sovrascrivere il percorso nel quale sarà presente l'immagine selezionata
+    private Uri UriImmagine = null; //per sovrascrivere il percorso nel quale sarà presente l'immagine selezionata
 
     public DialogNuovaSegnalazione() {
     }
@@ -122,9 +125,9 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                         addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
 
                         //SALVA IMMAGINE IN STORAGE FIREBASE
-                        StorageReference filepath = mStorage.child("Photo").child(percorsoImm.getLastPathSegment());
+                        StorageReference filepath = mStorage.child("Photo").child(UriImmagine.getLastPathSegment());
 
-                        filepath.putFile(percorsoImm).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        filepath.putFile(UriImmagine).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 //Toast.makeText( contesto , "Immagine Salvata", Toast.LENGTH_LONG).show();
@@ -250,7 +253,29 @@ public class DialogNuovaSegnalazione extends DialogFragment {
             public void onClick(View v) {
 
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intentCamera,CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+
+                /**PER SALVARE UNA FOTO*/
+                // PASSO 1 : percorso
+                // recuperiamo tramite Environment il percorso di default per il salvataggio della foto
+                File photoDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+                // PASSO 2 : nome
+                // utilizziamo una funzione per assegnare un nome unico ala foto che abbia come codice la data in cui
+                // è stata stampata
+                String photoName = createPhotoName();
+
+                // PASSO 3 : creo il file in cui salvare la foto con percorso e nome creati
+                File photoFile = new File( photoDirectory, photoName );
+
+
+                // Salvo l'uri dell'immagine per poi salvarla su firebase
+                UriImmagine = Uri.fromFile(photoFile);
+
+                // Comando che salverà la foto scattata nella galleria a seconda del URI assegnato
+                // contenente sia il nome che il percorso dell'immagine
+                intentCamera.putExtra( MediaStore.EXTRA_OUTPUT, UriImmagine );
+
+                startActivityForResult(intentCamera,CAMERA_REQUEST_CODE);
 
             }
         });
@@ -258,6 +283,24 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
 
     }
+
+    /**
+     * Metodo utile alla creazione di nomi unici per la storicizzazione di elementi come foto
+     * è possibile specificare il formato di data desiderato e personalizzare il nome
+     *
+     * @return
+     */
+    private String createPhotoName() {
+        SimpleDateFormat sdf = new SimpleDateFormat( "ddMMyyyy_HHmmss");
+        String timestamp = sdf.format(new Date());
+        return "CondomanagerPhoto" + timestamp + ".jpg";
+    }
+
+
+
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -344,36 +387,28 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == GALLERY_INTENT || requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-                //percorsoImm = data.getData(); //Sovrascrive la fonte ad ogni immagine recuperata
+            if ( requestCode == CAMERA_REQUEST_CODE || requestCode == GALLERY_INTENT) {
+
+                if ( requestCode == GALLERY_INTENT ){
+                    // Sovrascrive l'uri dell'immagine da stampare ogni volta che viene restituita una photo
+                   // con ActivityResult
+                   UriImmagine = data.getData();
+                }
 
                 // ci servirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase
                 InputStream inputStream;
 
-
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                mImmagine.setImageBitmap(photo);
-
-                // blocco richiesto per controllare se l'immagine sarà "leggibile" o meno
-                // in caso negativo, crea un messaggio di errore
-              //  try {
-                   // inputStream = getContext().getContentResolver().openInputStream(percorsoImm);
-
-
-
+                try {
+                    inputStream = getContext().getContentResolver().openInputStream(UriImmagine);
 
                     // Mappiamo la view per visualizzare l'inpit stream a schermo
-                   // Bitmap bt = BitmapFactory.decodeStream(inputStream);
-                    // mImmagine.setImageBitmap(bt);
+                    Bitmap bt = BitmapFactory.decodeStream(inputStream);
+                    mImmagine.setImageBitmap(bt);
 
-
-              //  } catch (FileNotFoundException e) {
-              //      e.printStackTrace();
-              //      Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
-              //  }
-
-                //Picasso.with( getActivity().getApplicationContext() ).load(percorsoImm).centerCrop().resize(200,300).into(mImmagine);
-
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    //      Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

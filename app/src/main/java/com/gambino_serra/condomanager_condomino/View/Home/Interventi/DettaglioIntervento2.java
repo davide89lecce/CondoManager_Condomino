@@ -30,7 +30,7 @@ import java.util.Map;
  * Created by condomanager_condomino on 06/03/17.
  */
 
-public class DettaglioIntervento extends AppCompatActivity {
+public class DettaglioIntervento2 extends AppCompatActivity {
 
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
@@ -74,7 +74,7 @@ public class DettaglioIntervento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.old_activity_dettaglio_intervento);
+        setContentView(R.layout.dettaglio_intervento);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -115,7 +115,7 @@ public class DettaglioIntervento extends AppCompatActivity {
 
         prova.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 String temp = dataSnapshot.getKey().toString();
 
