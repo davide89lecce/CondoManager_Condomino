@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.Firebase;
@@ -80,7 +82,8 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private ImageView mImmagine;
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 2; // Codice per definire l'intent specifico per la Galleria
-    private static final int CAMERA_REQUEST_CODE = 1; // Codice per definire l'intent specifico per la Camera
+    private static final int TAKE_PICTURE = 1;
+    //private static final int CAMERA_REQUEST_CODE = 1; // Codice per definire l'intent specifico per la Camera
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
 
     File sdImageMainDirectory;
@@ -254,6 +257,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+
                 /**PER SALVARE UNA FOTO*/
                 // PASSO 1 : percorso
                 // recuperiamo tramite Environment il percorso di default per il salvataggio della foto
@@ -271,11 +275,27 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                 // Salvo l'uri dell'immagine per poi salvarla su firebase
                 UriImmagine = Uri.fromFile(photoFile);
 
+                intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
                 // Comando che salverà la foto scattata nella galleria a seconda del URI assegnato
                 // contenente sia il nome che il percorso dell'immagine
                 intentCamera.putExtra( MediaStore.EXTRA_OUTPUT, UriImmagine );
 
-                startActivityForResult(intentCamera,CAMERA_REQUEST_CODE);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                    intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, UriImmagine);
+                }else {
+                    File file = new File(UriImmagine.getPath());
+                    Uri photoUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), getActivity().getApplicationContext().getPackageName() + ".provider", file);
+                    intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                }
+                intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                if (intentCamera.resolveActivity(getActivity().getApplicationContext().getPackageManager()) != null) {
+                    startActivityForResult(intentCamera, TAKE_PICTURE);
+                }
+
+
+                //startActivityForResult(intentCamera,TAKE_PICTURE);
 
             }
         });
@@ -377,21 +397,16 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     /**
      * Funzione che si attiverà una volta che l'activity chiamata per catturare un'immagine restituirà un risultato
      * ovvero appunto l'immagine che si desidera inserire nel db
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if ( requestCode == CAMERA_REQUEST_CODE || requestCode == GALLERY_INTENT) {
+            if ( requestCode == TAKE_PICTURE || requestCode == GALLERY_INTENT) {
 
                 if ( requestCode == GALLERY_INTENT ){
-                    // Sovrascrive l'uri dell'immagine da stampare ogni volta che viene restituita una photo
-                   // con ActivityResult
+                    // Sovrascrive l'uri dell'immagine da stampare ogni volta che viene restituita una photo con ActivityResult
                    UriImmagine = data.getData();
                 }
 
@@ -401,17 +416,15 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                 try {
                     inputStream = getContext().getContentResolver().openInputStream(UriImmagine);
 
-                    // Mappiamo la view per visualizzare l'inpit stream a schermo
+                    // Mappiamo la view per visualizzare l'input stream a schermo
                     Bitmap bt = BitmapFactory.decodeStream(inputStream);
                     mImmagine.setImageBitmap(bt);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    //      Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
                 }
             }
         }
     }
-
-
 }
