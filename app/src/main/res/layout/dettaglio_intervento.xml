@@ -19,10 +19,10 @@
         app:cardElevation="2dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnChiama"
-        app:layout_constraintVertical_bias="0.496"
         android:layout_marginLeft="24dp"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="8dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:text="Segnalazione"
+                android:text="Intervento"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -67,13 +67,15 @@
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="20dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="0dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView8"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/honeycomb" />
+                        app:layout_constraintTop_toTopOf="@+id/textView8"
+                        app:srcCompat="@drawable/logo_oggetto" />
 
                     <TextView
                         android:id="@+id/textView8"
@@ -82,16 +84,17 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif"
-                        android:text="Segnalazione"
+                        android:text="Oggetto"
                         android:textAppearance="@android:style/TextAppearance.Material.Medium"
                         android:textColor="@color/colorBlack"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@+id/imageView3"
-                        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/D_Segnalazione"
+                        android:id="@+id/D_Oggetto"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -144,13 +147,15 @@
                     <ImageView
                         android:id="@+id/imageView4"
                         android:layout_width="20dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="0dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView9"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/honeycomb" />
+                        app:layout_constraintTop_toTopOf="@+id/textView9"
+                        app:srcCompat="@drawable/logo_descriz" />
 
                     <TextView
                         android:id="@+id/textView9"
@@ -159,16 +164,17 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif"
-                        android:text="Data Segnalazione"
+                        android:text="Descrizione"
                         android:textAppearance="@android:style/TextAppearance.Material.Medium"
                         android:textColor="@color/colorBlack"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@+id/imageView4"
-                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/D_DataSegnalazione"
+                        android:id="@+id/D_Descrizione"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -221,15 +227,29 @@
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/checked"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="0dp" />
+
+                    <ImageView
                         android:id="@+id/imageView5"
                         android:layout_width="20dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="0dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView11"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/honeycomb" />
+                        app:layout_constraintTop_toTopOf="@+id/textView11"
+                        app:srcCompat="@drawable/logo_stato" />
 
                     <TextView
                         android:id="@+id/textView11"
@@ -238,29 +258,30 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif"
-                        android:text="Condomi"
+                        android:text="Stato"
                         android:textAppearance="@android:style/TextAppearance.Material.Medium"
                         android:textColor="@color/colorBlack"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@+id/imageView5"
-                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/D_Condominio"
+                        android:id="@+id/D_Stato"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintRight_toLeftOf="@+id/imageView2"
+                        android:layout_marginRight="24dp" />
 
                     <View
                         android:id="@+id/Separator3"
@@ -299,16 +320,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/D_dataAggiorn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                        android:layout_marginRight="8dp"
+                        app:layout_constraintRight_toRightOf="parent" />
+
                     <ImageView
                         android:id="@+id/imageView6"
                         android:layout_width="20dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="0dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView12"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/honeycomb" />
+                        app:layout_constraintTop_toTopOf="@+id/textView12"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:srcCompat="@drawable/logo_aggiornamento" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -317,29 +352,31 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif"
-                        android:text="Condominio"
+                        android:text="Ultimo Aggiornamento"
                         android:textAppearance="@android:style/TextAppearance.Material.Medium"
                         android:textColor="@color/colorBlack"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@+id/imageView6"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/D_Condomino"
+                        android:id="@+id/D_UltimoAggiornamento"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="0dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintLeft_toLeftOf="@+id/D_dataAggiorn"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/D_dataAggiorn"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <View
                         android:id="@+id/Separator4"
@@ -381,13 +418,15 @@
                     <ImageView
                         android:id="@+id/imageView7"
                         android:layout_width="20dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="0dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView10"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/honeycomb" />
+                        app:layout_constraintTop_toTopOf="@+id/textView10"
+                        app:srcCompat="@drawable/logo_fornitore" />
 
                     <TextView
                         android:id="@+id/textView10"
@@ -396,16 +435,17 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif"
-                        android:text="Condominio"
+                        android:text="Fornitore"
                         android:textAppearance="@android:style/TextAppearance.Material.Medium"
                         android:textColor="@color/colorBlack"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@+id/imageView7"
-                        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/D_Condominoo"
+                        android:id="@+id/D_Fornitore"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -439,8 +479,6 @@
 
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
-
-
 
 
         </android.support.constraint.ConstraintLayout>
