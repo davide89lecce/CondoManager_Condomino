@@ -3,6 +3,7 @@ package com.gambino_serra.condomanager_condomino.Model.Entity;
 
 public class MessaggioCondomino {
 
+    private String id;
     private String data;
     private String tipologia;
     private String messaggio;
@@ -10,13 +11,22 @@ public class MessaggioCondomino {
     private String uidAmministratore;
     private String stabile;
 
-    public MessaggioCondomino(String data, String tipologia, String messaggio, String uidCondomino, String uidAmministratore, String stabile) {
+    public MessaggioCondomino(String id, String data, String tipologia, String messaggio, String uidCondomino, String uidAmministratore, String stabile) {
+        this.id = id;
         this.data = data;
         this.tipologia = tipologia;
         this.messaggio = messaggio;
         this.uidCondomino = uidCondomino;
         this.uidAmministratore = uidAmministratore;
         this.stabile = stabile;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getData() {
@@ -66,4 +76,5 @@ public class MessaggioCondomino {
     public void setStabile(String stabile) {
         this.stabile = stabile;
     }
+
 }

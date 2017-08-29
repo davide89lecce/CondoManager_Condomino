@@ -44,4 +44,9 @@ public class FirebaseDB {
         return firebase;
     }
 
+    public static synchronized Firebase getMessaggiCondomino(){
+        firebase = new Firebase(DB + "Messaggi_condomino");
+        return firebase;
+    }
+
 }

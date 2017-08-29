@@ -128,6 +128,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                         addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
 
                         //SALVA IMMAGINE IN STORAGE FIREBASE
+                        //TODO: inserire controllo nel caso in cui non ci siano foto allegate
                         StorageReference filepath = mStorage.child("Photo").child(UriImmagine.getLastPathSegment());
 
                         filepath.putFile(UriImmagine).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -372,7 +373,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
                 //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
-                MessaggioCondomino m = new MessaggioCondomino(stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
+                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
 
                 //Setta il nome del nodo del messaggio (key)
                 mutableData.child(counter.toString()).setValue(m);

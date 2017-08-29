@@ -8,7 +8,7 @@
     android:fillViewport="true"
     android:scrollbarStyle="insideInset"
     android:scrollbars="vertical"
-    tools:context="com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterFornitoreActivity">
+    tools:context="com.gambino_serra.condomanager_condomino.Old_View.Utente.RegisterFornitoreActivity">
 
 
     <LinearLayout

@@ -17,16 +17,16 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.activity.MainDrawer;
-import com.gambino_serra.condomanager_condomino.View_old.Utente.BaseActivity;
-import com.gambino_serra.condomanager_condomino.View_old.Utente.RegisterAmministratoreActivity;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer;
+import com.gambino_serra.condomanager_condomino.Old_View.Utente.BaseActivity;
+import com.gambino_serra.condomanager_condomino.Old_View.Utente.RegisterAmministratoreActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-//import static com.gambino_serra.condomanager_condomino.Controller_old.Login.checkLogin;
+//import static com.gambino_serra.condomanager_condomino.Old_Controller.Login.checkLogin;
 
 public class LoginActivity extends BaseActivity implements Response.Listener<String>, Response.ErrorListener {
 

@@ -241,7 +241,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
                 //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
-                MessaggioCondomino m = new MessaggioCondomino(stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
+                MessaggioCondomino m = new MessaggioCondomino(counter.toString(), stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
 
                 //Setta il nome del nodo del messaggio (key)
                 mutableData.child(counter.toString()).setValue(m);

@@ -11,6 +11,7 @@
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Home</string>
+    <string name="nav_messaggi">Messaggi</string>
     <string name="nav_info_personali">Informazioni personali</string>
     <string name="nav_storico_interventi">Storico interventi</string>
     <string name="nav_storico_avvisi">Storico avvisi</string>
@@ -24,6 +25,7 @@
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>Home</item>
+        <item>Messaggi</item>
         <item>Informazioni personali</item>
         <item>Storico interventi</item>
         <item>Storico avvisi</item>

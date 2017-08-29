@@ -51,7 +51,7 @@
         android:fillViewport="true"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        tools:context="com.gambino_serra.condomanager_condomino.View.Home.Interventi.DettaglioIntervento"
+        tools:context="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.old_DettaglioIntervento"
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="39dp"
         tools:layout_conversion_absoluteWidth="384dp"

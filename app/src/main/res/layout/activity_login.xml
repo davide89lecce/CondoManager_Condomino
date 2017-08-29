@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.gambino_serra.condomanager_condomino.View_old.Utente.LoginActivity_old">
+    tools:context="com.gambino_serra.condomanager_condomino.Old_View.Utente.LoginActivity_old">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
