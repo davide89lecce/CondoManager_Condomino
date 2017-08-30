@@ -117,15 +117,24 @@ public class BachecaInterventi extends Fragment {
                             for ( DataSnapshot child : dataSnapshot.getChildren() ) {
                                 ticketInterventoMap.put(child.getKey(), child.getValue());
                             }
+                            
+                                TicketIntervento ticketIntervento = new TicketIntervento(
+                                        ticketInterventoMap.get("id").toString(),
+                                        ticketInterventoMap.get("amministratore").toString(),
+                                        ticketInterventoMap.get("data_ticket").toString(),
+                                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                                        ticketInterventoMap.get("fornitore").toString(),
+                                        ticketInterventoMap.get("messaggio_condomino").toString(),
+                                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                                        ticketInterventoMap.get("descrizione_condomini").toString(),
+                                        ticketInterventoMap.get("oggetto").toString(),
+                                        ticketInterventoMap.get("priorità").toString(),
+                                        ticketInterventoMap.get("rapporti_intervento").toString(),
+                                        ticketInterventoMap.get("richiesta").toString(),
+                                        ticketInterventoMap.get("stabile").toString(),
+                                        ticketInterventoMap.get("stato").toString() );
 
-                            TicketIntervento ticketIntervento = new TicketIntervento(
-                                    ticketInterventoMap.get("id").toString(),ticketInterventoMap.get("amministratore").toString(), ticketInterventoMap.get("data_ticket").toString(),
-                                    ticketInterventoMap.get("data_ultimo_aggiornamento").toString(), ticketInterventoMap.get("fornitore").toString(), ticketInterventoMap.get("messaggio_condomino").toString(),
-                                    ticketInterventoMap.get("note_condomini").toString(), ticketInterventoMap.get("oggetto").toString(), ticketInterventoMap.get("priorità").toString(),ticketInterventoMap.get("rapporti_intervento").toString(),
-                                    ticketInterventoMap.get("richiesta").toString(), ticketInterventoMap.get("stabile").toString(), ticketInterventoMap.get("stato").toString() );
-
-
-                            interventi.add(ticketIntervento);
+                                interventi.add(ticketIntervento);
 
                             adapter = new AdapterBachecaInterventi(interventi);
                             recyclerView.setAdapter(adapter);

@@ -126,10 +126,20 @@ public class old_DettaglioIntervento extends AppCompatActivity {
                 }
 
                 TicketIntervento ticketIntervento = new TicketIntervento(
-                        ticketInterventoMap.get("id").toString(), ticketInterventoMap.get("amministratore").toString(), ticketInterventoMap.get("data_ticket").toString(),
-                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(), ticketInterventoMap.get("fornitore").toString(), ticketInterventoMap.get("messaggio_condomino").toString(),
-                        ticketInterventoMap.get("note_condomini").toString(), ticketInterventoMap.get("oggetto").toString(), ticketInterventoMap.get("priorità").toString(), ticketInterventoMap.get("rapporti_intervento").toString(),
-                        ticketInterventoMap.get("richiesta").toString(), ticketInterventoMap.get("stabile").toString(), ticketInterventoMap.get("stato").toString());
+                        ticketInterventoMap.get("id").toString(),
+                        ticketInterventoMap.get("amministratore").toString(),
+                        ticketInterventoMap.get("data_ticket").toString(),
+                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                        ticketInterventoMap.get("fornitore").toString(),
+                        ticketInterventoMap.get("messaggio_condomino").toString(),
+                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                        ticketInterventoMap.get("descrizione_condomini").toString(),
+                        ticketInterventoMap.get("oggetto").toString(),
+                        ticketInterventoMap.get("priorità").toString(),
+                        ticketInterventoMap.get("rapporti_intervento").toString(),
+                        ticketInterventoMap.get("richiesta").toString(),
+                        ticketInterventoMap.get("stabile").toString(),
+                        ticketInterventoMap.get("stato").toString());
 
                 if(ticketIntervento.getStato().equals("A")){
                     descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico");

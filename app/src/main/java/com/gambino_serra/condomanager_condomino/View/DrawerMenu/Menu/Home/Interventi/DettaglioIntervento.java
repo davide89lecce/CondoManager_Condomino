@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.Old_View.Condomino.Dialog.DialogChiamaAmministratore;
@@ -125,9 +127,36 @@ public class DettaglioIntervento extends AppCompatActivity {
         descrizioneStatoT = (TextView) findViewById(R.id.descrizioneStatoD);
         imageStatoI = (ImageView) findViewById(R.id.imageStatoD);
 
-        Query intervento;
-        intervento = FirebaseDB.getInterventi().orderByKey().equalTo(idSegnalazione);
 
+        ticketInterventoMap = new HashMap<String, Object>();
+        // Avvalora il primo oggetto del map con l'ID dell'intervento recuperato
+        ticketInterventoMap.put("id", idSegnalazione);
+
+        Query intervento;
+        intervento = FirebaseDB.getInterventi().orderByKey().equalTo("idSegnalazione");
+
+        intervento.addValueEventListener (new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for ( DataSnapshot figlio : dataSnapshot.getChildren() )
+                    ticketInterventoMap.put(figlio.getKey(), figlio.getValue());
+
+                Log.d( "HEY" , ticketInterventoMap.get("id").toString()  );
+                Log.d( "HEY" , ticketInterventoMap.get("amministratore").toString()  );
+                Log.d( "HEY" , ticketInterventoMap.get("data_ticket").toString()  );
+                Log.d( "HEY" , ticketInterventoMap.get("fornitore").toString()  );
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
+
+
+        /*
         intervento.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -175,17 +204,17 @@ public class DettaglioIntervento extends AppCompatActivity {
                 segnalazioneT.setText(ticketIntervento.getOggetto());
                 condominioT.setText(ticketIntervento.getDataUltimoAggiornamento());
                 descrizioneStatoT.setText(ticketIntervento.getMessaggioCondomino());
-                /*
-                final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("data", ticketIntervento.getDataTicket());
-                editor.putString("segnalazione", ticketIntervento.getOggetto());
-                editor.putString("condomino", usernameCondomino);
-                editor.putString("idCondominio", idCondominio);
-                editor.putString("fornitore", fornitore);
-                editor.putString("stato", stato);
-                editor.apply();
-                */
+
+                //final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+                //SharedPreferences.Editor editor = sharedPrefs.edit();
+                //editor.putString("data", ticketIntervento.getDataTicket());
+                //editor.putString("segnalazione", ticketIntervento.getOggetto());
+                //editor.putString("condomino", usernameCondomino);
+                //editor.putString("idCondominio", idCondominio);
+                //editor.putString("fornitore", fornitore);
+                //editor.putString("stato", stato);
+                //editor.apply();
+
 
             }
 
@@ -209,7 +238,7 @@ public class DettaglioIntervento extends AppCompatActivity {
             }
 
         });
-
+*/
         btnChiama.setOnClickListener(new View.OnClickListener() {
 
             @Override
