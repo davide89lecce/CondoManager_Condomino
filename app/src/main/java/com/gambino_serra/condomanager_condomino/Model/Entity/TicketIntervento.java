@@ -12,24 +12,37 @@ public class TicketIntervento {
     private String dataUltimoAggiornamento;
     private String fornitore;
     private String messaggioCondomino;
+    private String aggiornamentoCondomini;
     private String descrizioneCondomini;
     private String oggetto;
-    private String priorita;
     private String rapportiIntervento; //link
     private String richiesta;
     private String stabile;
     private String stato;
 
-    public TicketIntervento(String idTicketIntervento, String uidAmministratore, String dataTicket, String dataUltimoAggiornamento, String fornitore, String messaggioCondomino, String descrizioneCondomini, String oggetto, String priorita, String rapportiIntervento, String richiesta, String stabile, String stato) {
+    public TicketIntervento(String idTicketIntervento,
+                            String uidAmministratore,
+                            String dataTicket,
+                            String dataUltimoAggiornamento,
+                            String fornitore,
+                            String messaggioCondomino,
+                            String aggiornamentoCondomini,
+                            String descrizioneCondomini,
+                            String oggetto,
+                            String rapportiIntervento,
+                            String richiesta,
+                            String stabile,
+                            String stato) {
+
         this.idTicketIntervento = idTicketIntervento;
         this.uidAmministratore = uidAmministratore;
         this.dataTicket = dataTicket;
         this.dataUltimoAggiornamento = dataUltimoAggiornamento;
         this.fornitore = fornitore;
         this.messaggioCondomino = messaggioCondomino;
+        this.aggiornamentoCondomini = aggiornamentoCondomini;
         this.descrizioneCondomini = descrizioneCondomini;
         this.oggetto = oggetto;
-        this.priorita = priorita;
         this.rapportiIntervento = rapportiIntervento;
         this.richiesta = richiesta;
         this.stabile = stabile;
@@ -84,6 +97,14 @@ public class TicketIntervento {
         this.messaggioCondomino = messaggioCondomino;
     }
 
+    public String getAggiornamentoCondomini() {
+        return aggiornamentoCondomini;
+    }
+
+    public void setAggiornamentoCondomini(String noteCondomini) {
+        this.aggiornamentoCondomini = noteCondomini;
+    }
+
     public String getDescrizioneCondomini() {
         return descrizioneCondomini;
     }
@@ -98,14 +119,6 @@ public class TicketIntervento {
 
     public void setOggetto(String oggetto) {
         this.oggetto = oggetto;
-    }
-
-    public String getPriorita() {
-        return priorita;
-    }
-
-    public void setPriorita(String priorita) {
-        this.priorita = priorita;
     }
 
     public String getRapportiIntervento() {
