@@ -136,7 +136,6 @@ public class DettaglioMessaggio extends AppCompatActivity {
                         ticketInterventoMap.get("aggiornamento_condomini").toString(),
                         ticketInterventoMap.get("descrizione_condomini").toString(),
                         ticketInterventoMap.get("oggetto").toString(),
-                        ticketInterventoMap.get("priorità").toString(),
                         ticketInterventoMap.get("rapporti_intervento").toString(),
                         ticketInterventoMap.get("richiesta").toString(),
                         ticketInterventoMap.get("stabile").toString(),

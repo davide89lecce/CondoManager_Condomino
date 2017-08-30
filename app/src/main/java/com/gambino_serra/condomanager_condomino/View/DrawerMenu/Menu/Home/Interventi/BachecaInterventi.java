@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -117,7 +119,11 @@ public class BachecaInterventi extends Fragment {
                             for ( DataSnapshot child : dataSnapshot.getChildren() ) {
                                 ticketInterventoMap.put(child.getKey(), child.getValue());
                             }
-                            
+
+                            try{
+
+
+
                                 TicketIntervento ticketIntervento = new TicketIntervento(
                                         ticketInterventoMap.get("id").toString(),
                                         ticketInterventoMap.get("amministratore").toString(),
@@ -128,13 +134,16 @@ public class BachecaInterventi extends Fragment {
                                         ticketInterventoMap.get("aggiornamento_condomini").toString(),
                                         ticketInterventoMap.get("descrizione_condomini").toString(),
                                         ticketInterventoMap.get("oggetto").toString(),
-                                        ticketInterventoMap.get("priorità").toString(),
                                         ticketInterventoMap.get("rapporti_intervento").toString(),
                                         ticketInterventoMap.get("richiesta").toString(),
                                         ticketInterventoMap.get("stabile").toString(),
                                         ticketInterventoMap.get("stato").toString() );
 
                                 interventi.add(ticketIntervento);
+                                }catch (NullPointerException e) {
+                                Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto"+ e.toString(), Toast.LENGTH_LONG).show();
+                                }
+
 
                             adapter = new AdapterBachecaInterventi(interventi);
                             recyclerView.setAdapter(adapter);
@@ -214,7 +223,7 @@ public class BachecaInterventi extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("idSegnalazione", selectedName);
 
-            Intent intent = new Intent(context, old_DettaglioIntervento.class);
+            Intent intent = new Intent(context, DettaglioIntervento.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

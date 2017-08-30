@@ -15,7 +15,6 @@ public class TicketIntervento {
     private String aggiornamentoCondomini;
     private String descrizioneCondomini;
     private String oggetto;
-    private String priorita;
     private String rapportiIntervento; //link
     private String richiesta;
     private String stabile;
@@ -30,7 +29,6 @@ public class TicketIntervento {
                             String aggiornamentoCondomini,
                             String descrizioneCondomini,
                             String oggetto,
-                            String priorita,
                             String rapportiIntervento,
                             String richiesta,
                             String stabile,
@@ -45,7 +43,6 @@ public class TicketIntervento {
         this.aggiornamentoCondomini = aggiornamentoCondomini;
         this.descrizioneCondomini = descrizioneCondomini;
         this.oggetto = oggetto;
-        this.priorita = priorita;
         this.rapportiIntervento = rapportiIntervento;
         this.richiesta = richiesta;
         this.stabile = stabile;
@@ -122,14 +119,6 @@ public class TicketIntervento {
 
     public void setOggetto(String oggetto) {
         this.oggetto = oggetto;
-    }
-
-    public String getPriorita() {
-        return priorita;
-    }
-
-    public void setPriorita(String priorita) {
-        this.priorita = priorita;
     }
 
     public String getRapportiIntervento() {

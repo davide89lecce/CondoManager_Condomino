@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -16,6 +17,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.snapshot.NodeUtilities;
 import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.Old_View.Condomino.Dialog.DialogChiamaAmministratore;
@@ -101,7 +103,7 @@ public class DettaglioIntervento extends AppCompatActivity {
             editor.apply();
 
         } else {
-
+            //TODO: perchè
             idSegnalazione = sharedPrefs.getString("idSegnalazione", "").toString();
 
             bundle = new Bundle();
@@ -116,6 +118,7 @@ public class DettaglioIntervento extends AppCompatActivity {
         mUltimoAggiornamento = (TextView) findViewById(R.id.D_UltimoAggiornamento);
         mFornitore = (TextView) findViewById(R.id.D_Fornitore);
 
+        /*
         dataT = (TextView) findViewById(R.id.dataD);
         segnalazioneT = (TextView) findViewById(R.id.segnalazioneD);
         condominoT = (TextView) findViewById(R.id.condominoD);
@@ -126,7 +129,7 @@ public class DettaglioIntervento extends AppCompatActivity {
         btnChiama = (LinearLayout) findViewById(R.id.btnChiama);
         descrizioneStatoT = (TextView) findViewById(R.id.descrizioneStatoD);
         imageStatoI = (ImageView) findViewById(R.id.imageStatoD);
-
+*/
 
         ticketInterventoMap = new HashMap<String, Object>();
         // Avvalora il primo oggetto del map con l'ID dell'intervento recuperato
@@ -139,12 +142,11 @@ public class DettaglioIntervento extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for ( DataSnapshot figlio : dataSnapshot.getChildren() )
-                    ticketInterventoMap.put(figlio.getKey(), figlio.getValue());
-
-                Log.d( "HEY" , ticketInterventoMap.get("id").toString()  );
-                Log.d( "HEY" , ticketInterventoMap.get("amministratore").toString()  );
-                Log.d( "HEY" , ticketInterventoMap.get("data_ticket").toString()  );
-                Log.d( "HEY" , ticketInterventoMap.get("fornitore").toString()  );
+                    try {
+                        ticketInterventoMap.put(figlio.getKey(), figlio.getValue(String.class));
+                    }catch (NullPointerException e) {
+                        ticketInterventoMap.put(figlio.getKey(), "-");
+                    }
             }
 
             @Override
@@ -153,9 +155,20 @@ public class DettaglioIntervento extends AppCompatActivity {
             }
         });
 
+try {
+    mOggetto.setText(ticketInterventoMap.get("oggetto").toString());
 
+    mDescrizione.setText(ticketInterventoMap.get("descrizione_condomini").toString());
 
+    mStato.setText(ticketInterventoMap.get("stato").toString());
 
+    mUltimoAggiornamento.setText(ticketInterventoMap.get("data_ultimo_aggiornamento").toString());
+
+    mFornitore.setText(ticketInterventoMap.get("fornitore").toString());
+
+}catch (NullPointerException e){
+    Toast.makeText( getApplicationContext(), "Non riesco ad aprire l'oggetto"+ e.toString(), Toast.LENGTH_LONG).show();
+}
         /*
         intervento.addChildEventListener(new ChildEventListener() {
             @Override
@@ -239,19 +252,6 @@ public class DettaglioIntervento extends AppCompatActivity {
 
         });
 */
-        btnChiama.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                DialogFragment newFragment = new DialogChiamaAmministratore();
-                bundle.putString("telefono",telefonoAmministratore);
-                newFragment.setArguments(bundle);
-                newFragment.show(getFragmentManager(), "ChiamaAmministratore");
-                overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-            }
-        });
-
 
     }
 
