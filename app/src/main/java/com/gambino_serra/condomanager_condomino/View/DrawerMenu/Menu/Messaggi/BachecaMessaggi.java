@@ -32,14 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this Menu must implement the
- * {@link BachecaMessaggi.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BachecaMessaggi#newInstance} factory method to
- * create an instance of this Menu.
- */
 public class BachecaMessaggi extends Fragment {
     // the Menu initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,13 +51,11 @@ public class BachecaMessaggi extends Fragment {
     Context context;
     String condominoNome;
     private ArrayList<Segnalazione> datas;
-
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-
     private String uidCondomino;
     private String stabile;
     Map<String, Object> messaggioCondominoMap;
@@ -73,9 +63,7 @@ public class BachecaMessaggi extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public BachecaMessaggi() {
-        // Required empty public constructor
-    }
+    public BachecaMessaggi() { }
 
     /**
      * Use this factory method to create a new instance of this Menu using the provided parameters.
@@ -95,21 +83,20 @@ public class BachecaMessaggi extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            }
         }
-    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this Menu
         return inflater.inflate(R.layout.bacheca_messaggi, container, false);
-    }
+        }
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+            }
         }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -147,44 +134,45 @@ public class BachecaMessaggi extends Fragment {
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
         Query query = FirebaseDB.getMessaggiCondomino().orderByChild("uidCondomino").equalTo(uidCondomino);
         query.addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
 
                 messaggioCondominoMap = new HashMap<String,Object>();
                 messaggioCondominoMap.put("id", dataSnapshot.getKey());
+
                 for ( DataSnapshot child : dataSnapshot.getChildren() ) {
                     messaggioCondominoMap.put(child.getKey(), child.getValue());
-                }
+                    }
 
                 MessaggioCondomino messaggioCondomino = new MessaggioCondomino(
-                        messaggioCondominoMap.get("id").toString(),messaggioCondominoMap.get("data").toString(), messaggioCondominoMap.get("tipologia").toString(),
-                        messaggioCondominoMap.get("messaggio").toString(), messaggioCondominoMap.get("uidCondomino").toString(), messaggioCondominoMap.get("uidAmministratore").toString(),
-                        messaggioCondominoMap.get("stabile").toString(), messaggioCondominoMap.get("foto").toString());
+                        messaggioCondominoMap.get("id").toString(),
+                        messaggioCondominoMap.get("data").toString(),
+                        messaggioCondominoMap.get("tipologia").toString(),
+                        messaggioCondominoMap.get("messaggio").toString(),
+                        messaggioCondominoMap.get("uidCondomino").toString(),
+                        messaggioCondominoMap.get("uidAmministratore").toString(),
+                        messaggioCondominoMap.get("stabile").toString(),
+                        messaggioCondominoMap.get("foto").toString());
 
                 messaggi.add(messaggioCondomino);
 
                 adapter = new AdapterMessaggi(messaggi);
                 recyclerView.setAdapter(adapter);
-
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-             }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-             }
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-             }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-            }
+            public void onCancelled(FirebaseError firebaseError) { }
         });
-
     }
 
 
@@ -192,7 +180,7 @@ public class BachecaMessaggi extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+        }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -201,7 +189,7 @@ public class BachecaMessaggi extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
+        }
 
     private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
 

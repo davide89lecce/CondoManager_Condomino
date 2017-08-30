@@ -137,17 +137,20 @@ public class BachecaInterventi extends Fragment {
                                         ticketInterventoMap.get("rapporti_intervento").toString(),
                                         ticketInterventoMap.get("richiesta").toString(),
                                         ticketInterventoMap.get("stabile").toString(),
-                                        ticketInterventoMap.get("stato").toString() );
+                                        ticketInterventoMap.get("stato").toString() ,
+                                        ticketInterventoMap.get("priorità").toString()  );
+
+
 
                                 interventi.add(ticketIntervento);
-                                }catch (NullPointerException e) {
+                                }
+                                catch (NullPointerException e) {
                                 Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto"+ e.toString(), Toast.LENGTH_LONG).show();
                                 }
 
 
                             adapter = new AdapterBachecaInterventi(interventi);
                             recyclerView.setAdapter(adapter);
-
                         }
 
                         @Override

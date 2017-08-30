@@ -12,7 +12,14 @@ public class MessaggioCondomino {
     private String stabile;
     private String foto;
 
-    public MessaggioCondomino(String id, String data, String tipologia, String messaggio, String uidCondomino, String uidAmministratore, String stabile, String foto) {
+    public MessaggioCondomino(String id,
+                              String data,
+                              String tipologia,
+                              String messaggio,
+                              String uidCondomino,
+                              String uidAmministratore,
+                              String stabile,
+                              String foto) {
         this.id = id;
         this.data = data;
         this.tipologia = tipologia;
@@ -86,6 +93,5 @@ public class MessaggioCondomino {
     public String getFoto() {
         return foto;
     }
-
 
 }

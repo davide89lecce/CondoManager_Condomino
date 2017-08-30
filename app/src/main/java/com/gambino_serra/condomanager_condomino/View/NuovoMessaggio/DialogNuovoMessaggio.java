@@ -90,8 +90,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
     File sdImageMainDirectory;
     private Uri UriImmagine = null; //per sovrascrivere il percorso nel quale sarà presente l'immagine selezionata
 
-    public DialogNuovoMessaggio() {
-    }
+    public DialogNuovoMessaggio() { }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -101,7 +100,6 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         mStorage = FirebaseStorage.getInstance().getReference();
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -123,10 +121,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
                         firebaseDatabase = FirebaseDatabase.getInstance();
                         databaseReference = firebaseDatabase.getReference("Messaggi_condomino");
 
-
                         descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
-
-
 
                         //SALVA IMMAGINE IN STORAGE FIREBASE
                         //TODO: inserire controllo nel caso in cui non ci siano foto allegat
@@ -164,8 +159,6 @@ public class DialogNuovoMessaggio extends DialogFragment {
                             e.printStackTrace();
                             Toast.makeText(getActivity().getApplicationContext(), "Problemi", Toast.LENGTH_LONG).show();
                         }
-
-
                         dismiss();
                     }
                 })
@@ -173,13 +166,10 @@ public class DialogNuovoMessaggio extends DialogFragment {
                 .setNeutralButton(R.string.nuova_segnalazione_annulla, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int id) {
-
                         dismiss();
-                    }
+                        }
                 });
-
         return builder.create();
-
     }
 
     @Override
@@ -206,7 +196,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
                         public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
                             if(dataSnapshot.getKey().toString().equals("amministratore")) {
                                 uidAmministratore = dataSnapshot.getValue().toString();
-                            }
+                                }
                         }
                         @Override
                         public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {}
@@ -236,12 +226,10 @@ public class DialogNuovoMessaggio extends DialogFragment {
         mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intentGallery = new Intent(Intent.ACTION_PICK);
                 intentGallery.setType("image/*");
                 startActivityForResult(intentGallery,GALLERY_INTENT);
-
-            }
+                }
         });
 
 
@@ -252,66 +240,53 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-
                 /**PER SALVARE UNA FOTO*/
                 // PASSO 1 : percorso
                 // recuperiamo tramite Environment il percorso di default per il salvataggio della foto
                 File photoDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
                 // PASSO 2 : nome
-                // utilizziamo una funzione per assegnare un nome unico ala foto che abbia come codice la data in cui
-                // è stata stampata
+                // utilizziamo una funzione per assegnare un nome unico ala foto che abbia come codice la data in cui è stata stampata
                 String photoName = createPhotoName();
 
                 // PASSO 3 : creo il file in cui salvare la foto con percorso e nome creati
                 File photoFile = new File( photoDirectory, photoName );
 
-
                 // Salvo l'uri dell'immagine per poi salvarla su firebase
                 UriImmagine = Uri.fromFile(photoFile);
 
-                intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
-                        | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
-                // Comando che salverà la foto scattata nella galleria a seconda del URI assegnato
-                // contenente sia il nome che il percorso dell'immagine
+                // Comando che salverà la foto scattata nella galleria a seconda del URI assegnato contenente sia il nome che il percorso dell'immagine
                 intentCamera.putExtra( MediaStore.EXTRA_OUTPUT, UriImmagine );
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, UriImmagine);
-                }else {
+                    }
+                else {
                     File file = new File(UriImmagine.getPath());
                     Uri photoUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), getActivity().getApplicationContext().getPackageName() + ".provider", file);
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                }
+                    }
                 intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 if (intentCamera.resolveActivity(getActivity().getApplicationContext().getPackageManager()) != null) {
                     startActivityForResult(intentCamera, TAKE_PICTURE);
-                }
-
+                    }
 
                 //startActivityForResult(intentCamera,TAKE_PICTURE);
-
             }
         });
-
-
-
     }
 
     /**
      * Metodo utile alla creazione di nomi unici per la storicizzazione di elementi come foto
      * è possibile specificare il formato di data desiderato e personalizzare il nome
-     *
-     * @return
      */
     private String createPhotoName() {
         SimpleDateFormat sdf = new SimpleDateFormat( "ddMMyyyy_HHmmss");
         String timestamp = sdf.format(new Date());
         return "CondomanagerPhoto" + timestamp + ".jpg";
-    }
-
-
+        }
 
 
     @Override
@@ -322,8 +297,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-    }
+        }
 
     @Override
     public void onDetach() {
@@ -351,7 +325,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 if (counter == null) {
                     return Transaction.success(mutableData);
-                }
+                    }
 
                 //Incrementa counter
                 counter = counter + 1;
@@ -370,17 +344,15 @@ public class DialogNuovoMessaggio extends DialogFragment {
                 //Setta il counter del nodo Messaggi_condomino
                 mutableData.child("counter").setValue(counter);
 
-
                 return Transaction.success(mutableData);
 
             }
 
             @Override
-            public void onComplete(DatabaseError databaseError, boolean b,
-                                   DataSnapshot dataSnapshot) {
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
                 // Transaction completed
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-            }
+                }
         });
     }
 
@@ -399,22 +371,24 @@ public class DialogNuovoMessaggio extends DialogFragment {
                 if ( requestCode == GALLERY_INTENT ){
                     // Sovrascrive l'uri dell'immagine da stampare ogni volta che viene restituita una photo con ActivityResult
                     UriImmagine = data.getData();
-                }
+                    }
 
                 // ci servirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase
                 InputStream inputStream;
 
-                try {
+                try
+                    {
                     inputStream = getContext().getContentResolver().openInputStream(UriImmagine);
 
                     // Mappiamo la view per visualizzare l'input stream a schermo
                     Bitmap bt = BitmapFactory.decodeStream(inputStream);
                     mImmagine.setImageBitmap(bt);
-
-                } catch (FileNotFoundException e) {
+                    }
+                catch (FileNotFoundException e)
+                    {
                     e.printStackTrace();
                     Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
-                }
+                    }
             }
         }
     }
