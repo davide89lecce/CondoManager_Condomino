@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.tesi.R;
-
 import java.util.ArrayList;
-
 import static com.gambino_serra.condomanager_condomino.tesi.R.id.imageView;
 
 
@@ -70,8 +67,6 @@ public class AdapterMessaggi extends RecyclerView.Adapter<AdapterMessaggi.MyView
         textViewIdSegnalazione.setText(dataset.get(listPosition).getMessaggio().toString());
         textViewData.setText(dataset.get(listPosition).getStabile());
         textStato.setText(dataset.get(listPosition).getTipologia());
-
-
 
     }
 

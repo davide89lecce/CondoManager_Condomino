@@ -26,9 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by condomanager_condomino on 06/03/17.
- */
 
 public class DettaglioMessaggio extends AppCompatActivity {
 

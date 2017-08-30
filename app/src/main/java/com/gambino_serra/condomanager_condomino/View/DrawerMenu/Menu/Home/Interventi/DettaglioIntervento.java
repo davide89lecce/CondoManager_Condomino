@@ -148,7 +148,6 @@ public class DettaglioIntervento extends AppCompatActivity {
                         ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
                         ticketInterventoMap.get("fornitore").toString(),
                         ticketInterventoMap.get("messaggio_condomino").toString(),
-                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
                         ticketInterventoMap.get("descrizione_condomini").toString(),
                         ticketInterventoMap.get("oggetto").toString(),
                         ticketInterventoMap.get("priorità").toString(),

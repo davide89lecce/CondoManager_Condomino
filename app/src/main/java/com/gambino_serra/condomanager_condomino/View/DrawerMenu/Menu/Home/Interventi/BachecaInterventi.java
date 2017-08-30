@@ -119,10 +119,19 @@ public class BachecaInterventi extends Fragment {
                             }
 
                             TicketIntervento ticketIntervento = new TicketIntervento(
-                                    ticketInterventoMap.get("id").toString(),ticketInterventoMap.get("amministratore").toString(), ticketInterventoMap.get("data_ticket").toString(),
-                                    ticketInterventoMap.get("data_ultimo_aggiornamento").toString(), ticketInterventoMap.get("fornitore").toString(), ticketInterventoMap.get("messaggio_condomino").toString(),
-                                    ticketInterventoMap.get("note_condomini").toString(), ticketInterventoMap.get("oggetto").toString(), ticketInterventoMap.get("priorità").toString(),ticketInterventoMap.get("rapporti_intervento").toString(),
-                                    ticketInterventoMap.get("richiesta").toString(), ticketInterventoMap.get("stabile").toString(), ticketInterventoMap.get("stato").toString() );
+                                    ticketInterventoMap.get("id").toString(),
+                                    ticketInterventoMap.get("amministratore").toString(),
+                                    ticketInterventoMap.get("data_ticket").toString(),
+                                    ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                                    ticketInterventoMap.get("fornitore").toString(),
+                                    ticketInterventoMap.get("messaggio_condomino").toString(),
+                                    ticketInterventoMap.get("note_condomini").toString(),
+                                    ticketInterventoMap.get("oggetto").toString(),
+                                    ticketInterventoMap.get("priorità").toString(),
+                                    ticketInterventoMap.get("rapporti_intervento").toString(),
+                                    ticketInterventoMap.get("richiesta").toString(),
+                                    ticketInterventoMap.get("stabile").toString(),
+                                    ticketInterventoMap.get("stato").toString() );
 
 
                             interventi.add(ticketIntervento);

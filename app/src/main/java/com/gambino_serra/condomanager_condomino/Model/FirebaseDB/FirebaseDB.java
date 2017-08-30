@@ -5,9 +5,6 @@ import android.content.Context;
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DatabaseReference;
 
-/**
- * Created by Antonio on 15/06/17.
- */
 
 public class FirebaseDB {
 
@@ -49,4 +46,8 @@ public class FirebaseDB {
         return firebase;
     }
 
+    public static synchronized Firebase getFornitori(){
+        firebase = new Firebase(DB + "Fornitori");
+        return firebase;
+    }
 }
