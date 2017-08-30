@@ -98,7 +98,7 @@ public class AdapterCardsInterventiInProgramma extends RecyclerView.Adapter<Adap
                 break;
 
             case "F":
-                imageView.setImageResource(R.drawable.froyo);
+              //  imageView.setImageResource(R.drawable.froyo);
                 break;
             default:
         }

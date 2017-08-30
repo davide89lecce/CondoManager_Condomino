@@ -98,7 +98,7 @@ public class AdapterCardsSegnalazioni extends RecyclerView.Adapter<AdapterCardsS
                 break;
 
             case "F":
-                imageView.setImageResource(R.drawable.froyo);
+                //imageView.setImageResource(R.drawable.froyo);
                 break;
             default:
         }

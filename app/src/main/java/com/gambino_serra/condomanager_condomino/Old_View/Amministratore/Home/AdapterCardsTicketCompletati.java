@@ -98,7 +98,7 @@ public class AdapterCardsTicketCompletati extends RecyclerView.Adapter<AdapterCa
                 break;
 
             case "F":
-                imageView.setImageResource(R.drawable.froyo);
+               // imageView.setImageResource(R.drawable.froyo);
                 break;
             default:
         }
