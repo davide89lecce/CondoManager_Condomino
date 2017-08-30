@@ -81,6 +81,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     private Button mSelectCamera;
     private ImageView mImmagine;
     private StorageReference mStorage;
+    private StorageReference filepath;
     private static final int GALLERY_INTENT = 2; // Codice per definire l'intent specifico per la Galleria
     private static final int TAKE_PICTURE = 1;
     //private static final int CAMERA_REQUEST_CODE = 1; // Codice per definire l'intent specifico per la Camera
@@ -125,29 +126,45 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                         descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
 
-                        addMessaggioCondomino(databaseReference,descrizioneSegnalazione);
+
 
                         //SALVA IMMAGINE IN STORAGE FIREBASE
-                        //TODO: inserire controllo nel caso in cui non ci siano foto allegate
-                        StorageReference filepath = mStorage.child("Photo").child(UriImmagine.getLastPathSegment());
+                        //TODO: inserire controllo nel caso in cui non ci siano foto allegat
+                        if ( UriImmagine != null) {
+                            filepath = mStorage.child("Photo").child(UriImmagine.getLastPathSegment());
 
-                        filepath.putFile(UriImmagine).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                //Toast.makeText( contesto , "Immagine Salvata", Toast.LENGTH_LONG).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) { //TODO: problemi su contesto Toast
-                                //Toast.makeText( contesto , "Immagine Salvata", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                            filepath.putFile(UriImmagine).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {//TODO : Nono funzionano i Toast
+                                    Toast.makeText( getActivity().getApplicationContext(), "Segnalazione Inviata con Successo", Toast.LENGTH_LONG).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) { //TODO: problemi su contesto Toast
+                                    Toast.makeText( getContext(), "Non è stato possibile inviare la segnalazione", Toast.LENGTH_LONG).show();
+                                }
+                            });
 
-                        // DA CHIEDERE SE SERVE ANCORA
-                        final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPrefs.edit();
-                        editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
-                        editor.apply();
+                            // DA CHIEDERE SE SERVE ANCORA
+                            final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPrefs.edit();
+                            editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
+                            editor.apply();
+                        }
+
+
+                        // Aggiunge la segnalazione al Database
+                        try
+                        {
+                            if (filepath != null)
+                                addSegnalazioneCondomino(databaseReference,descrizioneSegnalazione,filepath.toString());
+                            else
+                                addSegnalazioneCondomino(databaseReference,descrizioneSegnalazione,"-");
+                        }catch (NullPointerException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity().getApplicationContext(), "Problemi", Toast.LENGTH_LONG).show();
+                        }
+
 
                         dismiss();
                     }
@@ -191,49 +208,26 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                                 uidAmministratore = dataSnapshot.getValue().toString();
                             }
                         }
-
                         @Override
-                        public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-
-                        }
-
+                        public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {}
                         @Override
-                        public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
-
-                        }
-
+                        public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {}
                         @Override
-                        public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-
-                        }
-
+                        public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {}
                         @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-
-                        }
+                        public void onCancelled(FirebaseError firebaseError) {}
                     });
                 }
             }
 
             @Override
-            public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-
-            }
-
+            public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {}
             @Override
-            public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
-
-            }
-
+            public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {}
             @Override
-            public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-
-            }
-
+            public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {}
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
+            public void onCancelled(FirebaseError firebaseError) {}
         });
 
         mImmagine = (ImageView) this.getDialog().findViewById(R.id.ImmagineAnteprima);
@@ -320,13 +314,9 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
 
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -351,7 +341,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     }
 
 
-    private void addMessaggioCondomino(DatabaseReference postRef, final String descrizioneMessaggio) {
+    private void addSegnalazioneCondomino(DatabaseReference postRef, final String descrizioneSegnalazione, final String percorsoFoto) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -373,7 +363,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
                 //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
-                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"messaggio", descrizioneMessaggio,uidCondomino,uidAmministratore, stabile);
+                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Segnalazione", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto);
 
                 //Setta il nome del nodo del messaggio (key)
                 mutableData.child(counter.toString()).setValue(m);

@@ -10,8 +10,9 @@ public class MessaggioCondomino {
     private String uidCondomino;
     private String uidAmministratore;
     private String stabile;
+    private String foto;
 
-    public MessaggioCondomino(String id, String data, String tipologia, String messaggio, String uidCondomino, String uidAmministratore, String stabile) {
+    public MessaggioCondomino(String id, String data, String tipologia, String messaggio, String uidCondomino, String uidAmministratore, String stabile, String foto) {
         this.id = id;
         this.data = data;
         this.tipologia = tipologia;
@@ -19,6 +20,7 @@ public class MessaggioCondomino {
         this.uidCondomino = uidCondomino;
         this.uidAmministratore = uidAmministratore;
         this.stabile = stabile;
+        this.foto = foto;
     }
 
     public String getId() {
@@ -76,5 +78,14 @@ public class MessaggioCondomino {
     public void setStabile(String stabile) {
         this.stabile = stabile;
     }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
 
 }
