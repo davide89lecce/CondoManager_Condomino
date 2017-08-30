@@ -49,6 +49,14 @@ public class DettaglioIntervento extends AppCompatActivity {
     String azienda = "";
     String condomino = "";
 
+    // Oggetti di Layout NUOVI
+    TextView mOggetto;
+    TextView mDescrizione;
+    TextView mStato;
+    TextView mUltimoAggiornamento;
+    TextView mFornitore;
+
+
     TextView dataT;
     TextView segnalazioneT;
     TextView condominoT;
@@ -99,6 +107,13 @@ public class DettaglioIntervento extends AppCompatActivity {
 
         }
 
+        // Avvaloro i nuovi rierimenti al layout
+        mOggetto = (TextView) findViewById(R.id.D_Oggetto);
+        mDescrizione = (TextView) findViewById(R.id.D_Descrizione);
+        mStato = (TextView) findViewById(R.id.D_Stato);
+        mUltimoAggiornamento = (TextView) findViewById(R.id.D_UltimoAggiornamento);
+        mFornitore = (TextView) findViewById(R.id.D_Fornitore);
+
         dataT = (TextView) findViewById(R.id.dataD);
         segnalazioneT = (TextView) findViewById(R.id.segnalazioneD);
         condominoT = (TextView) findViewById(R.id.condominoD);
@@ -110,26 +125,37 @@ public class DettaglioIntervento extends AppCompatActivity {
         descrizioneStatoT = (TextView) findViewById(R.id.descrizioneStatoD);
         imageStatoI = (ImageView) findViewById(R.id.imageStatoD);
 
-        Query prova;
-        prova = FirebaseDB.getInterventi().orderByKey().equalTo(idSegnalazione);
+        Query intervento;
+        intervento = FirebaseDB.getInterventi().orderByKey().equalTo(idSegnalazione);
 
-        prova.addChildEventListener(new ChildEventListener() {
+        intervento.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                String temp = dataSnapshot.getKey().toString();
-
                 ticketInterventoMap = new HashMap<String, Object>();
+                // Avvalora il primo oggetto del map con l'ID dell'intervento recuperato
                 ticketInterventoMap.put("id", dataSnapshot.getKey());
+
+                // per ognuna delle coppie chiave valore, inseriamo il corrispondente elemento nel map creato
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     ticketInterventoMap.put(child.getKey(), child.getValue());
                 }
 
                 TicketIntervento ticketIntervento = new TicketIntervento(
-                        ticketInterventoMap.get("id").toString(), ticketInterventoMap.get("amministratore").toString(), ticketInterventoMap.get("data_ticket").toString(),
-                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(), ticketInterventoMap.get("fornitore").toString(), ticketInterventoMap.get("messaggio_condomino").toString(),
-                        ticketInterventoMap.get("note_condomini").toString(), ticketInterventoMap.get("oggetto").toString(), ticketInterventoMap.get("priorità").toString(), ticketInterventoMap.get("rapporti_intervento").toString(),
-                        ticketInterventoMap.get("richiesta").toString(), ticketInterventoMap.get("stabile").toString(), ticketInterventoMap.get("stato").toString());
+                        ticketInterventoMap.get("id").toString(),
+                        ticketInterventoMap.get("amministratore").toString(),
+                        ticketInterventoMap.get("data_ticket").toString(),
+                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                        ticketInterventoMap.get("fornitore").toString(),
+                        ticketInterventoMap.get("messaggio_condomino").toString(),
+                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                        ticketInterventoMap.get("descrizione_condomini").toString(),
+                        ticketInterventoMap.get("oggetto").toString(),
+                        ticketInterventoMap.get("priorità").toString(),
+                        ticketInterventoMap.get("rapporti_intervento").toString(),
+                        ticketInterventoMap.get("richiesta").toString(),
+                        ticketInterventoMap.get("stabile").toString(),
+                        ticketInterventoMap.get("stato").toString());
 
                 if(ticketIntervento.getStato().equals("A")){
                     descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico");
