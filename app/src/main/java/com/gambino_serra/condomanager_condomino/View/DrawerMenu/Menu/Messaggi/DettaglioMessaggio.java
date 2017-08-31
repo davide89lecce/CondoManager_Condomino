@@ -70,7 +70,6 @@ public class DettaglioMessaggio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //TODO: dettaglio_messagio.xml da sistemare
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dettaglio_messaggio);
 
