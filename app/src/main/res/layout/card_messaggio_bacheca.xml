@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -24,15 +27,15 @@
             >
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewMessaggio"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:layout_weight="0.50"
-                android:src="@drawable/sands_of_time"
+                android:layout_weight="0.51"
+                android:src="@drawable/mail_send"
                 android:tag="image_tag" />
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="3dp"
@@ -40,46 +43,82 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewData"
+                    android:id="@+id/DataMessaggio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
                     android:layout_marginRight="2dp"
-                    android:text="Android Name"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="sans-serif"
+                    android:text="data del messaggio"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="12sp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
-                    android:id="@+id/textViewSegnalazione"
+                    android:id="@+id/textViewTestoMessaggio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Android Version"
+                    android:text="Descrizione"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="0dp"
+                    card_view:layout_constraintLeft_toLeftOf="@+id/textViewTipologiaMessaggio"
+                    android:layout_marginTop="8dp"
+                    card_view:layout_constraintTop_toBottomOf="@+id/TipologiaMessaggio" />
+
+                <TextView
+                    android:id="@+id/textViewTipologiaMessaggio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Tipologia"
+                    android:textStyle="bold"
+                    card_view:layout_constraintLeft_toLeftOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/TestoMessaggio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
                     android:ellipsize="end"
-                    android:maxLines="3"
                     android:fontFamily="sans-serif"
+                    android:maxLines="3"
+                    android:text="qui apparirà il testo del messaggio"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="14sp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+                    card_view:layout_constraintLeft_toLeftOf="@+id/TipologiaMessaggio"
+                    android:layout_marginTop="4dp"
+                    card_view:layout_constraintTop_toBottomOf="@+id/textViewTestoMessaggio" />
+
+                <TextView
+                    android:id="@+id/TipologiaMessaggio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif"
+                    android:maxLines="3"
+                    android:text="qui apparirà la tipologia del messaggio"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="8dp"
+                    card_view:layout_constraintLeft_toLeftOf="@+id/textViewTipologiaMessaggio"
+                    android:layout_marginTop="4dp"
+                    card_view:layout_constraintTop_toBottomOf="@+id/textViewTipologiaMessaggio" />
 
                 <TextView
                     android:id="@+id/textViewIdSegnalazione"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:textColor="@android:color/transparent"
-                    android:textSize="0sp" />
-
-                <TextView
-                    android:id="@+id/textStato"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:textSize="0sp"
-                    android:textColor="@android:color/transparent" />
+                    tools:layout_editor_absoluteY="8dp"
+                    tools:layout_editor_absoluteX="195dp" />
 
-            </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

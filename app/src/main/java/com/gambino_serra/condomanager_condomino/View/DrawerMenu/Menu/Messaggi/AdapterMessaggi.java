@@ -20,21 +20,19 @@ public class AdapterMessaggi extends RecyclerView.Adapter<AdapterMessaggi.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewSegnalazione;
-        ImageView imageViewIcon;
+        TextView DataMessaggio;
+        TextView TestoMessaggio;
+        TextView TipologiaMessaggio;
+        ImageView imageViewMessaggio;
         TextView textViewIdSegnalazione;
-        TextView textViewData;
-        TextView textStato;
-
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.textViewSegnalazione = (TextView) itemView.findViewById(R.id.textViewSegnalazione);
-            this.imageViewIcon = (ImageView) itemView.findViewById(imageView);
+            this.imageViewMessaggio = (ImageView) itemView.findViewById(R.id.imageViewMessaggio);
+            this.TestoMessaggio = (TextView) itemView.findViewById(R.id.TestoMessaggio);
+            this.TipologiaMessaggio = (TextView) itemView.findViewById(R.id.TipologiaMessaggio);
+            this.DataMessaggio = (TextView) itemView.findViewById(R.id.DataMessaggio);
             this.textViewIdSegnalazione = (TextView) itemView.findViewById(R.id.textViewIdSegnalazione);
-            this.textViewData = (TextView) itemView.findViewById(R.id.textViewData);
-            this.textStato = (TextView) itemView.findViewById(R.id.textStato);
-
         }
     }
 
@@ -44,7 +42,6 @@ public class AdapterMessaggi extends RecyclerView.Adapter<AdapterMessaggi.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //TODO: sistemare card_messaggio_bacheca
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_messaggio_bacheca, parent, false);
 
         //Setta l'onclick sulla recycler view presente nella classe Interventi
@@ -57,17 +54,16 @@ public class AdapterMessaggi extends RecyclerView.Adapter<AdapterMessaggi.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
-        TextView textViewSegnalazione = holder.textViewSegnalazione;
-        ImageView imageView = holder.imageViewIcon;
+        TextView TipologiaMessaggio = holder.TipologiaMessaggio;
+        TextView TestoMessaggio = holder.TestoMessaggio;
+        TextView DataMessaggio = holder.DataMessaggio;
+        ImageView imageViewMessaggio = holder.imageViewMessaggio;
         TextView textViewIdSegnalazione = holder.textViewIdSegnalazione;
-        TextView textViewData = holder.textViewData;
-        TextView textStato = holder.textStato;
 
-        textViewSegnalazione.setText( dataset.get(listPosition).getData());
+        TipologiaMessaggio.setText( dataset.get(listPosition).getData());
+        TestoMessaggio.setText( dataset.get(listPosition).getData());
+        DataMessaggio.setText(dataset.get(listPosition).getStabile());
         textViewIdSegnalazione.setText(dataset.get(listPosition).getMessaggio().toString());
-        textViewData.setText(dataset.get(listPosition).getStabile());
-        textStato.setText(dataset.get(listPosition).getTipologia());
-
     }
 
     @Override
