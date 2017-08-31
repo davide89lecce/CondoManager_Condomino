@@ -12,17 +12,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="24dp"
         android:isScrollContainer="true"
         app:cardCornerRadius="0.1dp"
         app:cardElevation="2dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginTop="8dp">
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="8dp"
+        tools:layout_editor_absoluteY="-14dp"
+        tools:layout_editor_absoluteX="-10dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

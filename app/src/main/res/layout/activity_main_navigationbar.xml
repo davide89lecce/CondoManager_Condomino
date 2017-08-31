@@ -28,8 +28,8 @@
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/material_design_android_floating_action_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="271dp"
+        android:layout_height="177dp"
         fab:menu_animationDelayPerItem="55"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
@@ -60,8 +60,8 @@
         fab:menu_shadowYOffset="4dp"
         fab:menu_showShadow="true"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="-77dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginTop="318dp"
+        android:layout_marginRight="7dp"
         app:layout_constraintRight_toRightOf="parent">
 
         <com.github.clans.fab.FloatingActionButton
