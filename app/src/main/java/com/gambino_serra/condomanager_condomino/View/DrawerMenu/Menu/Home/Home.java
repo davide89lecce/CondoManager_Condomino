@@ -2,6 +2,7 @@ package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -123,24 +125,20 @@ public class Home extends Fragment {
         materialDesignFAM.showMenu(true);
         fl = (FrameLayout)view.findViewById(R.id.frame_layout);
 
+        materialDesignFAM.setOnTouchListener(new View.OnTouchListener() { //todo: perchè stracazzo non diventa tutto grigio?
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP){
 
-       // materialDesignFAM.setOnTouchListener(new View.OnTouchListener() {
-       //     @Override
-       //     public boolean onTouch(View v, MotionEvent event) {
-       //         //if(event.getAction() == MotionEvent.ACTION_UP){
-       //
-       //             if(materialDesignFAM.isOpened())
-       //             { fl.setBackgroundColor(Color.GRAY);
-       //
-       //             }
-       //             else
-       //             { fl.setBackgroundColor(Color.TRANSPARENT); }
-       //             // Do what you want
-       //             return true;
-       //         }
-       //         return true; // consume the event
-       //     }
-       // });
+                    if(materialDesignFAM.isOpened())
+                        { fl.setBackgroundColor(Color.GRAY); }
+                    else
+                        { fl.setBackgroundColor(Color.TRANSPARENT); }
+                    return true;
+                }
+                return true; // consume the event
+            }
+        });
         
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
