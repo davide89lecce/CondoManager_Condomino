@@ -12,7 +12,7 @@ import com.gambino_serra.condomanager_condomino.tesi.R;
 
 import java.util.ArrayList;
 
-import static com.gambino_serra.condomanager_condomino.tesi.R.id.imageView;
+import static com.gambino_serra.condomanager_condomino.tesi.R.id.Logo_Interv;
 
 
 public class AdapterCardsInteventiCompletati extends RecyclerView.Adapter<AdapterCardsInteventiCompletati.MyViewHolder> {
@@ -34,10 +34,10 @@ public class AdapterCardsInteventiCompletati extends RecyclerView.Adapter<Adapte
         public MyViewHolder(View itemView) {
             super(itemView);
             this.textViewCondominio = (TextView) itemView.findViewById(R.id.textViewCondominio);
-            this.textViewSegnalazione = (TextView) itemView.findViewById(R.id.textViewSegnalazione);
-            this.imageViewIcon = (ImageView) itemView.findViewById(imageView);
+            this.textViewSegnalazione = (TextView) itemView.findViewById(R.id.Oggetto_Interv);
+            this.imageViewIcon = (ImageView) itemView.findViewById(Logo_Interv);
             this.textViewIdSegnalazione = (TextView) itemView.findViewById(R.id.textViewIdSegnalazione);
-            this.textViewData = (TextView) itemView.findViewById(R.id.textViewData);
+            this.textViewData = (TextView) itemView.findViewById(R.id.Stato_Interv);
             this.textStato = (TextView) itemView.findViewById(R.id.textStato);
 
         }

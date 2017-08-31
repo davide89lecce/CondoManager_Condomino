@@ -24,7 +24,7 @@
             >
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/Logo_Interv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -41,7 +41,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/textViewData"
+                    android:id="@+id/Stato_Interv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -65,7 +65,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:id="@+id/textViewSegnalazione"
+                    android:id="@+id/Oggetto_Interv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"

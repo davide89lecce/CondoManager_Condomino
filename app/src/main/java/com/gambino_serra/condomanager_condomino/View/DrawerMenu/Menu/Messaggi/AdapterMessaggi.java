@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import java.util.ArrayList;
-import static com.gambino_serra.condomanager_condomino.tesi.R.id.imageView;
 
 
 public class AdapterMessaggi extends RecyclerView.Adapter<AdapterMessaggi.MyViewHolder> {
