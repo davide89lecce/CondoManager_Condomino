@@ -40,7 +40,6 @@ public class DettaglioIntervento extends AppCompatActivity {
     private static final String LOGGED_USER = "username";
 
     String username = "";
-    String idSegnalazione = "";
     String data = "";
     String segnalazione = "";
     String usernameCondomino = "";
@@ -53,24 +52,16 @@ public class DettaglioIntervento extends AppCompatActivity {
     String azienda = "";
     String condomino = "";
 
+    String idTicket;
+
     // Oggetti di Layout NUOVI
     TextView mOggetto;
     TextView mDescrizione;
     TextView mStato;
     TextView mUltimoAggiornamento;
     TextView mFornitore;
+    TextView mDataAgg;
 
-
-    TextView dataT;
-    TextView segnalazioneT;
-    TextView condominoT;
-    TextView impiantoT;
-    TextView fornitoreT;
-    TextView statoT;
-    TextView condominioT;
-    LinearLayout btnChiama;
-    TextView descrizioneStatoT;
-    ImageView imageStatoI;
 
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
@@ -96,18 +87,18 @@ public class DettaglioIntervento extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
 
             bundle = getIntent().getExtras();
-            idSegnalazione = bundle.get("idSegnalazione").toString();
+            idTicket = bundle.get("idSegnalazione").toString();
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("idSegnalazione", idSegnalazione);
+            editor.putString("idSegnalazione", idTicket); //TODO: segnalazione o ticket???
             editor.apply();
 
         } else {
             //TODO: perchè
-            idSegnalazione = sharedPrefs.getString("idSegnalazione", "").toString();
+            idTicket = sharedPrefs.getString("idSegnalazione", "").toString();
 
             bundle = new Bundle();
-            bundle.putString("idSegnalazione", idSegnalazione);
+            bundle.putString("idSegnalazione", idTicket);
 
         }
 
@@ -116,37 +107,64 @@ public class DettaglioIntervento extends AppCompatActivity {
         mDescrizione = (TextView) findViewById(R.id.D_Descrizione);
         mStato = (TextView) findViewById(R.id.D_Stato);
         mUltimoAggiornamento = (TextView) findViewById(R.id.D_UltimoAggiornamento);
+        mDataAgg = (TextView) findViewById(R.id.D_dataAggiorn);
         mFornitore = (TextView) findViewById(R.id.D_Fornitore);
 
-        /*
-        dataT = (TextView) findViewById(R.id.dataD);
-        segnalazioneT = (TextView) findViewById(R.id.segnalazioneD);
-        condominoT = (TextView) findViewById(R.id.condominoD);
-        //impiantoT = (TextView) findViewById(R.id.impiantoD);
-        fornitoreT = (TextView) findViewById(R.id.fornitoreD);
-        //statoT = (TextView) findViewById(R.id.statoD);
-        condominioT = (TextView) findViewById(R.id.condominioD);
-        btnChiama = (LinearLayout) findViewById(R.id.btnChiama);
-        descrizioneStatoT = (TextView) findViewById(R.id.descrizioneStatoD);
-        imageStatoI = (ImageView) findViewById(R.id.imageStatoD);
-*/
-
-        ticketInterventoMap = new HashMap<String, Object>();
-        // Avvalora il primo oggetto del map con l'ID dell'intervento recuperato
-        ticketInterventoMap.put("id", idSegnalazione);
 
         Query intervento;
-        intervento = FirebaseDB.getInterventi().orderByKey().equalTo("idSegnalazione");
+        intervento = FirebaseDB.getInterventi().orderByKey().equalTo(idTicket);
 
-        intervento.addValueEventListener (new ValueEventListener() {
+        intervento.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for ( DataSnapshot figlio : dataSnapshot.getChildren() )
-                    try {
-                        ticketInterventoMap.put(figlio.getKey(), figlio.getValue(String.class));
-                    }catch (NullPointerException e) {
-                        ticketInterventoMap.put(figlio.getKey(), "-");
-                    }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ticketInterventoMap = new HashMap<String, Object>();
+                // Avvalora il primo oggetto del map con l'ID dell'intervento recuperato
+                ticketInterventoMap.put("idIntervento", idTicket);
+
+
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    ticketInterventoMap.put(child.getKey(), child.getValue());
+                }
+
+                TicketIntervento ticketIntervento = new TicketIntervento(
+                        ticketInterventoMap.get("idIntervento").toString(),
+                        ticketInterventoMap.get("amministratore").toString(),
+                        ticketInterventoMap.get("data_ticket").toString(),
+                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                        ticketInterventoMap.get("fornitore").toString(),
+                        ticketInterventoMap.get("messaggio_condomino").toString(),
+                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                        ticketInterventoMap.get("descrizione_condomini").toString(),
+                        ticketInterventoMap.get("oggetto").toString(),
+                        ticketInterventoMap.get("rapporti_intervento").toString(),
+                        ticketInterventoMap.get("richiesta").toString(),
+                        ticketInterventoMap.get("stabile").toString(),
+                        ticketInterventoMap.get("stato").toString(),
+                        ticketInterventoMap.get("priorità").toString()
+                );
+
+                mOggetto.setText(ticketIntervento.getOggetto());
+                mFornitore.setText(ticketIntervento.getFornitore());
+                mDataAgg.setText(ticketIntervento.getDataUltimoAggiornamento());
+                mUltimoAggiornamento.setText(ticketIntervento.getAggiornamentoCondomini());
+                mDescrizione.setText(ticketIntervento.getDescrizioneCondomini());
+                mStato.setText(ticketIntervento.getStato());
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -155,20 +173,6 @@ public class DettaglioIntervento extends AppCompatActivity {
             }
         });
 
-try {
-    mOggetto.setText(ticketInterventoMap.get("oggetto").toString());
-
-    mDescrizione.setText(ticketInterventoMap.get("descrizione_condomini").toString());
-
-    mStato.setText(ticketInterventoMap.get("stato").toString());
-
-    mUltimoAggiornamento.setText(ticketInterventoMap.get("data_ultimo_aggiornamento").toString());
-
-    mFornitore.setText(ticketInterventoMap.get("fornitore").toString());
-
-}catch (NullPointerException e){
-    Toast.makeText( getApplicationContext(), "Non riesco ad aprire l'oggetto"+ e.toString(), Toast.LENGTH_LONG).show();
-}
         /*
         intervento.addChildEventListener(new ChildEventListener() {
             @Override

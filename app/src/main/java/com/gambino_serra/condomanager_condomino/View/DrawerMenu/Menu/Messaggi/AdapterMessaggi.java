@@ -60,10 +60,10 @@ public class AdapterMessaggi extends RecyclerView.Adapter<AdapterMessaggi.MyView
         ImageView imageViewMessaggio = holder.imageViewMessaggio;
         TextView textViewIdSegnalazione = holder.textViewIdSegnalazione;
 
-        TipologiaMessaggio.setText( dataset.get(listPosition).getData());
-        TestoMessaggio.setText( dataset.get(listPosition).getData());
-        DataMessaggio.setText(dataset.get(listPosition).getStabile());
-        textViewIdSegnalazione.setText(dataset.get(listPosition).getMessaggio().toString());
+        TipologiaMessaggio.setText( dataset.get(listPosition).getTipologia());
+        TestoMessaggio.setText( dataset.get(listPosition).getMessaggio());
+        DataMessaggio.setText(dataset.get(listPosition).getData());
+        textViewIdSegnalazione.setText(dataset.get(listPosition).getId().toString());
     }
 
     @Override

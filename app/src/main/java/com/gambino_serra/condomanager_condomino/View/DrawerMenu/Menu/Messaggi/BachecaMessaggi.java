@@ -46,7 +46,7 @@ public class BachecaMessaggi extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private ArrayList<Segnalazione> data;
+    //private ArrayList<Segnalazione> data;
     public static View.OnClickListener myOnClickListener;
     Context context;
     String condominoNome;
@@ -115,7 +115,7 @@ public class BachecaMessaggi extends Fragment {
 
         context = getContext();
         firebaseAuth = FirebaseAuth.getInstance();
-        data = new ArrayList<Segnalazione>();
+        //data = new ArrayList<Segnalazione>();
         messaggioCondominoMap = new HashMap<String,Object>();
         messaggi = new ArrayList<MessaggioCondomino>();
 

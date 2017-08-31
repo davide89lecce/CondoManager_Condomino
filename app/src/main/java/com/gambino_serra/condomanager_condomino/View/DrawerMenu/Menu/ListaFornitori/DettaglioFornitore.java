@@ -75,7 +75,7 @@ public class DettaglioFornitore extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
 
             bundle = getIntent().getExtras();
-            uidFornitore = bundle.get("uidFornitore").toString();
+            uidFornitore = bundle.get("uidFornitore").toString(); // prende l'identificativo per fare il retrieve delle info
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
             editor.putString("uidfornitore", uidFornitore);
@@ -106,7 +106,6 @@ public class DettaglioFornitore extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-
                 dettaglioFornitoreMap = new HashMap<String, Object>();
                 dettaglioFornitoreMap.put("uidFornitore", dataSnapshot.getKey());
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
@@ -130,17 +129,6 @@ public class DettaglioFornitore extends AppCompatActivity {
                 Ttelefono.setText(fornitore.getTelefono());
                 Temail.setText(fornitore.getEmail());
                 Tindirizzo.setText(fornitore.getIndirizzo());
-                /*
-                final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("data", ticketIntervento.getDataTicket());
-                editor.putString("segnalazione", ticketIntervento.getOggetto());
-                editor.putString("condomino", usernameCondomino);
-                editor.putString("idCondominio", idCondominio);
-                editor.putString("fornitore", fornitore);
-                editor.putString("stato", stato);
-                editor.apply();
-                */
 
             }
 
