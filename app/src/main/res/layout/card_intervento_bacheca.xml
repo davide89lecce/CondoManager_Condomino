@@ -34,14 +34,15 @@
 
             <ImageView
                 android:id="@+id/Logo_Interv"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="0dp"
                 android:src="@drawable/sands_of_time"
                 android:tag="image_tag"
                 card_view:layout_constraintLeft_toLeftOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent" />
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:srcCompat="@drawable/bg_circle" />
 
 
             <TextView
@@ -94,6 +95,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Data Agg Interv"
+                android:textSize="12sp"
                 card_view:layout_constraintRight_toRightOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
 

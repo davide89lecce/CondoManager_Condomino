@@ -21,6 +21,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.Old_Model.Entity.Segnalazione;
@@ -99,94 +100,77 @@ public class BachecaInterventi extends Fragment {
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
         firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
 
-        firebaseDB.addChildEventListener(new ChildEventListener() {
+
+        firebaseDB.child("stabile").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //ricavo codicefiscale stabile
+                stabile = dataSnapshot.getValue().toString();
+                Query prova;
+                prova = FirebaseDB.getInterventi().orderByChild("stabile").equalTo(stabile);
 
-                if(dataSnapshot.getKey().toString().equals("stabile")){
-                    //ricavo codicefiscale stabile
-                    stabile = dataSnapshot.getValue().toString();
+                prova.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                    Query prova;
-                    prova = FirebaseDB.getInterventi().orderByChild("stabile").equalTo(stabile);
+                        ticketInterventoMap = new HashMap<String,Object>();
+                        ticketInterventoMap.put("id", dataSnapshot.getKey());
 
-                    prova.addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                            String temp = dataSnapshot.getKey().toString();
-
-                            ticketInterventoMap = new HashMap<String,Object>();
-                            ticketInterventoMap.put("id", dataSnapshot.getKey());
-                            for ( DataSnapshot child : dataSnapshot.getChildren() ) {
-                                ticketInterventoMap.put(child.getKey(), child.getValue());
-                            }
-
-                            try{
-
-                                TicketIntervento ticketIntervento = new TicketIntervento(
-                                        ticketInterventoMap.get("id").toString(),
-                                        ticketInterventoMap.get("amministratore").toString(),
-                                        ticketInterventoMap.get("data_ticket").toString(),
-                                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
-                                        ticketInterventoMap.get("fornitore").toString(),
-                                        ticketInterventoMap.get("messaggio_condomino").toString(),
-                                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
-                                        ticketInterventoMap.get("descrizione_condomini").toString(),
-                                        ticketInterventoMap.get("oggetto").toString(),
-                                        ticketInterventoMap.get("rapporti_intervento").toString(),
-                                        ticketInterventoMap.get("richiesta").toString(),
-                                        ticketInterventoMap.get("stabile").toString(),
-                                        ticketInterventoMap.get("stato").toString() ,
-                                        ticketInterventoMap.get("priorità").toString()  );
-
-
-
-                                interventi.add(ticketIntervento);
-                                }
-                                catch (NullPointerException e) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
-                                }
-
-
-                            adapter = new AdapterBachecaInterventi(interventi);
-                            recyclerView.setAdapter(adapter);
+                        for ( DataSnapshot child : dataSnapshot.getChildren() ) {
+                            ticketInterventoMap.put(child.getKey(), child.getValue());
                         }
 
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        try{
 
+                            TicketIntervento ticketIntervento = new TicketIntervento(
+                                    ticketInterventoMap.get("id").toString(),
+                                    ticketInterventoMap.get("amministratore").toString(),
+                                    ticketInterventoMap.get("data_ticket").toString(),
+                                    ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                                    ticketInterventoMap.get("fornitore").toString(),
+                                    ticketInterventoMap.get("messaggio_condomino").toString(),
+                                    ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                                    ticketInterventoMap.get("descrizione_condomini").toString(),
+                                    ticketInterventoMap.get("oggetto").toString(),
+                                    ticketInterventoMap.get("rapporti_intervento").toString(),
+                                    ticketInterventoMap.get("richiesta").toString(),
+                                    ticketInterventoMap.get("stabile").toString(),
+                                    ticketInterventoMap.get("stato").toString() ,
+                                    ticketInterventoMap.get("priorità").toString()  );
+
+
+
+                            interventi.add(ticketIntervento);
+                        }
+                        catch (NullPointerException e) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
                         }
 
-                        @Override
-                        public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                        }
+                        adapter = new AdapterBachecaInterventi(interventi);
+                        recyclerView.setAdapter(adapter);
+                    }
 
-                        @Override
-                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                        }
+                    }
 
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                        }
-                    });
-                }
-            }
+                    }
 
-            @Override
-            public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            }
+                    }
 
-            @Override
-            public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
 
-            }
-
-            @Override
-            public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                    }
+                });
 
             }
 
@@ -195,6 +179,8 @@ public class BachecaInterventi extends Fragment {
 
             }
         });
+
+
 
 
 

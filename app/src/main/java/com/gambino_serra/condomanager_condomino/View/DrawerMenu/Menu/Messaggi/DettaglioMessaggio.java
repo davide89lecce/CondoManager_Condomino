@@ -14,6 +14,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.tesi.R;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +46,13 @@ public class DettaglioMessaggio extends AppCompatActivity {
     TextView messaggio_descrizione;
     ImageView messaggio_foto;
 
-    private Firebase firebaseDB;
+    private FirebaseDB firebaseDB;
+    private Firebase dbMessaggi;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
+    private StorageReference mStorage;
 
     Map<String, Object> MessaggioMap;
 
@@ -60,6 +65,8 @@ public class DettaglioMessaggio extends AppCompatActivity {
         setContentView(R.layout.dettaglio_messaggio);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        mStorage = FirebaseStorage.getInstance().getReference();
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
@@ -114,6 +121,30 @@ public class DettaglioMessaggio extends AppCompatActivity {
                 messaggio_data.setText(messaggio.getData());
                 messaggio_descrizione.setText(messaggio.getMessaggio());
                 //messaggio_foto.setText(); todo: caricare foto
+
+
+                String UID = firebaseAuth.getCurrentUser().getUid().toString();
+
+                Query foto = firebaseDB.getMessaggiCondomino().orderByChild("uidCondomino").equalTo(UID);
+
+                foto.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        StorageReference filepath = mStorage.child("Photos").child(MessaggioMap.get("foto").toString());
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
+
+
+
 
             }
 
