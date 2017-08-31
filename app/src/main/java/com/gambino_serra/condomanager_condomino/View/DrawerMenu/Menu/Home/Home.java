@@ -29,7 +29,7 @@ public class Home extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     FloatingActionMenu materialDesignFAM;
-    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
+    FloatingActionButton floatingActionButton1, floatingActionButton2;
     FrameLayout fl;
 
     private String mParam1;
@@ -117,7 +117,6 @@ public class Home extends Fragment {
         materialDesignFAM = (FloatingActionMenu) getActivity().findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item2);
-        floatingActionButton3 = (FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item3);
 
         materialDesignFAM.hideMenu(true);
         materialDesignFAM.setClosedOnTouchOutside(true);
@@ -162,9 +161,7 @@ public class Home extends Fragment {
                 materialDesignFAM.close(true);
             }
         });
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {  }
-        });
+
     }
 
 

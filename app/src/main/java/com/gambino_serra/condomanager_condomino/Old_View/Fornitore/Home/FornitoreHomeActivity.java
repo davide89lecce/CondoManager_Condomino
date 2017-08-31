@@ -72,7 +72,7 @@ public class FornitoreHomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.botton_menu_old, menu);
+        inflater.inflate(R.menu.old_botton_menu, menu);
         return true;
     }
 
