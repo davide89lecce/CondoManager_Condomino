@@ -212,7 +212,7 @@ public class BachecaMessaggi extends Fragment {
             String selectedName = (String) textViewName.getText();
 
             Bundle bundle = new Bundle();
-            bundle.putString("idSegnalazione", selectedName);
+            bundle.putString("id", selectedName);
 
             Intent intent = new Intent(context, DettaglioMessaggio.class);
             intent.putExtras(bundle);

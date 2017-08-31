@@ -14,9 +14,8 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
+import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.Old_View.Condomino.Dialog.DialogChiamaAmministratore;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,29 +32,16 @@ public class DettaglioMessaggio extends AppCompatActivity {
     private static final String LOGGED_USER = "username";
 
     String username = "";
-    String idSegnalazione = "";
+    String idMessaggio;
     String data = "";
-    String segnalazione = "";
-    String usernameCondomino = "";
-    String condominio = "";
-    String telefonoAmministratore = "";
-    String fornitore = "";
-    String stato = "";
-    String idCondominio = "";
-    String impiantoNome = "";
-    String azienda = "";
-    String condomino = "";
+    String tipologia = "";
+    String descrizione = "";
+    String foto = "";
 
-    TextView dataT;
-    TextView segnalazioneT;
-    TextView condominoT;
-    TextView impiantoT;
-    TextView fornitoreT;
-    TextView statoT;
-    TextView condominioT;
-    ConstraintLayout btnChiama;
-    TextView descrizioneStatoT;
-    ImageView imageStatoI;
+    TextView messaggio_data;
+    TextView messaggio_tipologia;
+    TextView messaggio_descrizione;
+    ImageView messaggio_foto;
 
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
@@ -63,7 +49,7 @@ public class DettaglioMessaggio extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
 
-    Map<String, Object> ticketInterventoMap;
+    Map<String, Object> MessaggioMap;
 
     Bundle bundle;
 
@@ -81,34 +67,25 @@ public class DettaglioMessaggio extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
 
             bundle = getIntent().getExtras();
-            idSegnalazione = bundle.get("idSegnalazione").toString();
+            idMessaggio = bundle.get("id").toString();
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("idSegnalazione", idSegnalazione);
+            editor.putString("id", idMessaggio);
             editor.apply();
-
-        } else {
-
-            idSegnalazione = sharedPrefs.getString("idSegnalazione", "").toString();
-
+            }
+        else {
+            idMessaggio = sharedPrefs.getString("id", "").toString();
             bundle = new Bundle();
-            bundle.putString("idSegnalazione", idSegnalazione);
+            bundle.putString("id", idMessaggio);
+            }
 
-        }
-
-        dataT = (TextView) findViewById(R.id.dataD);
-        segnalazioneT = (TextView) findViewById(R.id.segnalazioneD);
-        condominoT = (TextView) findViewById(R.id.condominoD);
-        //impiantoT = (TextView) findViewById(R.id.impiantoD);
-        fornitoreT = (TextView) findViewById(R.id.fornitoreD);
-        //statoT = (TextView) findViewById(R.id.statoD);
-        condominioT = (TextView) findViewById(R.id.condominioD);
-        btnChiama = (ConstraintLayout) findViewById(R.id.btnChiama);
-        descrizioneStatoT = (TextView) findViewById(R.id.descrizioneStatoD);
-        imageStatoI = (ImageView) findViewById(R.id.imageStatoD);
+        messaggio_data = (TextView) findViewById(R.id.messaggio_data);
+        messaggio_descrizione = (TextView) findViewById(R.id.messaggio_descrizione);
+        messaggio_tipologia = (TextView) findViewById(R.id.messaggio_tipologia);
+        messaggio_foto = (ImageView) findViewById(R.id.messaggio_foto);
 
         Query prova;
-        prova = FirebaseDB.getInterventi().orderByKey().equalTo(idSegnalazione);
+        prova = FirebaseDB.getMessaggiCondomino().orderByKey().equalTo(idMessaggio);
 
         prova.addChildEventListener(new ChildEventListener() {
             @Override
@@ -116,96 +93,42 @@ public class DettaglioMessaggio extends AppCompatActivity {
 
                 String temp = dataSnapshot.getKey().toString();
 
-                ticketInterventoMap = new HashMap<String, Object>();
-                ticketInterventoMap.put("id", dataSnapshot.getKey());
+                MessaggioMap = new HashMap<String, Object>();
+                MessaggioMap.put("id", dataSnapshot.getKey());
+
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    ticketInterventoMap.put(child.getKey(), child.getValue());
+                    MessaggioMap.put(child.getKey(), child.getValue());
                 }
 
-                TicketIntervento ticketIntervento = new TicketIntervento(
-                        ticketInterventoMap.get("id").toString(),
-                        ticketInterventoMap.get("amministratore").toString(),
-                        ticketInterventoMap.get("data_ticket").toString(),
-                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
-                        ticketInterventoMap.get("fornitore").toString(),
-                        ticketInterventoMap.get("messaggio_condomino").toString(),
-                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
-                        ticketInterventoMap.get("descrizione_condomini").toString(),
-                        ticketInterventoMap.get("oggetto").toString(),
-                        ticketInterventoMap.get("rapporti_intervento").toString(),
-                        ticketInterventoMap.get("richiesta").toString(),
-                        ticketInterventoMap.get("stabile").toString(),
-                        ticketInterventoMap.get("stato").toString() ,
-                        ticketInterventoMap.get("priorità").toString()  );
+                MessaggioCondomino messaggio = new MessaggioCondomino(
+                        MessaggioMap.get("id").toString(),
+                        MessaggioMap.get("data").toString(),
+                        MessaggioMap.get("tipologia").toString(),
+                        MessaggioMap.get("messaggio").toString(),
+                        MessaggioMap.get("uidCondomino").toString(),
+                        MessaggioMap.get("uidAmministratore").toString(),
+                        MessaggioMap.get("stabile").toString(),
+                        MessaggioMap.get("foto").toString() );
 
-                if(ticketIntervento.getStato().equals("A")){
-                    descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico");
-                    imageStatoI.setImageResource(R.drawable.sand_clock2);
-                }else if(ticketIntervento.getStato().equals("B") || stato.equals("C") || stato.equals("D")){
-                    descrizioneStatoT.setText("Questa richiesta è in corso d'opera");
-                    imageStatoI.setImageResource(R.drawable.wrench);
-                }else if(ticketIntervento.getStato().equals("E") || stato.equals("F")){
-                    descrizioneStatoT.setText("I lavori per questo intervento sono stati conclusi");
-                    imageStatoI.setImageResource(R.drawable.checked);
-                }else if(ticketIntervento.getStato().equals("G")){
-                    descrizioneStatoT.setText("Questa richiesta è stata rifiutata.\nContattare l'amministratore per maggiori dettagli");
-                    imageStatoI.setImageResource(R.drawable.error);
-                }
-
-                dataT.setText(ticketIntervento.getDataTicket());
-                segnalazioneT.setText(ticketIntervento.getOggetto());
-                condominioT.setText(ticketIntervento.getDataUltimoAggiornamento());
-                descrizioneStatoT.setText(ticketIntervento.getMessaggioCondomino());
-                /*
-                final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("data", ticketIntervento.getDataTicket());
-                editor.putString("segnalazione", ticketIntervento.getOggetto());
-                editor.putString("condomino", usernameCondomino);
-                editor.putString("idCondominio", idCondominio);
-                editor.putString("fornitore", fornitore);
-                editor.putString("stato", stato);
-                editor.apply();
-                */
+                messaggio_tipologia.setText(messaggio.getTipologia());
+                messaggio_data.setText(messaggio.getData());
+                messaggio_descrizione.setText(messaggio.getMessaggio());
+                //messaggio_foto.setText(); todo: caricare foto
 
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-             }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
+            public void onCancelled(FirebaseError firebaseError) { }
 
         });
-
-        btnChiama.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                DialogFragment newFragment = new DialogChiamaAmministratore();
-                bundle.putString("telefono",telefonoAmministratore);
-                newFragment.setArguments(bundle);
-                newFragment.show(getFragmentManager(), "ChiamaAmministratore");
-                overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-            }
-        });
-
-
     }
-
-
 }
