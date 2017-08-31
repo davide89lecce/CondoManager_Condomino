@@ -87,10 +87,10 @@ public class DettaglioIntervento extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
 
             bundle = getIntent().getExtras();
-            idTicket = bundle.get("idSegnalazione").toString();
+            idTicket = bundle.get("idTicket").toString();
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("idSegnalazione", idTicket); //TODO: segnalazione o ticket???
+            editor.putString("idTicket", idTicket);
             editor.apply();
 
         } else {

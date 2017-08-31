@@ -98,6 +98,7 @@ public class BachecaInterventi extends Fragment {
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
         firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
+
         firebaseDB.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
@@ -122,8 +123,6 @@ public class BachecaInterventi extends Fragment {
 
                             try{
 
-
-
                                 TicketIntervento ticketIntervento = new TicketIntervento(
                                         ticketInterventoMap.get("id").toString(),
                                         ticketInterventoMap.get("amministratore").toString(),
@@ -145,7 +144,7 @@ public class BachecaInterventi extends Fragment {
                                 interventi.add(ticketIntervento);
                                 }
                                 catch (NullPointerException e) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto"+ e.toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
                                 }
 
 
@@ -220,11 +219,11 @@ public class BachecaInterventi extends Fragment {
             RecyclerView.ViewHolder viewHolder
                     = recyclerView.findViewHolderForPosition(selectedItemPosition);
             TextView textViewName
-                    = (TextView) viewHolder.itemView.findViewById(R.id.textViewIdSegnalazione);
+                    = (TextView) viewHolder.itemView.findViewById(R.id.IDTicket);
             String selectedName = (String) textViewName.getText();
 
             Bundle bundle = new Bundle();
-            bundle.putString("idSegnalazione", selectedName);
+            bundle.putString("idTicket", selectedName);
 
             Intent intent = new Intent(context, DettaglioIntervento.class);
             intent.putExtras(bundle);
