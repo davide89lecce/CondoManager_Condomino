@@ -1,13 +1,19 @@
 package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Messaggi;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -18,12 +24,17 @@ import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.tesi.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +64,8 @@ public class DettaglioMessaggio extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private StorageReference mStorage;
+
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
 
     Map<String, Object> MessaggioMap;
 
@@ -120,31 +133,40 @@ public class DettaglioMessaggio extends AppCompatActivity {
                 messaggio_tipologia.setText(messaggio.getTipologia());
                 messaggio_data.setText(messaggio.getData());
                 messaggio_descrizione.setText(messaggio.getMessaggio());
-                //messaggio_foto.setText(); todo: caricare foto
-
 
                 String UID = firebaseAuth.getCurrentUser().getUid().toString();
 
-                Query foto = firebaseDB.getMessaggiCondomino().orderByChild("uidCondomino").equalTo(UID);
+                // Se nel messaggio è effettivamente presente una foto
+                if ( MessaggioMap.get("foto").toString() != "-" ) {
 
-                foto.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        StorageReference filepath = mStorage.child("Photos").child(MessaggioMap.get("foto").toString());
+                    String filephoto = MessaggioMap.get("foto").toString().substring(35);
+                    StorageReference storageRef = mStorage.child( filephoto );
 
+                    //Uri uriii =  "gs://condomanager-a5aa6.appspot.com/Photo/CondomanagerPhoto30082017_110031.jpg" ;
+
+
+                    /*
+                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Picasso.with(getApplicationContext()).load(uri).fit().into(messaggio_foto);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                */
+                String prova = new String ("https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_110031.jpg?alt=media&token=e1069808-eaaa-4303-9f73-3ed813902de3");
+                    Picasso.with(getApplicationContext()).load(prova).fit().into(messaggio_foto);
+
+                    //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
 
                     }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
-
-
-
 
             }
 
@@ -162,4 +184,21 @@ public class DettaglioMessaggio extends AppCompatActivity {
 
         });
     }
+
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE)
+        {
+            Uri link = data.getData();
+
+            StorageReference filepath = mStorage.child("Photos").child(MessaggioMap.get("foto").toString());
+
+            Picasso.with(getApplicationContext()).load( link ).fit().centerCrop().into(messaggio_foto);
+        }
+
+
+    }*/
 }
