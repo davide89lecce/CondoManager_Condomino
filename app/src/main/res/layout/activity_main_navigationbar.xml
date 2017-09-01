@@ -32,8 +32,8 @@
         fab:menu_animationDelayPerItem="55"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="#da762f"
-        fab:menu_colorPressed="#dc473f"
+        fab:menu_colorNormal="#dc473f"
+        fab:menu_colorPressed="@color/colorAccent"
         fab:menu_colorRipple="#99d4d4d4"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
@@ -78,7 +78,6 @@
                     android:src="@drawable/mail"
                     fab:fab_label="Nuovo messaggio"
                     fab:fab_size="mini" />
-
 
     </com.github.clans.fab.FloatingActionMenu>
 
