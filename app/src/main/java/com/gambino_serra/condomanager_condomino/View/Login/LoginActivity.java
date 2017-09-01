@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 //import static com.gambino_serra.condomanager_condomino.Old_Controller.Login.checkLogin;
 
-public class LoginActivity extends BaseActivity implements Response.Listener<String>, Response.ErrorListener {
+public class LoginActivity extends BaseActivity {
 
     //Firebase
     private Firebase DBref;                 //Riferimento al DB
@@ -36,17 +36,12 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
     private FirebaseUser utente;            //oggetto per definire l'utente del DB
     private Firebase userRef;               //posso conservare altri riferimenti ad oggetto che punto a piacere
 
-    boolean exist;
-    String Tipologia = new String("N");
-    boolean check = false ;
 
     EditText etUsername, etPassword;
     Button btnLogin;
     Button btnRegister;
     String username;
     String password;
-    Response.Listener<String> listener = this;
-    Response.ErrorListener errorListener = this;
 
     private static final String MY_PREFERENCES = "preferences";
     private static final String TIPO_UTENTE = "tipoUtente";
@@ -80,7 +75,6 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         }
 
-        userState();
         //firebaseAuth.signOut();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
@@ -172,56 +166,6 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
         mProgressDialog.setMessage(getString(R.string.login));
         }
 
-    /**
-     * Il metodo e' invocato alla risposta (dati ricevuti da database altervista) della richiesta di autenticazione.
-     */
-    @Override
-    public void onResponse(String response) {
-//        hideProgressDialog();
-//        checkLogin(response, getApplicationContext(),username);
-        }
-
-    /**
-     * Il metodo viene invocato in caso di problemi nella ricezione della risposta.
-     */
-    @Override
-    public void onErrorResponse(VolleyError error) { }
-
-    /**
-     *  Il metodo verifica che le SharedPreferences contengano dati, nel caso contrario l'utente risulterà non connesso.
-     */
-    public void userState(){
-
-        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-        if (!sharedPrefs.getAll().isEmpty()) {
-            getStatusAndGoHome();
-            }
-        }
-
-    /**
-     * Il metodo verifica il tipo di utente e lo indirizza nella sua Home Activity.
-     */
-    private void getStatusAndGoHome() {
-
-        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-
-        if (sharedPrefs.getString(TIPO_UTENTE, "").equals("C"))
-            {
-            Intent in = new Intent(this, MainDrawer.class);
-            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(in);
-            }
-    }
-
-    private void writeSharedPreferences(String username, String password, String tipo_utente){
-
-        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-        SharedPreferences.Editor editor =sharedPrefs.edit();
-        editor.putString(TIPO_UTENTE,tipo_utente);
-        editor.putString(LOGGED_USER,username);
-        editor.apply();
-        }
-
 
     private void checkTipologia(final String UID){
 
@@ -230,6 +174,7 @@ public class LoginActivity extends BaseActivity implements Response.Listener<Str
 
         hideProgressDialog();
 
+        // Riferimento alla tabella Condomini
         userRef = FirebaseDB.getCondomini().child(UID);
 
         userRef.addValueEventListener(new ValueEventListener() {

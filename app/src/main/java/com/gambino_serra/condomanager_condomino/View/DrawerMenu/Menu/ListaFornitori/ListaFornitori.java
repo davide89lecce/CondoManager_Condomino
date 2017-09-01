@@ -36,24 +36,21 @@ import java.util.Map;
 
 
 public class ListaFornitori extends Fragment {
-    // the Menu initialization parameters, e.g. ARG_ITEM_NUMBER
+    // the Menu initialization parameters, e.g. ARG_ITEM_NUMBER TODO : cce bbete?
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    private static final String MY_PREFERENCES = "preferences";
-    private static final String LOGGED_USER = "username";
-    String username;
+
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private ArrayList<Fornitore> data;
     public static View.OnClickListener myOnClickListener;
     Context context;
-    //String condominoNome;
-    private ArrayList<Fornitore> datas;
+
 
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
@@ -62,7 +59,6 @@ public class ListaFornitori extends Fragment {
     private FirebaseDatabase firebaseDatabase;
 
     private String uidCondomino;
-    //private String stabile;
     Map<String, Object> FornitoreMap;
     ArrayList<Fornitore> fornitori;
 
@@ -91,6 +87,9 @@ public class ListaFornitori extends Fragment {
         }
     }
 
+    /**
+     * Dato che siamo in un fragment, non possiamo usare un semplice setContent view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this Menu
@@ -136,6 +135,8 @@ public class ListaFornitori extends Fragment {
         //lettura di TUTTI i fornitori TODO: sistemare con solo fornitori del condominio in questione
 
         Query query = FirebaseDB.getFornitori().orderByChild("categoria");
+
+
         query.addChildEventListener(new ChildEventListener() {
 
             @Override

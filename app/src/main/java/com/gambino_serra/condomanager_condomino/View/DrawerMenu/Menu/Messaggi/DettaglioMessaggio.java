@@ -1,6 +1,7 @@
 package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Messaggi;
 
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
+import com.gambino_serra.condomanager_condomino.Old_View.Utente.BaseActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,7 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class DettaglioMessaggio extends AppCompatActivity {
+public class DettaglioMessaggio extends BaseActivity {
 
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
@@ -139,6 +141,7 @@ public class DettaglioMessaggio extends AppCompatActivity {
                 // Se nel messaggio è effettivamente presente una foto
                 if ( MessaggioMap.get("foto").toString() != "-" ) {
 
+                    showProgressDialog();
 
                     String filephoto = MessaggioMap.get("foto").toString().substring(35);
                     StorageReference storageRef = mStorage.child( filephoto );
@@ -147,6 +150,7 @@ public class DettaglioMessaggio extends AppCompatActivity {
 
 
                     /*
+                    //TODO : questo doveva funzionare ma no
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -159,9 +163,14 @@ public class DettaglioMessaggio extends AppCompatActivity {
                         }
                     });
                 */
+
+
+                   // TODO : non riesco a recuperare le info per stampare la foto, per ora ne ho utilizzata una fissa inserendone manualmente
+                    // TODO : il codice chiamato "URL di Download", mentre dal programma riesco soltanto a ricavare la "Posizione di Storage"
                 String prova = new String ("https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_110031.jpg?alt=media&token=e1069808-eaaa-4303-9f73-3ed813902de3");
                     Picasso.with(getApplicationContext()).load(prova).fit().into(messaggio_foto);
 
+                    hideProgressDialog();
                     //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
@@ -201,4 +210,15 @@ public class DettaglioMessaggio extends AppCompatActivity {
 
 
     }*/
+
+
+
+
+    /**
+     * Il metodo imposta il messaggio della Dialog.
+     */
+    @Override
+    protected void setMessage() {
+        mProgressDialog.setMessage("Caricamento Immagine");
+    }
 }

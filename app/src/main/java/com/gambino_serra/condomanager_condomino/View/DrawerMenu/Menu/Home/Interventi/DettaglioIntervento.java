@@ -1,26 +1,17 @@
 package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi;
 
-import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
-import com.firebase.client.snapshot.NodeUtilities;
 import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.Old_View.Condomino.Dialog.DialogChiamaAmministratore;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -78,6 +69,7 @@ public class DettaglioIntervento extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //TODO: serve???
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
@@ -100,12 +92,12 @@ public class DettaglioIntervento extends AppCompatActivity {
         }
 
         // Avvaloro i nuovi rierimenti al layout
-        mOggetto = (TextView) findViewById(R.id.D_Oggetto);
-        mDescrizione = (TextView) findViewById(R.id.D_Descrizione);
-        mStato = (TextView) findViewById(R.id.D_Stato);
-        mUltimoAggiornamento = (TextView) findViewById(R.id.D_UltimoAggiornamento);
+        mOggetto = (TextView) findViewById(R.id.D_Nome);
+        mDescrizione = (TextView) findViewById(R.id.D_Stabile);
+        mStato = (TextView) findViewById(R.id.D_Interno);
+        mUltimoAggiornamento = (TextView) findViewById(R.id.D_Telefono);
         mDataAgg = (TextView) findViewById(R.id.D_dataAggiorn);
-        mFornitore = (TextView) findViewById(R.id.D_Fornitore);
+        mFornitore = (TextView) findViewById(R.id.D_Email);
 
 
         Query intervento;
