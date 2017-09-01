@@ -20,7 +20,7 @@
 
         <item
             android:id="@+id/nav_storico_avvisi"
-            android:icon="@drawable/ic_warning_black_24dp"
+            android:icon="@drawable/warning"
             android:title="@string/nav_storico_avvisi" />
 
         <item

@@ -33,7 +33,7 @@
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
         fab:menu_colorNormal="#da762f"
-        fab:menu_colorPressed="#dc8b3f"
+        fab:menu_colorPressed="#dc473f"
         fab:menu_colorRipple="#99d4d4d4"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
@@ -67,7 +67,7 @@
                     android:id="@+id/material_design_floating_action_menu_item1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home_black_24dp"
+                    android:src="@drawable/warning"
                     fab:fab_label="Nuova Segnalazione"
                     fab:fab_size="mini" />
 
@@ -75,7 +75,7 @@
                     android:id="@+id/material_design_floating_action_menu_item2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_notifications_black_24dp"
+                    android:src="@drawable/mail"
                     fab:fab_label="Nuovo messaggio"
                     fab:fab_size="mini" />
 
