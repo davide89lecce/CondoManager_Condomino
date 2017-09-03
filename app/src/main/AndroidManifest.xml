@@ -28,15 +28,7 @@
 
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
-            android:label="@string/activity_title_privacy_policy"
             android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.AboutUsActivity"
-            android:label="@string/activity_title_about_us" />
-        <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.PrivacyPolicyActivity"
-            android:label="@string/activity_title_privacy_policy" />
 
         <activity
             android:name="com.gambino_serra.condomanager_condomino.Old_View.Utente.LoginActivity_old"
