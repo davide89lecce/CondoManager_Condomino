@@ -65,7 +65,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:id="@+id/Oggetto_Interv"
+                    android:id="@+id/Oggetto_Avviso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"

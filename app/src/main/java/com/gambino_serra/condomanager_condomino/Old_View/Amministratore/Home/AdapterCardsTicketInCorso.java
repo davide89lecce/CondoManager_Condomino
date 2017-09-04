@@ -34,7 +34,7 @@ public class AdapterCardsTicketInCorso extends RecyclerView.Adapter<AdapterCards
         public MyViewHolder(View itemView) {
             super(itemView);
             this.textViewCondominio = (TextView) itemView.findViewById(R.id.textViewCondominio);
-            this.textViewSegnalazione = (TextView) itemView.findViewById(R.id.Oggetto_Interv);
+            this.textViewSegnalazione = (TextView) itemView.findViewById(R.id.Oggetto_Avviso);
             this.imageViewIcon = (ImageView) itemView.findViewById(Logo_Interv);
             this.textViewIdSegnalazione = (TextView) itemView.findViewById(R.id.textViewIdSegnalazione);
             this.textViewData = (TextView) itemView.findViewById(R.id.Stato_Interv);

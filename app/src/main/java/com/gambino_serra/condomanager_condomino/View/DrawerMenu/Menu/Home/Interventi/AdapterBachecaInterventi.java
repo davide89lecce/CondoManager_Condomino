@@ -13,7 +13,6 @@ import com.gambino_serra.condomanager_condomino.tesi.R;
 import java.util.ArrayList;
 
 import static com.gambino_serra.condomanager_condomino.tesi.R.id.Logo_Interv;
-import static com.gambino_serra.condomanager_condomino.tesi.R.id.TipologiaMessaggio;
 
 
 public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachecaInterventi.MyViewHolder> {
@@ -33,7 +32,7 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.mOggetto = (TextView) itemView.findViewById(R.id.Oggetto_Interv);
+            this.mOggetto = (TextView) itemView.findViewById(R.id.Oggetto_Avviso);
             this.mStato = (TextView) itemView.findViewById(R.id.Stato_Interv);
             this.mDataAgg = (TextView) itemView.findViewById(R.id.DataAgg_Interv);
             this.mAgg = (TextView) itemView.findViewById(R.id.Aggiornamento_Interv);

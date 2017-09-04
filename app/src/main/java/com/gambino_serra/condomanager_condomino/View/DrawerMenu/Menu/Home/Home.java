@@ -89,10 +89,10 @@ public class Home extends Fragment {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = BachecaAvvisi.newInstance();
+                                selectedFragment = BachecaSondaggi.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = BachecaSondaggi.newInstance();
+                                selectedFragment = BachecaAvvisi.newInstance();
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = BachecaInterventi.newInstance();
@@ -107,7 +107,7 @@ public class Home extends Fragment {
 
         //Manually displaying the first Menu - one time only
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, BachecaAvvisi.newInstance());
+        transaction.replace(R.id.frame_layout, BachecaSondaggi.newInstance());
          transaction.commit();
 
         //Used to select an item programmatically
