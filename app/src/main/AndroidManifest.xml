@@ -51,6 +51,13 @@
             android:label="@string/title_details_segnalazione"
             android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Avvisi.DettaglioAvviso"
+            android:label="@string/title_details_segnalazione"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Messaggi.DettaglioMessaggio"
             android:label="@string/title_details_segnalazione"
@@ -61,6 +68,7 @@
             android:label="@string/title_details_segnalazione"
             android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
+
 
         <activity
             android:name="com.gambino_serra.condomanager_condomino.Old_View.Utente.RegisterActivity"

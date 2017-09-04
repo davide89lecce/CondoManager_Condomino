@@ -92,7 +92,7 @@ public class DettaglioIntervento extends AppCompatActivity {
         }
 
         // Avvaloro i nuovi rierimenti al layout
-        mOggetto = (TextView) findViewById(R.id.D_Nome);
+        mOggetto = (TextView) findViewById(R.id.Descr_Avviso);
         mDescrizione = (TextView) findViewById(R.id.D_Stabile);
         mStato = (TextView) findViewById(R.id.D_Interno);
         mUltimoAggiornamento = (TextView) findViewById(R.id.D_Telefono);

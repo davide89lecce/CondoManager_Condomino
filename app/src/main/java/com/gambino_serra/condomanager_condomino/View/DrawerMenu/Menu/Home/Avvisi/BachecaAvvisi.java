@@ -146,7 +146,7 @@ public class BachecaAvvisi extends Fragment {
                             );
 
 
-
+                            // TODO : if ( avvisoMap.get("scadenza").toDate  <  oggy  )
                             avvisi.add(avviso);
                         }
                         catch (NullPointerException e) {
@@ -206,22 +206,22 @@ public class BachecaAvvisi extends Fragment {
 
         @Override
         public void onClick(View v) {
-            detailsSegnalazione(v);
+            detailsAvviso(v);
         }
 
-        private void detailsSegnalazione(View v) {
+        private void detailsAvviso(View v) {
 
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder
                     = recyclerView.findViewHolderForPosition(selectedItemPosition);
             TextView textViewName
-                    = (TextView) viewHolder.itemView.findViewById(R.id.IDTicket);
+                    = (TextView) viewHolder.itemView.findViewById(R.id.IDAvviso);
             String selectedName = (String) textViewName.getText();
 
             Bundle bundle = new Bundle();
             bundle.putString("idAvviso", selectedName);
 
-            Intent intent = new Intent(context, DettaglioIntervento.class);
+            Intent intent = new Intent(context, DettaglioAvviso.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

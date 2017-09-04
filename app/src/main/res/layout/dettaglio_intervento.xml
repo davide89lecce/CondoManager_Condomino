@@ -72,13 +72,13 @@
                         android:layout_height="20dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                        app:layout_constraintBottom_toBottomOf="@+id/Ogg_Avviso"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView8"
+                        app:layout_constraintTop_toTopOf="@+id/Ogg_Avviso"
                         app:srcCompat="@drawable/logo_oggetto" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/Ogg_Avviso"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -94,7 +94,7 @@
                         android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/D_Nome"
+                        android:id="@+id/Descr_Avviso"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -104,7 +104,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@+id/textView8"
+                        app:layout_constraintLeft_toLeftOf="@+id/Ogg_Avviso"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView3"
                         app:layout_constraintHorizontal_bias="0.0" />
@@ -123,7 +123,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/D_Nome"
+                        app:layout_constraintTop_toBottomOf="@+id/Descr_Avviso"
                         app:layout_constraintVertical_bias="1.0" />
 
                 </android.support.constraint.ConstraintLayout>

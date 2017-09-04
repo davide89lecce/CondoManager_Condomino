@@ -54,7 +54,7 @@ public class InformazioniPersonali extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this Menu
         View view = inflater.inflate(R.layout.bacheca_informazioni_personali, container, false);
-        mNome = (TextView) view.findViewById(R.id.D_Nome);
+        mNome = (TextView) view.findViewById(R.id.Descr_Avviso);
         mCodiceFiscale = (TextView) view.findViewById(R.id.D_CodiceFiscale);
         mStabile = (TextView) view.findViewById(R.id.D_Stabile);
         mInterno = (TextView) view.findViewById(R.id.D_Interno);
