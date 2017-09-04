@@ -196,6 +196,7 @@ public class ListaFornitori extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+
     private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
 
         private final Context context;
