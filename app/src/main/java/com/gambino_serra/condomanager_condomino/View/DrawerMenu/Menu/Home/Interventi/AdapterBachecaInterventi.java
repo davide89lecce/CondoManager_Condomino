@@ -69,7 +69,7 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
 
 
         mOggetto.setText(dataset.get(listPosition).getOggetto());
-        mStato.setText(dataset.get(listPosition).getStato());
+        //mStato.setText(dataset.get(listPosition).getStato());
         mDataAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
         mAgg.setText(dataset.get(listPosition).getAggiornamentoCondomini());
         IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
@@ -83,23 +83,27 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
             // intervento richiesto o rifiutato (al condomino interressa solo che sia stato processato
             // dall'amministratore, se un fornitore lo rifiuterà, lui lo vedrà ancora in attesa
             // di essere preso in carico
-            case "A" :
-            case "D" :
+            case "in attesa" :
+            case "rifiutato" :
                 {
                 mLogoStato.setImageResource(R.drawable.tool_blue);
+                    mStato.setText("Intervento Richiesto");
                 break;
                 }
 
-            case "B": // intervento in corso
+            case "in corso": // intervento in corso
                 {
                 mLogoStato.setImageResource(R.drawable.tool_orange);
+                    mStato.setText("Intervento in Corso");
                 break;
                 }
-            case "C":   // intervento concluso
+            case "completato":   // intervento concluso
                 {
                 mLogoStato.setImageResource(R.drawable.tool_green);
+                    mStato.setText("Intervento Completato");
                 break;
                 }
+                //TODO : case "archiviato":
 
             default:
         }

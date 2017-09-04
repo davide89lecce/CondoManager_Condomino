@@ -61,7 +61,7 @@ public class AdapterBachecaAvvisi extends RecyclerView.Adapter<AdapterBachecaAvv
 
 
         mOggetto.setText(dataset.get(listPosition).getOggetto());
-        mDescrizione.setText(dataset.get(listPosition).getDescrizione());
+        mDescrizione.setText(dataset.get(listPosition).getDescrizione()); //TODO : stampa solo anterima descrizione
         IdAvviso.setText(dataset.get(listPosition).getIdAvviso());
 
 

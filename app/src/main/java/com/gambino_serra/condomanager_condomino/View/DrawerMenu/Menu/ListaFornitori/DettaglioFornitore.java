@@ -33,14 +33,6 @@ public class DettaglioFornitore extends AppCompatActivity {
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
 
-    String nome_azienda = "";
-    String nome = "";
-    String categoria = "";
-    String partita_iva = "";
-    String telefono = "";
-    String email = "";
-    String indirizzo = "";
-
     TextView Tnome_azienda;
     TextView Tnome;
     TextView Tcategoria;
@@ -99,6 +91,9 @@ public class DettaglioFornitore extends AppCompatActivity {
         BTNchiama_fornitore = (ImageView) findViewById(R.id.imageViewFornChiama);
 
 
+        // chiama una query per farsi restituire una """Tabella""" con tutti i figli aventi lo stesso
+        // uidFornitore, ovvero solo uno, ma in questo modo possiamo inserire un addChild event listener
+        // che considererà come Key gli uid (solo uno) e come Value l'intero sottoalbero
         Query prova;
         prova = FirebaseDB.getFornitori().orderByKey().equalTo(uidFornitore);
 
@@ -108,6 +103,8 @@ public class DettaglioFornitore extends AppCompatActivity {
 
                 dettaglioFornitoreMap = new HashMap<String, Object>();
                 dettaglioFornitoreMap.put("uidFornitore", dataSnapshot.getKey());
+
+                //
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     dettaglioFornitoreMap.put(child.getKey(), child.getValue());
                 }
