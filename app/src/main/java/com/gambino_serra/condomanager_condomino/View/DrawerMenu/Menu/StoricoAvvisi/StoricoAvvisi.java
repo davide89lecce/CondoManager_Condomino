@@ -55,10 +55,9 @@ public class StoricoAvvisi extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this Menu
-        return inflater.inflate(R.layout.bacheca_storico_avvisi2, container, false);
+        return inflater.inflate(R.layout.bacheca_storico_avvisi, container, false);
     }
 
     public void onButtonPressed(Uri uri) {

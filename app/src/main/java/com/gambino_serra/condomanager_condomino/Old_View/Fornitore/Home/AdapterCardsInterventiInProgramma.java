@@ -82,7 +82,7 @@ public class AdapterCardsInterventiInProgramma extends RecyclerView.Adapter<Adap
                 break;
 
             case "B":
-                imageView.setImageResource(R.drawable.sand_clock2);
+                //    imageView.setImageResource(R.drawable.sand_clock2);
                 break;
 
             case "C":

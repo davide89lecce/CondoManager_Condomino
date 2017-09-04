@@ -92,10 +92,10 @@ public class Home extends Fragment {
                                 selectedFragment = BachecaAvvisi.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = BachecaInterventi.newInstance();
+                                selectedFragment = BachecaSondaggi.newInstance();
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = BachecaSondaggi.newInstance();
+                                selectedFragment = BachecaInterventi.newInstance();
                                 break;
                         }
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

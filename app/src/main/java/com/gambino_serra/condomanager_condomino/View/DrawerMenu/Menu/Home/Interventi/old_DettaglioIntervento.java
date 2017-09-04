@@ -144,7 +144,7 @@ public class old_DettaglioIntervento extends AppCompatActivity {
 
                 if(ticketIntervento.getStato().equals("A")){
                     descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico");
-                    imageStatoI.setImageResource(R.drawable.sand_clock2);
+                    //   imageStatoI.setImageResource(R.drawable.sand_clock2);
                 }else if(ticketIntervento.getStato().equals("B") || stato.equals("C") || stato.equals("D")){
                     descrizioneStatoT.setText("Questa richiesta è in corso d'opera");
                     imageStatoI.setImageResource(R.drawable.wrench);

@@ -163,7 +163,7 @@ public class DetailsSegnalazione extends AppCompatActivity
                     imageStatoI.setImageResource(R.drawable.user);
                 }else if(stato.equals("B")){
                     descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico dal fornitore");
-                    imageStatoI.setImageResource(R.drawable.sand_clock2);
+                  //  imageStatoI.setImageResource(R.drawable.sand_clock2);
                 }else if(stato.equals("C")){
                     descrizioneStatoT.setText("Questa richiesta è in corso d'opera");
                     imageStatoI.setImageResource(R.drawable.wrench);

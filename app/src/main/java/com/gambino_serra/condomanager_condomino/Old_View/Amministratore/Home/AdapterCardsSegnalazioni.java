@@ -78,15 +78,15 @@ public class AdapterCardsSegnalazioni extends RecyclerView.Adapter<AdapterCardsS
         switch(stato) {
 
             case "A":
-                imageView.setImageResource(R.drawable.user);
+               // imageView.setImageResource(R.drawable.user);
                 break;
 
             case "B":
-                imageView.setImageResource(R.drawable.sand_clock2);
+               // imageView.setImageResource(R.drawable.sand_clock2);
                 break;
 
             case "C":
-                imageView.setImageResource(R.drawable.wrench);
+               // imageView.setImageResource(R.drawable.wrench);
                 break;
 
             case "D":

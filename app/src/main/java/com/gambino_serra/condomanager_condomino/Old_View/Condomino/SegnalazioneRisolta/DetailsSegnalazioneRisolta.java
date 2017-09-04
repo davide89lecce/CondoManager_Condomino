@@ -160,7 +160,7 @@ public class DetailsSegnalazioneRisolta extends AppCompatActivity
 
                 if(stato.equals("A")){
                     descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico");
-                    imageStatoI.setImageResource(R.drawable.sand_clock2);
+                    //   imageStatoI.setImageResource(R.drawable.sand_clock2);
                 }else if(stato.equals("B") || stato.equals("C") || stato.equals("D")){
                     descrizioneStatoT.setText("Questa richiesta è in corso d'opera");
                     imageStatoI.setImageResource(R.drawable.wrench);
