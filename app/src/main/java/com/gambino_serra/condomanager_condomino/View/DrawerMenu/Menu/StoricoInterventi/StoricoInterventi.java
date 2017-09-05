@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -31,7 +30,6 @@ import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornit
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -99,7 +97,7 @@ public class StoricoInterventi extends Fragment {
 //                    + " must implement OnFragmentInteractionListener");
 //        }
     }
-    
+
     @Override
     public void onStart() {
         super.onStart();
@@ -233,8 +231,6 @@ public class StoricoInterventi extends Fragment {
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-
         }
     }
-
 }
