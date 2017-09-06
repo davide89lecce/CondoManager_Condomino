@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.Old_View.Utente.BaseActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -143,32 +145,47 @@ public class DettaglioMessaggio extends BaseActivity {
 
                     showProgressDialog();
 
-                    String filephoto = MessaggioMap.get("foto").toString().substring(35);
-                    StorageReference storageRef = mStorage.child( filephoto );
-
-                    //Uri uriii =  "gs://condomanager-a5aa6.appspot.com/Photo/CondomanagerPhoto30082017_110031.jpg" ;
+                    String filephoto = MessaggioMap.get("foto").toString();
+                    //StorageReference storageRef = mStorage.child( "Photo/CondomanagerPhoto30082017_095657.jpg" );
 
 
+
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("Photo/CondomanagerPhoto30082017_095657.jpg");
+
+
+
+
+                    String downloadUri = storageRef.getPath();
+
+                            //getDownloadUrl().getResult();
+
+                    Log.d ("HEY", downloadUri.toString());
                     /*
-                    //TODO : questo doveva funzionare ma no
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Picasso.with(getApplicationContext()).load(uri).fit().into(messaggio_foto);
+                            Picasso.with(getApplicationContext()).load(   uri   ).fit().into(messaggio_foto);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception e) {
+                        public void onFailure(@NonNull Exception exception) {
                             Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
                         }
                     });
-                */
+                    */
+
+                    //Uri uriii =  "gs://condomanager-a5aa6.appspot.com/Photo/CondomanagerPhoto30082017_110031.jpg" ;
+
+                    //https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_095657.jpg?alt=media&token=c047ca82-0a03-4156-9f0f-f4a93ca34b26
+
+                    Picasso.with(getApplicationContext()).load(
+                            storageRef.getPath()
+                            //"https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_095657.jpg?alt=media&token=c047ca82-0a03-4156-9f0f-f4a93ca34b26"
+
+                       ).fit().into(messaggio_foto);
 
 
-                   // TODO : non riesco a recuperare le info per stampare la foto, per ora ne ho utilizzata una fissa inserendone manualmente
-                    // TODO : il codice chiamato "URL di Download", mentre dal programma riesco soltanto a ricavare la "Posizione di Storage"
-                String prova = new String ("https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_110031.jpg?alt=media&token=e1069808-eaaa-4303-9f73-3ed813902de3");
-                    Picasso.with(getApplicationContext()).load(prova).fit().into(messaggio_foto);
+
 
                     hideProgressDialog();
                     //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
