@@ -17,12 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.Old_View.Utente.BaseActivity;
@@ -142,58 +144,22 @@ public class DettaglioMessaggio extends BaseActivity {
 
                 // Se nel messaggio è effettivamente presente una foto
                 if ( MessaggioMap.get("foto").toString() != "-" ) {
-
                     showProgressDialog();
-
                     String filephoto = MessaggioMap.get("foto").toString();
-                    //StorageReference storageRef = mStorage.child( "Photo/CondomanagerPhoto30082017_095657.jpg" );
+                    // Riferimento al file con cartella Photo e successivamente il nome dell'immagine
+                    StorageReference photoRef = mStorage.child("Photo").child( filephoto );
 
 
-
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("Photo/CondomanagerPhoto30082017_095657.jpg");
-
-
-
-
-                    String downloadUri = storageRef.getPath();
-
-                            //getDownloadUrl().getResult();
-
-                    Log.d ("HEY", downloadUri.toString());
-                    /*
-                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Picasso.with(getApplicationContext()).load(   uri   ).fit().into(messaggio_foto);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    */
-
-                    //Uri uriii =  "gs://condomanager-a5aa6.appspot.com/Photo/CondomanagerPhoto30082017_110031.jpg" ;
-
-                    //https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_095657.jpg?alt=media&token=c047ca82-0a03-4156-9f0f-f4a93ca34b26
-
-                    Picasso.with(getApplicationContext()).load(
-                            storageRef.getPath()
-                            //"https://firebasestorage.googleapis.com/v0/b/condomanager-a5aa6.appspot.com/o/Photo%2FCondomanagerPhoto30082017_095657.jpg?alt=media&token=c047ca82-0a03-4156-9f0f-f4a93ca34b26"
-
-                       ).fit().into(messaggio_foto);
+                    // Load the image using Glide
+                    Glide.with(getApplicationContext().getApplicationContext())
+                            .using(new FirebaseImageLoader())
+                            .load(photoRef)
+                            .into(messaggio_foto);
 
 
-
-
+                    //Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
                     hideProgressDialog();
-                    //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-
-
                     }
-
             }
 
             @Override
