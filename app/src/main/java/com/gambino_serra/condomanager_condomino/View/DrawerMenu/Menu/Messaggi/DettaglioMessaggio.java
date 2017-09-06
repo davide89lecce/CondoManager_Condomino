@@ -24,7 +24,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+//import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.Old_View.Utente.BaseActivity;
@@ -134,7 +134,8 @@ public class DettaglioMessaggio extends BaseActivity {
                         MessaggioMap.get("uidCondomino").toString(),
                         MessaggioMap.get("uidAmministratore").toString(),
                         MessaggioMap.get("stabile").toString(),
-                        MessaggioMap.get("foto").toString() );
+                        MessaggioMap.get("foto").toString(),
+                        MessaggioMap.get("url").toString());
 
                 messaggio_tipologia.setText(messaggio.getTipologia());
                 messaggio_data.setText(messaggio.getData());
@@ -150,16 +151,12 @@ public class DettaglioMessaggio extends BaseActivity {
                     StorageReference photoRef = mStorage.child("Photo").child( filephoto );
 
 
-                    // Load the image using Glide
-                    Glide.with(getApplicationContext().getApplicationContext())
-                            .using(new FirebaseImageLoader())
-                            .load(photoRef)
-                            .into(messaggio_foto);
-
+                    Picasso.with(getApplicationContext()).load( messaggio.getUrl() ).fit().centerCrop().into(messaggio_foto) ;
+                }
 
                     //Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
                     hideProgressDialog();
-                    }
+
             }
 
             @Override

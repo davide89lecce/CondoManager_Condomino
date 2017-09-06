@@ -77,11 +77,13 @@ public class DialogNuovoMessaggio extends DialogFragment {
     String descrizioneSegnalazione;
     String username;
 
+
     private Button mSelectImage;
     private Button mSelectCamera;
     private ImageView mImmagine;
     private StorageReference mStorage;
     private StorageReference filepath;
+    private Uri urlpath ;
     private static final int GALLERY_INTENT = 2; // Codice per definire l'intent specifico per la Galleria
     private static final int TAKE_PICTURE = 1;
     //private static final int CAMERA_REQUEST_CODE = 1; // Codice per definire l'intent specifico per la Camera
@@ -130,40 +132,52 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                             filepath.putFile(UriImmagine).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {//TODO : Nono funzionano i Toast
-                                    Toast.makeText( getActivity().getApplicationContext(), "Segnalazione Inviata con Successo", Toast.LENGTH_LONG).show();
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    urlpath = taskSnapshot.getDownloadUrl();
+
+                                    //Aggiunge la segnalazione al Database
+                                    try {
+                                        if (filepath != null) {
+                                            addSegnalazioneCondomino(databaseReference,
+                                                    descrizioneSegnalazione,
+                                                    UriImmagine.getLastPathSegment().toString(),
+                                                    urlpath.toString());
+                                            //Toast.makeText(getActivity().getApplicationContext(), "Messaggio Inviato con Successo", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(getActivity().getApplicationContext(), "Problemi Caricamento Foto", Toast.LENGTH_LONG).show();
+                                        }
+                                    } catch (NullPointerException e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(getActivity().getApplicationContext(), "Null Pointer Exception", Toast.LENGTH_LONG).show();
+                                    }
+                                    //Toast.makeText(getActivity().getApplicationContext(), "Segnalazione Inviata con Successo", Toast.LENGTH_LONG).show();
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) { //TODO: problemi su contesto Toast
-                                    Toast.makeText( getContext(), "Non è stato possibile inviare la segnalazione", Toast.LENGTH_LONG).show();
+                                    Toast.makeText( getActivity().getApplicationContext(), "Non è stato possibile inviare la segnalazione", Toast.LENGTH_LONG).show();
                                 }
                             });
 
+                            Toast.makeText(getActivity().getApplicationContext(), "Segnalazione Inviata con Successo", Toast.LENGTH_LONG).show();
                             // DA CHIEDERE SE SERVE ANCORA
                             final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPrefs.edit();
                             editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
                             editor.apply();
-                        }
 
 
-                        // Aggiunge la segnalazione al Database
-                        try
-                        {
-                            if (filepath != null)
-                                addSegnalazioneCondomino(databaseReference,descrizioneSegnalazione,filepath.toString());
-                            else
-                                addSegnalazioneCondomino(databaseReference,descrizioneSegnalazione,"-");
-                        }catch (NullPointerException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getActivity().getApplicationContext(), "Problemi", Toast.LENGTH_LONG).show();
+                        }else{
+                            addSegnalazioneCondomino(databaseReference,descrizioneSegnalazione,"-","-");
+                            Toast.makeText(getActivity().getApplicationContext(), "Messaggio Inviato con Successo", Toast.LENGTH_LONG).show();
                         }
+
                         dismiss();
                     }
-                })
 
-                .setNeutralButton(R.string.nuova_segnalazione_annulla, new DialogInterface.OnClickListener() {
+                }).setNeutralButton(R.string.nuova_segnalazione_annulla, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int id) {
                         dismiss();
@@ -315,7 +329,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
     }
 
 
-    private void addSegnalazioneCondomino(DatabaseReference postRef, final String descrizioneSegnalazione, final String percorsoFoto) {
+    private void addSegnalazioneCondomino(DatabaseReference postRef, final String descrizioneSegnalazione, final String percorsoFoto, final String urlFoto) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -337,7 +351,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
                 //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
-                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Messaggio", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto);
+                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Messaggio", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto, urlFoto);
 
                 //Setta il nome del nodo del messaggio (key)
                 mutableData.child(counter.toString()).setValue(m);

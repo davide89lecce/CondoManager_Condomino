@@ -11,6 +11,9 @@ public class MessaggioCondomino {
     private String uidAmministratore;
     private String stabile;
     private String foto;
+    private String url;
+
+
 
     public MessaggioCondomino(String id,
                               String data,
@@ -19,7 +22,8 @@ public class MessaggioCondomino {
                               String uidCondomino,
                               String uidAmministratore,
                               String stabile,
-                              String foto) {
+                              String foto,
+                              String url) {
         this.id = id;
         this.data = data;
         this.tipologia = tipologia;
@@ -28,6 +32,7 @@ public class MessaggioCondomino {
         this.uidAmministratore = uidAmministratore;
         this.stabile = stabile;
         this.foto = foto;
+        this.url = url;
     }
 
     public String getId() {
@@ -94,4 +99,11 @@ public class MessaggioCondomino {
         return foto;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

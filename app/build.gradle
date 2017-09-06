@@ -64,7 +64,25 @@ dependencies {
     compile 'com.github.clans:fab:1.6.2'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
-    //compile 'com.firebaseui:firebase-ui-storage:0.6.0'
+
+
+        // FirebaseUI Database only
+        //-    compile 'com.firebaseui:firebase-ui-database:1.1.1'
+        //    compile 'com.firebaseui:firebase-ui-database:1.2.0'
+
+        // FirebaseUI Auth only
+        //-    compile 'com.firebaseui:firebase-ui-auth:1.1.1'
+        //    compile 'com.firebaseui:firebase-ui-auth:1.1.1'
+
+        // FirebaseUI Storage only
+        //-    compile 'com.firebaseui:firebase-ui-storage:1.1.1'
+         //   compile 'com.firebaseui:firebase-ui-storage:1.2.0'
+
+        // Single target that includes all FirebaseUI libraries above
+        //-    compile 'com.firebaseui:firebase-ui:1.1.1'
+        //    compile 'com.firebaseui:firebase-ui:1.2.0'
+
+
 
     androidTestCompile 'junit:junit:4.12'
 }

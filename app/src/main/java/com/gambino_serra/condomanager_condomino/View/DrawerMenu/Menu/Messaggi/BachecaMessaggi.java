@@ -153,7 +153,8 @@ public class BachecaMessaggi extends Fragment {
                         messaggioCondominoMap.get("uidCondomino").toString(),
                         messaggioCondominoMap.get("uidAmministratore").toString(),
                         messaggioCondominoMap.get("stabile").toString(),
-                        messaggioCondominoMap.get("foto").toString());
+                        messaggioCondominoMap.get("foto").toString(),
+                        messaggioCondominoMap.get("url").toString());
 
                 messaggi.add(messaggioCondomino);
 
