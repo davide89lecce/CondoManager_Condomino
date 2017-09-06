@@ -141,7 +141,7 @@ public class StoricoAvvisi extends Fragment {
 
         myOnClickListener = new StoricoAvvisi.MyOnClickListener(context);
 
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view2);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view1);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());

@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -31,53 +30,34 @@ import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornit
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this Menu must implement the
- * {@link StoricoInterventi.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link StoricoInterventi#newInstance} factory method to
- * create an instance of this Menu.
- */
+
 public class StoricoInterventi extends Fragment {
-    // the Menu initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     private String mParam1;
     private String mParam2;
-
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private ArrayList<Segnalazione> data;
     public static View.OnClickListener myOnClickListener;
-    Context context;
-
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
-
     private String uidCondomino;
     private String stabile;
     Map<String, Object> ticketInterventoMap;
     ArrayList<TicketIntervento> interventi;
-
-
+    Context context;
     private OnFragmentInteractionListener mListener;
 
-    public StoricoInterventi() {
-        // Required empty public constructor
-    }
+    public StoricoInterventi() { }
 
-    /**
-     * Use this factory method to create a new instance of this Menu using the provided parameters.
-     */
     public static StoricoInterventi newInstance(String param1, String param2) {
         StoricoInterventi fragment = new StoricoInterventi();
         Bundle args = new Bundle();
@@ -98,9 +78,8 @@ public class StoricoInterventi extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this Menu
         return inflater.inflate(R.layout.bacheca_storico_interventi, container, false);
-    }
+        }
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -118,9 +97,6 @@ public class StoricoInterventi extends Fragment {
 //                    + " must implement OnFragmentInteractionListener");
 //        }
     }
-
-
-
 
     @Override
     public void onStart() {
@@ -140,8 +116,6 @@ public class StoricoInterventi extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
 
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
@@ -165,10 +139,9 @@ public class StoricoInterventi extends Fragment {
 
                         for ( DataSnapshot child : dataSnapshot.getChildren() ) {
                             ticketInterventoMap.put(child.getKey(), child.getValue());
-                        }
+                            }
 
                         try{
-
                             TicketIntervento ticketIntervento = new TicketIntervento(
                                     ticketInterventoMap.get("id").toString(),
                                     ticketInterventoMap.get("amministratore").toString(),
@@ -185,63 +158,41 @@ public class StoricoInterventi extends Fragment {
                                     ticketInterventoMap.get("stato").toString() ,
                                     ticketInterventoMap.get("priorità").toString()  );
 
-
-
                             interventi.add(ticketIntervento);
                         }
-                        catch (NullPointerException e) {
+                        catch (NullPointerException e)
+                            {
                             Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
-                        }
-
+                            }
 
                         adapter = new AdapterBachecaInterventi(interventi);
                         recyclerView.setAdapter(adapter);
                     }
 
                     @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
                     @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
+                    public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
                     @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
                     @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
+                    public void onCancelled(FirebaseError firebaseError) { }
                 });
-
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
+            public void onCancelled(FirebaseError firebaseError) { }
         });
-
-
-
-
-
     }
-
-
-
-
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+        }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -250,7 +201,7 @@ public class StoricoInterventi extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
+        }
 
 
     private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
@@ -259,20 +210,18 @@ public class StoricoInterventi extends Fragment {
 
         private MyOnClickListener(Context context) {
             this.context = context;
-        }
+            }
 
         @Override
         public void onClick(View v) {
             detailsIntervento(v);
-        }
+            }
 
         private void detailsIntervento(View v) {
 
             int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder
-                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName
-                    = (TextView) viewHolder.itemView.findViewById(R.id.IDTicket);
+            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
+            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.IDTicket);
             String selectedName = (String) textViewName.getText();
 
             Bundle bundle = new Bundle();
@@ -282,8 +231,6 @@ public class StoricoInterventi extends Fragment {
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-
         }
     }
-
 }

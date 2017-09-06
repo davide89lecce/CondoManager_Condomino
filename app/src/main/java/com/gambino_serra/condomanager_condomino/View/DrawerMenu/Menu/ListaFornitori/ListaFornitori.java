@@ -125,7 +125,7 @@ public class ListaFornitori extends Fragment {
 
         myOnClickListener = new com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori.ListaFornitori.MyOnClickListener(context);
 
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view2);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view1);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
