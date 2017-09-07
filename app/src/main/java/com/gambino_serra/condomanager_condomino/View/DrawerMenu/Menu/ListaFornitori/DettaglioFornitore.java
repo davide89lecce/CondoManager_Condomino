@@ -84,7 +84,6 @@ public class DettaglioFornitore extends AppCompatActivity {
 
         Tnome_azienda = (TextView) findViewById(R.id.FornnomeAzienda);
         Tcategoria = (TextView) findViewById(R.id.FornSettore);
-        Tpartita_iva = (TextView) findViewById(R.id.FornPartIVA);
         Ttelefono = (TextView) findViewById(R.id.FornTelefono);
         Temail = (TextView) findViewById(R.id.FornEmail);
         Tindirizzo = (TextView) findViewById(R.id.FornIndirizzo);
@@ -122,7 +121,6 @@ public class DettaglioFornitore extends AppCompatActivity {
 
                 Tnome_azienda.setText(fornitore.getNome_azienda());
                 Tcategoria.setText(fornitore.getCategoria());
-                Tpartita_iva.setText(fornitore.getPartita_iva());
                 Ttelefono.setText(fornitore.getTelefono());
                 Temail.setText(fornitore.getEmail());
                 Tindirizzo.setText(fornitore.getIndirizzo());
