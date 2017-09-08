@@ -16,8 +16,6 @@ public class AdapterListaFornitori extends RecyclerView.Adapter<AdapterListaForn
 
     private ArrayList<Fornitore> dataset;
 
-    int row;
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewUidFornitore;
@@ -56,17 +54,12 @@ public class AdapterListaFornitori extends RecyclerView.Adapter<AdapterListaForn
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
-        //TextView textViewDettaglioFornNome = holder.textViewDettaglioFornNome;
         TextView DettaglioFornNome = holder.DettaglioFornNome;
-        //TextView textViewDettaglioFornCategoria = holder.textViewDettaglioFornCategoria;
         TextView DettaglioFornCategoria = holder.DettaglioFornCategoria;
-        //ImageView imageViewFornitore = holder.imageViewFornitore;
         TextView textViewUidFornitore = holder.textViewUidFornitore;
 
         textViewUidFornitore.setText(dataset.get(listPosition).getUid().toString());
-        //textViewDettaglioFornNome.setText( dataset.get(listPosition).getData());
         DettaglioFornNome.setText(dataset.get(listPosition).getNome_azienda().toString());
-        //textViewDettaglioFornCategoria.setText(dataset.get(listPosition).getStabile());
         DettaglioFornCategoria.setText(dataset.get(listPosition).getCategoria());
 
     }

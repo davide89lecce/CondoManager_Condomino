@@ -55,7 +55,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -114,12 +114,12 @@
 
                     <View
                         android:id="@+id/Separator1"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="1dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
                         android:layout_marginStart="8dp"
                         android:background="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,7 +142,8 @@
                 app:cardElevation="0dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewFornNome">
+                app:layout_constraintTop_toBottomOf="@+id/cardViewFornNome"
+                android:layout_marginTop="8dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -196,12 +197,10 @@
 
                     <View
                         android:id="@+id/Separator2"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="1dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginStart="8dp"
                         android:background="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -209,87 +208,6 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
-
-                </android.support.constraint.ConstraintLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardViewFornPartIVA"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginStart="24dp"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewFornSettore">
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp">
-
-                    <ImageView
-                        android:id="@+id/imageViewFornPartIVA"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginBottom="0dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="0dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textViewFornPartIVA"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textViewFornPartIVA"
-                        app:srcCompat="@drawable/logo_descriz" />
-
-                    <TextView
-                        android:id="@+id/textViewFornPartIVA"
-                        android:layout_width="80dp"
-                        android:layout_height="19dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Partita IVA"
-                        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/imageViewFornPartIVA"
-                        android:layout_marginLeft="8dp" />
-
-                    <TextView
-                        android:id="@+id/FornPartIVA"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/Separator6"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageViewFornPartIVA" />
-
-                    <View
-                        android:id="@+id/Separator6"
-                        android:layout_width="300dp"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="-35dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginStart="8dp"
-                        android:background="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
@@ -308,7 +226,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewFornSettore"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintHorizontal_bias="0.0">
 
                 <android.support.constraint.ConstraintLayout
@@ -364,12 +282,10 @@
 
                     <View
                         android:id="@+id/Separator3"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="1dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginStart="8dp"
                         android:background="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -395,7 +311,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewFornIndirizzo"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintHorizontal_bias="0.0">
 
                 <android.support.constraint.ConstraintLayout
@@ -448,12 +364,10 @@
 
                     <View
                         android:id="@+id/Separator4"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="1dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginStart="8dp"
                         android:background="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -479,7 +393,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewFornEmail"
-                android:layout_marginTop="-1dp">
+                android:layout_marginTop="8dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -514,23 +428,19 @@
 
                     <ImageView
                         android:id="@+id/imageViewFornChiama"
-                        android:layout_width="27dp"
+                        android:layout_width="33dp"
                         android:layout_height="33dp"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginBottom="4dp"
                         android:layout_marginLeft="32dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/bg_circle"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginTop="4dp"
                         android:backgroundTint="@color/colorPrimary"
-                        android:src="@drawable/ic_call"
                         android:textAlignment="center"
-                        android:tint="@color/colorWhite"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/FornTelefono"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.518"
-                        app:srcCompat="@android:drawable/ic_menu_call" />
+                        card_view:srcCompat="@drawable/chiama" />
 
                     <TextView
                         android:id="@+id/FornTelefono"
