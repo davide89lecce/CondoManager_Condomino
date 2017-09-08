@@ -57,9 +57,9 @@ public class InformazioniPersonali extends Fragment {
         mNome = (TextView) view.findViewById(R.id.Descr_Avviso);
         mCodiceFiscale = (TextView) view.findViewById(R.id.D_CodiceFiscale);
         mStabile = (TextView) view.findViewById(R.id.D_Stabile);
-        mInterno = (TextView) view.findViewById(R.id.D_Interno);
-        mTelefono = (TextView) view.findViewById(R.id.D_Telefono);
-        mEmail = (TextView) view.findViewById(R.id.D_Email);
+        mInterno = (TextView) view.findViewById(R.id.D_Stato);
+        mTelefono = (TextView) view.findViewById(R.id.D_ultimoAggiorn);
+        mEmail = (TextView) view.findViewById(R.id.D_NomeFornitore);
         return view;
         }
 

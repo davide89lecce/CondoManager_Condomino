@@ -140,7 +140,8 @@ public class old_DettaglioIntervento extends AppCompatActivity {
                         ticketInterventoMap.get("richiesta").toString(),
                         ticketInterventoMap.get("stabile").toString(),
                         ticketInterventoMap.get("stato").toString() ,
-                        ticketInterventoMap.get("priorità").toString()  );
+                        ticketInterventoMap.get("priorità").toString(),
+                        "ciao","ciao","ciao","ciao");//TODO
 
                 if(ticketIntervento.getStato().equals("A")){
                     descrizioneStatoT.setText("Questa richiesta è in attesa di essere presa in carico");

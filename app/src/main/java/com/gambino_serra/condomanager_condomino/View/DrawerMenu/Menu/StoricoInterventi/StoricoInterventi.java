@@ -156,7 +156,8 @@ public class StoricoInterventi extends Fragment {
                                     ticketInterventoMap.get("richiesta").toString(),
                                     ticketInterventoMap.get("stabile").toString(),
                                     ticketInterventoMap.get("stato").toString() ,
-                                    ticketInterventoMap.get("priorità").toString()  );
+                                    ticketInterventoMap.get("priorità").toString(),
+                                    "ciao","ciao","ciao","ciao");//TODO
 
                             interventi.add(ticketIntervento);
                         }

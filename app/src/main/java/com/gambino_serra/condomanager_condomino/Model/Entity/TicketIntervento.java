@@ -16,6 +16,11 @@ public class TicketIntervento {
     private String stabile;
     private String stato;
     private String priorità;
+    private String foto;
+    private String nomeAziendaFornitore;
+    private String nomeFornitore;
+    private String categoriaFornitore;
+
 
     public TicketIntervento(String idTicketIntervento,
                             String uidAmministratore,
@@ -30,7 +35,11 @@ public class TicketIntervento {
                             String richiesta,
                             String stabile,
                             String stato,
-                            String priorità) {
+                            String priorità,
+                            String foto,
+                            String nomeAziendaFornitore,
+                            String nomeFornitore,
+                            String categoriaFornitore) {
 
         this.idTicketIntervento = idTicketIntervento;
         this.uidAmministratore = uidAmministratore;
@@ -46,7 +55,12 @@ public class TicketIntervento {
         this.stabile = stabile;
         this.stato = stato;
         this.priorità = priorità;
+        this.foto = foto;
+        this.nomeAziendaFornitore = nomeAziendaFornitore;
+        this.nomeFornitore = nomeFornitore;
+        this.categoriaFornitore = categoriaFornitore;
     }
+
 
     public String getIdTicketIntervento() {
         return idTicketIntervento;
@@ -160,4 +174,36 @@ public class TicketIntervento {
         this.priorità = priorità;
     }
 
+    public String getNomeAziendaFornitore() {
+        return nomeAziendaFornitore;
+    }
+
+    public void setNomeAziendaFornitore(String nomeAziendaFornitore) {
+        this.nomeAziendaFornitore = nomeAziendaFornitore;
+    }
+
+    public String getNomeFornitore() {
+        return nomeFornitore;
+    }
+
+    public void setNomeFornitore(String nomeFornitore) {
+        this.nomeFornitore = nomeFornitore;
+    }
+
+    public String getCategoriaFornitore() {
+        return categoriaFornitore;
+    }
+
+    public void setCategoriaFornitore(String categoriaFornitore) {
+        this.categoriaFornitore = categoriaFornitore;
+    }
+
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }
