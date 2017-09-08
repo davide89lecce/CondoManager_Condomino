@@ -125,7 +125,7 @@ public class Home extends Fragment {
         materialDesignFAM.showMenu(true);
         fl = (FrameLayout)view.findViewById(R.id.frame_layout);
 
-//        materialDesignFAM.setOnTouchListener(new View.OnTouchListener() { //todo: perchè stracazzo non diventa tutto grigio?
+//        materialDesignFAM.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
 //                if(event.getAction() == MotionEvent.ACTION_UP){
