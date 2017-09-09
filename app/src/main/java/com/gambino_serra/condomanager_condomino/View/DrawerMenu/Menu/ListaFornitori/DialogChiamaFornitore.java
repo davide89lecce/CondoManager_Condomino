@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.Old_View.Amministratore.Dialog;
+package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
