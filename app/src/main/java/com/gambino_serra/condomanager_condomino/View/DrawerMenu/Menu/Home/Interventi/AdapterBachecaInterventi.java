@@ -110,6 +110,14 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
 
     }
 
+
+    @Override
+    public User getItem(int position) {
+        return super.getItem(getItemCount() - 1 - position);
+    }
+
+
+    
     @Override
     public int getItemCount() {
         return dataset.size();

@@ -195,7 +195,7 @@ public class DettaglioIntervento extends AppCompatActivity {
                         ticketInterventoMap.get("stabile").toString(),
                         ticketInterventoMap.get("stato").toString(),
                         ticketInterventoMap.get("priorità").toString(),
-                        ticketInterventoMap.get("url").toString(), // TODO: cambia DB
+                        ticketInterventoMap.get("foto").toString(), // TODO: cambia DB
                         ticketInterventoMap2.get("nome_azienda").toString(),
                         ticketInterventoMap2.get("nome").toString(),
                         ticketInterventoMap2.get("categoria").toString()
