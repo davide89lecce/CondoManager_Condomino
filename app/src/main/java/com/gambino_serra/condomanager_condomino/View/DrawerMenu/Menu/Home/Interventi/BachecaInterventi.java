@@ -101,6 +101,7 @@ public class BachecaInterventi extends Fragment {
         firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
 
 
+
         firebaseDB.child("stabile").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
