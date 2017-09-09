@@ -2,7 +2,6 @@ package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,13 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Avvisi.BachecaAvvisi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Sondaggi.BachecaSondaggi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.BachecaInterventi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Sondaggi.BachecaSondaggi;
 import com.gambino_serra.condomanager_condomino.View.NuovaSegnalazione.DialogNuovaSegnalazione;
 import com.gambino_serra.condomanager_condomino.View.NuovoMessaggio.DialogNuovoMessaggio;
 import com.gambino_serra.condomanager_condomino.tesi.R;
@@ -36,6 +35,8 @@ public class Home extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    BottomNavigationView bottomNavigationView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -80,7 +81,7 @@ public class Home extends Fragment {
         //FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         //transaction.replace(R.id.frame_layout, childFragment).commit();
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
+        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -90,25 +91,39 @@ public class Home extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.action_item1:
                                 selectedFragment = BachecaSondaggi.newInstance();
+                                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                                bottomNavigationView.getMenu().getItem(1).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = BachecaAvvisi.newInstance();
+                                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                                bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = BachecaInterventi.newInstance();
+                                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(1).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(2).setChecked(true);
                                 break;
                         }
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.commit();
+
                         return true;
                     }
                 });
 
         //Manually displaying the first Menu - one time only
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, BachecaSondaggi.newInstance());
+        transaction.replace(R.id.frame_layout, BachecaAvvisi.newInstance());
          transaction.commit();
+        //Seleziona l'item interventi in corso
+        bottomNavigationView.getMenu().getItem(0).setChecked(false);
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        bottomNavigationView.getMenu().getItem(2).setChecked(false);
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
