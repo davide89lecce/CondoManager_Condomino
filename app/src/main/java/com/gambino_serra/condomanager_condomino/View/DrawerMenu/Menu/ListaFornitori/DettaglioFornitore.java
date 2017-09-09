@@ -3,10 +3,8 @@ package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaForni
 import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +16,6 @@ import com.firebase.client.Query;
 import com.gambino_serra.condomanager_condomino.Model.Entity.Fornitore;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 //import com.gambino_serra.condomanager_condomino.Old_View.Condomino.Dialog.DialogChiamaAmministratore;
-import com.gambino_serra.condomanager_condomino.Old_View.Amministratore.Dialog.DialogChiamaFornitore;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

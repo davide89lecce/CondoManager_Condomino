@@ -22,7 +22,7 @@ import com.gambino_serra.condomanager_condomino.Old_Model.JsonSerializable.JsonF
 import com.gambino_serra.condomanager_condomino.Old_Model.JsonSerializable.JsonIntervento;
 import com.gambino_serra.condomanager_condomino.Old_Model.JsonSerializable.JsonSegnalazione;
 import com.gambino_serra.condomanager_condomino.tesi.R;
-import com.gambino_serra.condomanager_condomino.Old_View.Amministratore.Dialog.DialogChiamaFornitore;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori.DialogChiamaFornitore;
 import com.gambino_serra.condomanager_condomino.Old_View.Amministratore.Dialog.DialogConfermaArchiviazione;
 import com.kosalgeek.android.json.JsonConverter;
 
