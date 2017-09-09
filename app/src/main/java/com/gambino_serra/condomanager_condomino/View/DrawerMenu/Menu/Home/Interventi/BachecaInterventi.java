@@ -151,6 +151,7 @@ public class BachecaInterventi extends Fragment {
 
                         adapter = new AdapterBachecaInterventi(interventi);
                         recyclerView.setAdapter(adapter);
+
                     }
 
                     @Override

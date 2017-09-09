@@ -305,7 +305,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
      * è possibile specificare il formato di data desiderato e personalizzare il nome
      */
     private String createPhotoName() {
-        SimpleDateFormat sdf = new SimpleDateFormat( "ddMMyyyy_HHmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyyMMdd_HHmmss");
         String timestamp = sdf.format(new Date());
         return "CondomanagerPhoto" + timestamp + ".jpg";
         }
@@ -354,7 +354,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 //Ricava la data e la formatta nel formato appropriato
                 Date newDate = new Date(new Date().getTime());
-                SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm ");
+                SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm ");
                 String stringdate = dt.format(newDate);
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
