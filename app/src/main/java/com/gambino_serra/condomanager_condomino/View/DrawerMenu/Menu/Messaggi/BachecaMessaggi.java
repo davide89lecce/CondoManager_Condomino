@@ -20,7 +20,6 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.gambino_serra.condomanager_condomino.Model.Entity.MessaggioCondomino;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.Old_Model.Entity.Segnalazione;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,7 +49,6 @@ public class BachecaMessaggi extends Fragment {
     public static View.OnClickListener myOnClickListener;
     Context context;
     String condominoNome;
-    private ArrayList<Segnalazione> datas;
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
