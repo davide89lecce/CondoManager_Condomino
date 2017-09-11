@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.View;
+package com.gambino_serra.condomanager_condomino.View.Login;
 
 /**
  * Created by condomanager_condomino on 10/03/17.

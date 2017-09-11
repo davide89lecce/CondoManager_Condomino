@@ -16,7 +16,6 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer;
-import com.gambino_serra.condomanager_condomino.View.BaseActivity;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
