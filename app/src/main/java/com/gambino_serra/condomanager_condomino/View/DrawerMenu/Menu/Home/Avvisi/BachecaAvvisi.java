@@ -83,8 +83,7 @@ public class BachecaAvvisi extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_bacheca_avvisi, container, false);
     }
 
@@ -98,7 +97,7 @@ public class BachecaAvvisi extends Fragment {
         avvisoMap = new HashMap<String,Object>();
         avvisi = new ArrayList<Avviso>();
 
-        myOnClickListener = new BachecaAvvisi.MyOnClickListener(context);
+        //myOnClickListener = new BachecaAvvisi.MyOnClickListener(context);
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view1);
         recyclerView.setHasFixedSize(true);
@@ -187,51 +186,5 @@ public class BachecaAvvisi extends Fragment {
             }
         });
 
-
-
-
-
     }
-
-
-
-
-    private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
-
-        private final Context context;
-
-        private MyOnClickListener(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void onClick(View v) {
-            detailsAvviso(v);
-        }
-
-        private void detailsAvviso(View v) {
-
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder
-                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName
-                    = (TextView) viewHolder.itemView.findViewById(R.id.IDAvviso);
-            String selectedName = (String) textViewName.getText();
-
-            Bundle bundle = new Bundle();
-            bundle.putString("idAvviso", selectedName);
-
-            Intent intent = new Intent(context, DettaglioAvviso.class);
-            intent.putExtras(bundle);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-
-        }
-    }
-
-
-
-
-
-
 }
