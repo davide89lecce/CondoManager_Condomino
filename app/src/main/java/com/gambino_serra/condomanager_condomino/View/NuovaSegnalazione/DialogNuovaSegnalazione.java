@@ -406,6 +406,10 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                     Bitmap bt = BitmapFactory.decodeStream(inputStream);
                     mImmagine.setImageBitmap(bt);
 
+                    mImmagine.getLayoutParams().width = 720;
+                    mImmagine.getLayoutParams().height = 480;
+                    mImmagine.requestLayout();
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();

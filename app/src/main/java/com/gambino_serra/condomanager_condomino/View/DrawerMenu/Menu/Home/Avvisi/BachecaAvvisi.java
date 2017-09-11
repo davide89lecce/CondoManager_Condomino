@@ -41,14 +41,9 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.Avviso;
-import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.AdapterBachecaInterventi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.BachecaInterventi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.DettaglioIntervento;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

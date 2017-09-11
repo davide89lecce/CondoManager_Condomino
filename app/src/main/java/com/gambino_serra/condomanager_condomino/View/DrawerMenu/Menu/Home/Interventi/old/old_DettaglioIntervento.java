@@ -1,29 +1,6 @@
-package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi;
+package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.old;
 
-import android.app.DialogFragment;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
-import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
-import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.tesi.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by condomanager_condomino on 06/03/17.

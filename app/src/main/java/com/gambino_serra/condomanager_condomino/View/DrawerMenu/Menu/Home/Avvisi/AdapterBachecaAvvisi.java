@@ -4,18 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gambino_serra.condomanager_condomino.Model.Entity.Avviso;
-import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.AdapterBachecaInterventi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.BachecaInterventi;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 
 import java.util.ArrayList;
-
-import static com.gambino_serra.condomanager_condomino.tesi.R.id.Logo_Interv;
 
 
 public class AdapterBachecaAvvisi extends RecyclerView.Adapter<AdapterBachecaAvvisi.MyViewHolder> {

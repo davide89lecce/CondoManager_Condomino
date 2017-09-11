@@ -397,6 +397,11 @@ public class DialogNuovoMessaggio extends DialogFragment {
                     // Mappiamo la view per visualizzare l'input stream a schermo
                     Bitmap bt = BitmapFactory.decodeStream(inputStream);
                     mImmagine.setImageBitmap(bt);
+
+                        mImmagine.getLayoutParams().width = 720;
+                        mImmagine.getLayoutParams().height = 480;
+                        mImmagine.requestLayout();
+
                     }
                 catch (FileNotFoundException e)
                     {

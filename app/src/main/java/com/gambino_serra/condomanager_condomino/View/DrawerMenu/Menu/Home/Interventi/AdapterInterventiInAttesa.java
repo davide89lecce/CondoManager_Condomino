@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import static com.gambino_serra.condomanager_condomino.tesi.R.id.Logo_Interv;
 
 
-public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachecaInterventi.MyViewHolder> {
+public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInterventiInAttesa.MyViewHolder> {
 
     private ArrayList<TicketIntervento> dataset;
 
@@ -42,7 +42,7 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
         }
     }
 
-    public AdapterBachecaInterventi(ArrayList<TicketIntervento> dataset) {
+    public AdapterInterventiInAttesa(ArrayList<TicketIntervento> dataset) {
         this.dataset = dataset;
     }
 
@@ -51,7 +51,7 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_intervento_bacheca, parent, false);
 
         //Setta l'onclick sulla recycler view presente nella classe Interventi
-        view.setOnClickListener(BachecaInterventi.myOnClickListener);
+        view.setOnClickListener(com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.InterventiInAttesa.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -85,25 +85,25 @@ public class AdapterBachecaInterventi extends RecyclerView.Adapter<AdapterBachec
             // di essere preso in carico
             case "in attesa" :
             case "rifiutato" :
-                {
+            {
                 mLogoStato.setImageResource(R.drawable.tool_blue);
-                    mStato.setText("Intervento Richiesto");
+                mStato.setText("Intervento Richiesto");
                 break;
-                }
+            }
 
             case "in corso": // intervento in corso
-                {
+            {
                 mLogoStato.setImageResource(R.drawable.tool_orange);
-                    mStato.setText("Intervento in Corso");
+                mStato.setText("Intervento in Corso");
                 break;
-                }
+            }
             case "completato":   // intervento concluso
-                {
+            {
                 mLogoStato.setImageResource(R.drawable.tool_green);
-                    mStato.setText("Intervento Completato");
+                mStato.setText("Intervento Completato");
                 break;
-                }
-                //TODO : case "archiviato":
+            }
+            //TODO : case "archiviato":
 
             default:
         }

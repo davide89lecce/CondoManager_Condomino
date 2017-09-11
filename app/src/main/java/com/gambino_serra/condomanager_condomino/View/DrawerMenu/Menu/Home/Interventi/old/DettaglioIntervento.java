@@ -1,7 +1,6 @@
-package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi;
+package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.old;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
