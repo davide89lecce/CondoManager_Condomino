@@ -22,7 +22,6 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.Old_Model.Entity.Segnalazione;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.AdapterBachecaInterventi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.BachecaInterventi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.DettaglioIntervento;
@@ -44,7 +43,6 @@ public class StoricoInterventi extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private ArrayList<Segnalazione> data;
     public static View.OnClickListener myOnClickListener;
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
@@ -104,7 +102,6 @@ public class StoricoInterventi extends Fragment {
 
         context = getContext();
         firebaseAuth = FirebaseAuth.getInstance();
-        data = new ArrayList<Segnalazione>();
         ticketInterventoMap = new HashMap<String,Object>();
         interventi = new ArrayList<TicketIntervento>();
 

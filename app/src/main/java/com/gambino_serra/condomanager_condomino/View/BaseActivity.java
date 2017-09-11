@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_condomino.Old_View.Utente;
+package com.gambino_serra.condomanager_condomino.View;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
