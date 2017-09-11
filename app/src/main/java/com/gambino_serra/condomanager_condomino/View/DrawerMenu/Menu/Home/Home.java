@@ -98,7 +98,7 @@ public class Home extends Fragment {
                             case R.id.action_item2:
                                 selectedFragment = BachecaAvvisi.newInstance();
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
-                                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                                bottomNavigationView.getMenu().getItem(1).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item3:

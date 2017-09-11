@@ -116,20 +116,6 @@ public class BachecaAvvisi extends Fragment {
 
 
 
-        //query utilizzata per ordinare il db Avvisi in ordine discendente per id e quindi
-        // prelevarli a partire dall'ultimo inserito
-        Query query0;
-        query0 = FirebaseDB.getInterventi().orderByChild("Ogetto");
-        query0.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {}
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {}
-        });
-
-
-
-
         firebaseDB.child("stabile").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
