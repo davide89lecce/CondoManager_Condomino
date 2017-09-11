@@ -24,7 +24,6 @@ import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornit
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Messaggi.BachecaMessaggi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.StoricoAvvisi.StoricoAvvisi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.StoricoInterventi.StoricoInterventi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.other.CircleTransform;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -76,8 +75,6 @@ public class MainDrawer extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
-
         mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -94,19 +91,6 @@ public class MainDrawer extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-
-
-        //fab.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View view) {
-        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-        //                .setAction("Action", null).show();
-        //    }
-        //});
-
-        // load nav menu header data
-        loadNavHeader();
-
         // initializing navigation menu
         setUpNavigationView();
 
@@ -117,35 +101,10 @@ public class MainDrawer extends AppCompatActivity {
         }
     }
 
-    /***
-     * Load navigation menu header information
-     * like background image, profile image
-     * name, website, notifications action view (dot)
-     */
-    private void loadNavHeader() {
-        // name, website
-        txtName.setText("NOME DELL'UTENTE"); //TODO: IMPOSTARE NOME DELL'UTENTE LOGGATO
-        //txtWebsite.setText("www.androidhive.info");
 
-        // loading header background image
-        Glide.with(this).load(urlNavHeaderBg)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgNavHeaderBg);
-
-        // Loading profile image
-        Glide.with(this).load(urlProfileImg)
-                .crossFade()
-                .thumbnail(0.5f)
-                .bitmapTransform(new CircleTransform(this))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgProfile);
-
-    }
 
     /***
-     * Returns respected Menu that user
-     * selected from navigation menu
+     * Returns respected Menu that user selected from navigation menu
      */
     private void loadHomeFragment() {
 
@@ -161,7 +120,6 @@ public class MainDrawer extends AppCompatActivity {
             drawer.closeDrawers();
 
             // show or hide the fab button
-           // toggleFab();
             return;
         }
 
@@ -184,10 +142,7 @@ public class MainDrawer extends AppCompatActivity {
         // If mPendingRunnable is not null, then add to the message queue
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
-        }
-
-        // show or hide the fab button
-       // toggleFab();
+             }
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -238,12 +193,8 @@ public class MainDrawer extends AppCompatActivity {
         navigationView.getMenu().getItem(3).setChecked(false);
         navigationView.getMenu().getItem(4).setChecked(false);
         navigationView.getMenu().getItem(5).setChecked(false);
-
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
-
-        //Punto accanto voce menù
-        //navigationView.getMenu().getItem(navItemIndex).setActionView(R.layout.menu_dot);
-    }
+        }
 
     private void setUpNavigationView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
@@ -281,14 +232,8 @@ public class MainDrawer extends AppCompatActivity {
                         CURRENT_TAG = TAG_LISTA_FORNITORI;
                         break;
 
-//                    case R.id.nav_about_us:
-//                        // launch new intent instead of loading Menu
-//                        startActivity(new Intent(MainDrawer.this, AboutUsActivity.class));
-//                        drawer.closeDrawers();
-//                        return true;
                     case R.id.nav_logout:
                         // launch new intent instead of loading Menu
-                       // startActivity(new Intent(MainDrawer.this, PrivacyPolicyActivity.class));
                         drawer.closeDrawers();
                         firebaseAuth.signOut();
                         startActivity(new Intent(MainDrawer.this, com.gambino_serra.condomanager_condomino.View.Login.LoginActivity.class));
@@ -343,8 +288,7 @@ public class MainDrawer extends AppCompatActivity {
         // This code loads home Menu when back key is pressed
         // when user is in other Menu than home
         if (shouldLoadHomeFragOnBackPress) {
-            // checking if user is on other navigation menu
-            // rather than home
+            // checking if user is on other navigation menu rather than home
             if (navItemIndex != 0) {
                 navItemIndex = 0;
                 CURRENT_TAG = TAG_HOME;
@@ -355,13 +299,4 @@ public class MainDrawer extends AppCompatActivity {
 
         super.onBackPressed();
     }
-
-
-    // show or hide the fab
-    //private void toggleFab() {
-    //    if (navItemIndex == 0)
-    //        fab.show();
-    //    else
-    //        fab.hide();
-    //}
 }

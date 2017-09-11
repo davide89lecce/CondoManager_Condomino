@@ -22,18 +22,13 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_condomino.Model.Entity.Avviso;
-import com.gambino_serra.condomanager_condomino.Model.Entity.Fornitore;
 import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Avvisi.AdapterBachecaAvvisi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Avvisi.DettaglioAvviso;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori.AdapterListaFornitori;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori.DettaglioFornitore;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -139,7 +134,7 @@ public class StoricoAvvisi extends Fragment {
         avvisoMap = new HashMap<String,Object>();
         avvisi= new ArrayList<Avviso>();
 
-        myOnClickListener = new StoricoAvvisi.MyOnClickListener(context);
+        //myOnClickListener = new StoricoAvvisi.MyOnClickListener(context);
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view1);
         recyclerView.setHasFixedSize(true);
@@ -214,7 +209,6 @@ public class StoricoAvvisi extends Fragment {
 
                     }
                 });
-
             }
 
             @Override
@@ -222,12 +216,7 @@ public class StoricoAvvisi extends Fragment {
 
             }
         });
-
     }
-
-
-
-
 
     @Override
     public void onDetach() {
@@ -242,37 +231,6 @@ public class StoricoAvvisi extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
-
-    private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
-
-        private final Context context;
-
-        private MyOnClickListener(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void onClick(View v) {
-            detailsFornitore(v);
-        }
-
-        private void detailsFornitore(View v) {
-
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.textViewUidFornitore);
-            String selectedName = (String) textViewName.getText();
-
-            Bundle bundle = new Bundle();
-            bundle.putString("idAvviso", selectedName);
-
-            Intent intent = new Intent(context, DettaglioAvviso.class);
-            intent.putExtras(bundle);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-
-        }
     }
 
 }
