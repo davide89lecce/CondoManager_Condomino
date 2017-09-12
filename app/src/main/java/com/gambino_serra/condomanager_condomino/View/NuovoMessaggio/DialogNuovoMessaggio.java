@@ -126,7 +126,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
                         descrizioneSegnalazione = descrizioneSegnalazioneE.getText().toString();
 
                         //SALVA IMMAGINE IN STORAGE FIREBASE
-                        //TODO: inserire controllo nel caso in cui non ci siano foto allegat
+
                         if ( UriImmagine != null) {
                             filepath = mStorage.child("Photo").child(UriImmagine.getLastPathSegment());
 
@@ -156,7 +156,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) { //TODO: problemi su contesto Toast
+                                public void onFailure(@NonNull Exception e) {
                                     Toast.makeText( getActivity().getApplicationContext(), "Non è stato possibile inviare la segnalazione", Toast.LENGTH_LONG).show();
                                 }
                             });

@@ -76,7 +76,6 @@ public class DettaglioIntervento extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //TODO: serve???
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
@@ -90,7 +89,6 @@ public class DettaglioIntervento extends AppCompatActivity {
             editor.apply();
 
         } else {
-            //TODO: perchè
             idTicket = sharedPrefs.getString("idSegnalazione", "").toString();
 
             bundle = new Bundle();
@@ -194,7 +192,7 @@ public class DettaglioIntervento extends AppCompatActivity {
                         ticketInterventoMap.get("stabile").toString(),
                         ticketInterventoMap.get("stato").toString(),
                         ticketInterventoMap.get("priorità").toString(),
-                        ticketInterventoMap.get("foto").toString(), // TODO: cambia DB
+                        ticketInterventoMap.get("foto").toString(),
                         ticketInterventoMap2.get("nome_azienda").toString(),
                         ticketInterventoMap2.get("nome").toString(),
                         ticketInterventoMap2.get("categoria").toString()
@@ -243,7 +241,6 @@ public class DettaglioIntervento extends AppCompatActivity {
                         mStato.setText("Intervento Completato");
                         break;
                     }
-                    //TODO : case "archiviato":
 
                     default:
                 }

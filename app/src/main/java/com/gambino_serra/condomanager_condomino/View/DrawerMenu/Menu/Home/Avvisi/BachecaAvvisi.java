@@ -22,6 +22,7 @@ package com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Avvis
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,7 @@ import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +62,7 @@ public class BachecaAvvisi extends Fragment {
 
     private Firebase firebaseDB;
     private FirebaseAuth firebaseAuth;
+    private SimpleDateFormat today;
 
     private String uidCondomino;
     private String stabile;
@@ -106,7 +109,7 @@ public class BachecaAvvisi extends Fragment {
         uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
         firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
 
-
+        //today = DataFormat(); TODO: salva la data odiarna per visualizzare solo gli avvisi non scaduti
 
 
         firebaseDB.child("stabile").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -140,7 +143,7 @@ public class BachecaAvvisi extends Fragment {
                             );
 
 
-                            // TODO : if ( avvisoMap.get("scadenza").toDate  <  oggy  )
+                            if( avviso.getDataScadenza() >)
                             avvisi.add(avviso);
                         }
                         catch (NullPointerException e) {
@@ -182,4 +185,16 @@ public class BachecaAvvisi extends Fragment {
         });
 
     }
+
+
+
+    private String DataFormat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+        String timestamp = sdf.format(new Date());
+        return timestamp;
+    }
+
+
+
+
 }

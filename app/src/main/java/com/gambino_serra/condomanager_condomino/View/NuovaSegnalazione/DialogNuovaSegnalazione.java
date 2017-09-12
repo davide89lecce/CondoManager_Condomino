@@ -128,13 +128,13 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
 
                         //SALVA IMMAGINE IN STORAGE FIREBASE
-                        //TODO: inserire controllo nel caso in cui non ci siano foto allegat
+
                         if ( UriImmagine != null) {
                             filepath = mStorage.child("Photo").child(UriImmagine.getLastPathSegment());
 
                             filepath.putFile(UriImmagine).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {//TODO : Nono funzionano i Toast
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                                     urlpath = taskSnapshot.getDownloadUrl();
 
@@ -158,20 +158,20 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) { //TODO: problemi su contesto Toast
+                                public void onFailure(@NonNull Exception e) {
                                     Toast.makeText( getActivity().getApplicationContext() , "Non è stato possibile inviare la segnalazione", Toast.LENGTH_LONG).show();
                                 }
                             });
 
-                            Toast.makeText(getActivity().getApplicationContext(), "Segnalazione Inviata con Successo", Toast.LENGTH_LONG).show();
-                            // DA CHIEDERE SE SERVE ANCORA
+                            Toast.makeText(getActivity().getApplicationContext(), "Segnalazione inviata con successo", Toast.LENGTH_LONG).show();
+
                             final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPrefs.edit();
                             editor.putString("descrizioneSegnalazione", descrizioneSegnalazione);
                             editor.apply();
                         }else{
                             addSegnalazioneCondomino(databaseReference,descrizioneSegnalazione,"-","-");
-                            Toast.makeText(getActivity().getApplicationContext(), "Segnalazione Inviato con Successo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Segnalazione inviata con successo", Toast.LENGTH_LONG).show();
                         }
 
 
