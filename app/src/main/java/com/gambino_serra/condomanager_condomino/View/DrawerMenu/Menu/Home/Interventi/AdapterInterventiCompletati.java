@@ -98,12 +98,12 @@ public class AdapterInterventiCompletati extends RecyclerView.Adapter<AdapterInt
                 break;
             }
             case "completato":   // intervento concluso
+            case "archiviato" :
             {
                 mLogoStato.setImageResource(R.drawable.tool_green);
                 mStato.setText("Intervento Completato");
                 break;
             }
-            //TODO : case "archiviato":
 
             default:
         }
