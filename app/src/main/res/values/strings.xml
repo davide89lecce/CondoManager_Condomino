@@ -66,7 +66,7 @@
     <string name="title_condomino_home">Condomino home</string>
     <string name="title_details_segnalazione">Dettagli segnalazione</string>
 
-    <!-- old_content_login -->
+    <!-- content_login -->
     <string name="enter_mail"> Enter mail</string>
     <string name="enter_password">Enter password</string>
     <string name="str_login">LOGIN</string>

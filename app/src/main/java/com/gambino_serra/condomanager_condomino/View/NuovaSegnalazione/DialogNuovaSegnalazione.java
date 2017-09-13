@@ -110,7 +110,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         title.setText(R.string.title_nuova_segnalazione);
         title.setGravity(Gravity.CENTER);
         title.setTextSize(30);
-        title.setBackgroundResource(R.color.primarySegnalazione);
+        title.setBackgroundResource(R.color.colorPrimary);
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 

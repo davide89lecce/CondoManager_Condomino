@@ -143,7 +143,7 @@ public class BachecaAvvisi extends Fragment {
                             );
 
 
-                            if( avviso.getDataScadenza() >)
+                            // TODO : if( avviso.getDataScadenza() )
                             avvisi.add(avviso);
                         }
                         catch (NullPointerException e) {
