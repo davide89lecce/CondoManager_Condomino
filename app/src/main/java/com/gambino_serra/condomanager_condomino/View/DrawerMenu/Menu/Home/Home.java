@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Avvisi.BachecaAvvisi;
 import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.BachecaInterventi;
@@ -29,6 +30,7 @@ public class Home extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    TextView TitoloSezione;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2;
     FrameLayout fl;
@@ -81,6 +83,8 @@ public class Home extends Fragment {
         //FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         //transaction.replace(R.id.frame_layout, childFragment).commit();
 
+        TitoloSezione = (TextView) getActivity().findViewById(R.id.D_SezioneTab);
+
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -91,18 +95,21 @@ public class Home extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.action_item1:
                                 selectedFragment = BachecaSondaggi.newInstance();
+                                TitoloSezione.setText("BACHECA SONDAGGI");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = BachecaAvvisi.newInstance();
+                                TitoloSezione.setText("BACHECA AVVISI");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = BachecaInterventi.newInstance();
+                                TitoloSezione.setText("BACHECA INTERVENTI");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
@@ -115,7 +122,7 @@ public class Home extends Fragment {
                         return true;
                     }
                 });
-
+// TODO : cerca animazione per tab da sx a dx
         //Manually displaying the first Menu - one time only
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, BachecaAvvisi.newInstance());
@@ -124,6 +131,7 @@ public class Home extends Fragment {
         bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
+        TitoloSezione.setText("BACHECA AVVISI");
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
