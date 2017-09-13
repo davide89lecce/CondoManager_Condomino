@@ -154,6 +154,7 @@ public class StoricoInterventi extends Fragment {
                                     ticketInterventoMap.get("priorità").toString(),
                                     "ciao","ciao","ciao","ciao");//TODO
 
+                            if ( "completato".equals(ticketIntervento.getStato()) || "archiviato".equals(ticketIntervento.getStato()) )
                             interventi.add(ticketIntervento);
                         }
                         catch (NullPointerException e)
