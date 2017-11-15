@@ -19,21 +19,18 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="CondoManager Condomino"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.gambino_serra.condomanager_condomino.condomanager_condomino"
-        >
+        android:name="com.gambino_serra.condomanager_condomino.condomanager_condomino" >
+
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.Login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name="com.gambino_serra.condomanager_condomino.View.Login.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -41,19 +38,47 @@
         </activity>
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Interventi.old.DettaglioIntervento"
-            android:label="@string/title_details_segnalazione"
+            android:name="com.gambino_serra.condomanager_condomino.View.Login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.Home.Interventi.DettaglioIntervento"
+            android:label="Dettaglio intervento"
             android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Messaggi.DettaglioMessaggio"
-            android:label="@string/title_details_segnalazione"
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Messaggi.DettaglioMessaggio"
+            android:label="Dettaglio messaggio"
             android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori.DettaglioFornitore"
-            android:label="@string/title_details_segnalazione"
+            android:name="com.gambino_serra.condomanager_condomino.View.Home.Sondaggi.DettagliSondaggi.SondaggioSceltaMultipla"
+            android:label="Dettagli sondaggio scelta multipla"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.Home.Sondaggi.DettagliSondaggi.SondaggioSceltaSingola"
+            android:label="Dettagli sondaggio scelta singola"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.Home.Sondaggi.DettagliSondaggi.SondaggioRating"
+            android:label="Dettagli sondaggio rating"
+            android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.gambino_serra.condomanager_condomino.View.DrawerMenu.ListaFornitori.DettaglioFornitore"
+            android:label="Dettagli fornitore"
             android:parentActivityName="com.gambino_serra.condomanager_condomino.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
 

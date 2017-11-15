@@ -178,11 +178,11 @@ public class DialogNuovoMessaggio extends DialogFragment {
                     }
 
                 }).setNeutralButton(R.string.nuova_segnalazione_annulla, new DialogInterface.OnClickListener() {
-                    @TargetApi(Build.VERSION_CODES.M)
-                    public void onClick(DialogInterface dialog, int id) {
-                        dismiss();
-                        }
-                });
+            @TargetApi(Build.VERSION_CODES.M)
+            public void onClick(DialogInterface dialog, int id) {
+                dismiss();
+            }
+        });
         return builder.create();
     }
 
@@ -210,7 +210,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
                         public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
                             if(dataSnapshot.getKey().toString().equals("amministratore")) {
                                 uidAmministratore = dataSnapshot.getValue().toString();
-                                }
+                            }
                         }
                         @Override
                         public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {}
@@ -243,7 +243,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
                 Intent intentGallery = new Intent(Intent.ACTION_PICK);
                 intentGallery.setType("image/*");
                 startActivityForResult(intentGallery,GALLERY_INTENT);
-                }
+            }
         });
 
 
@@ -276,16 +276,16 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, UriImmagine);
-                    }
+                }
                 else {
                     File file = new File(UriImmagine.getPath());
                     Uri photoUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), getActivity().getApplicationContext().getPackageName() + ".provider", file);
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                    }
+                }
                 intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 if (intentCamera.resolveActivity(getActivity().getApplicationContext().getPackageManager()) != null) {
                     startActivityForResult(intentCamera, TAKE_PICTURE);
-                    }
+                }
 
                 //startActivityForResult(intentCamera,TAKE_PICTURE);
             }
@@ -300,7 +300,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyyMMdd_HHmmss");
         String timestamp = sdf.format(new Date());
         return "CondomanagerPhoto" + timestamp + ".jpg";
-        }
+    }
 
 
     @Override
@@ -311,7 +311,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        }
+    }
 
     @Override
     public void onDetach() {
@@ -339,7 +339,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 if (counter == null) {
                     return Transaction.success(mutableData);
-                    }
+                }
 
                 //Incrementa counter
                 counter = counter + 1;
@@ -351,12 +351,25 @@ public class DialogNuovoMessaggio extends DialogFragment {
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
                 //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
-                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Messaggio", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto, urlFoto);
+                //MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Messaggio", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto, urlFoto);
 
                 //Setta il nome del nodo del messaggio (key)
-                mutableData.child(counter.toString()).setValue(m);
+                //mutableData.child(counter.toString()).setValue(m);
+
+                mutableData.child(counter.toString()).child("id").setValue(counter);
+                mutableData.child(counter.toString()).child("data").setValue(stringdate);
+                mutableData.child(counter.toString()).child("foto").setValue(percorsoFoto);
+                mutableData.child(counter.toString()).child("letto").setValue("no");
+                mutableData.child(counter.toString()).child("messaggio").setValue(descrizioneSegnalazione);
+                mutableData.child(counter.toString()).child("stabile").setValue(stabile);
+                mutableData.child(counter.toString()).child("tipologia").setValue("Messaggio");
+                mutableData.child(counter.toString()).child("uidAmministratore").setValue(uidAmministratore);
+                mutableData.child(counter.toString()).child("uidCondomino").setValue(uidCondomino);
+                mutableData.child(counter.toString()).child("url").setValue(urlFoto);
+
                 //Setta il counter del nodo Messaggi_condomino
                 mutableData.child("counter").setValue(counter);
+
 
                 return Transaction.success(mutableData);
 
@@ -366,7 +379,7 @@ public class DialogNuovoMessaggio extends DialogFragment {
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
                 // Transaction completed
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-                }
+            }
         });
     }
 
@@ -385,29 +398,29 @@ public class DialogNuovoMessaggio extends DialogFragment {
                 if ( requestCode == GALLERY_INTENT ){
                     // Sovrascrive l'uri dell'immagine da stampare ogni volta che viene restituita una photo con ActivityResult
                     UriImmagine = data.getData();
-                    }
+                }
 
                 // ci servirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase
                 InputStream inputStream;
 
                 try
-                    {
+                {
                     inputStream = getContext().getContentResolver().openInputStream(UriImmagine);
 
                     // Mappiamo la view per visualizzare l'input stream a schermo
                     Bitmap bt = BitmapFactory.decodeStream(inputStream);
                     mImmagine.setImageBitmap(bt);
 
-                        mImmagine.getLayoutParams().width = 720;
-                        mImmagine.getLayoutParams().height = 480;
-                        mImmagine.requestLayout();
+                    mImmagine.getLayoutParams().width = 720;
+                    mImmagine.getLayoutParams().height = 480;
+                    mImmagine.requestLayout();
 
-                    }
+                }
                 catch (FileNotFoundException e)
-                    {
+                {
                     e.printStackTrace();
                     Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'immagine", Toast.LENGTH_LONG).show();
-                    }
+                }
             }
         }
     }

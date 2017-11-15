@@ -184,7 +184,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                     @TargetApi(Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int id) {
                         dismiss();
-                        }
+                    }
                 });
 
         return builder.create();
@@ -248,7 +248,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
                 Intent intentGallery = new Intent(Intent.ACTION_PICK);
                 intentGallery.setType("image/*");
                 startActivityForResult(intentGallery,GALLERY_INTENT);
-                }
+            }
         });
 
 
@@ -283,17 +283,17 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, UriImmagine);
-                    }
+                }
                 else {
                     File file = new File(UriImmagine.getPath());
                     Uri photoUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), getActivity().getApplicationContext().getPackageName() + ".provider", file);
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                    }
+                }
                 intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                 if (intentCamera.resolveActivity(getActivity().getApplicationContext().getPackageManager()) != null) {
                     startActivityForResult(intentCamera, TAKE_PICTURE);
-                    }
+                }
 
                 //startActivityForResult(intentCamera,TAKE_PICTURE);
             }
@@ -308,7 +308,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyyMMdd_HHmmss");
         String timestamp = sdf.format(new Date());
         return "CondomanagerPhoto" + timestamp + ".jpg";
-        }
+    }
 
 
     @Override
@@ -319,7 +319,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        }
+    }
 
     @Override
     public void onDetach() {
@@ -359,10 +359,24 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 //Instanziamo un nuovo oggetto MessaggioCondomino contenente tutte le informazioni
                 //per la creazione di un nuovo nodo Messaggi_condomino su Firebase
-                MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Segnalazione", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto, urlFoto);
+                //MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Segnalazione", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto, urlFoto);
 
                 //Setta il nome del nodo del messaggio (key)
-                mutableData.child(counter.toString()).setValue(m);
+                //mutableData.child(counter.toString()).setValue(m);
+
+
+                mutableData.child(counter.toString()).child("id").setValue(counter);
+                mutableData.child(counter.toString()).child("data").setValue(stringdate);
+                mutableData.child(counter.toString()).child("foto").setValue(percorsoFoto);
+                mutableData.child(counter.toString()).child("letto").setValue("no");
+                mutableData.child(counter.toString()).child("messaggio").setValue(descrizioneSegnalazione);
+                mutableData.child(counter.toString()).child("stabile").setValue(stabile);
+                mutableData.child(counter.toString()).child("tipologia").setValue("Segnalazione");
+                mutableData.child(counter.toString()).child("uidAmministratore").setValue(uidAmministratore);
+                mutableData.child(counter.toString()).child("uidCondomino").setValue(uidCondomino);
+                mutableData.child(counter.toString()).child("url").setValue(urlFoto);
+
+
                 //Setta il counter del nodo Messaggi_condomino
                 mutableData.child("counter").setValue(counter);
 
@@ -393,7 +407,7 @@ public class DialogNuovaSegnalazione extends DialogFragment {
 
                 if ( requestCode == GALLERY_INTENT ){
                     // Sovrascrive l'uri dell'immagine da stampare ogni volta che viene restituita una photo con ActivityResult
-                   UriImmagine = data.getData();
+                    UriImmagine = data.getData();
                 }
 
                 // ci servirà per visualizzare l'immagine selezionata prima di inviarla e salvarla su Firebase

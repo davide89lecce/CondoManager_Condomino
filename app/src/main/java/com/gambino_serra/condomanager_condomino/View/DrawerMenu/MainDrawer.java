@@ -16,14 +16,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Home.Home;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.InformazioniPersonali.InformazioniPersonali;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.ListaFornitori.ListaFornitori;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.Messaggi.BachecaMessaggi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.StoricoAvvisi.StoricoAvvisi;
-import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Menu.StoricoInterventi.StoricoInterventi;
+import com.gambino_serra.condomanager_condomino.View.Home.Home;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.InformazioniPersonali.InformazioniPersonali;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.ListaFornitori.ListaFornitori;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.Messaggi.BachecaMessaggi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.StoricoAvvisi.StoricoAvvisi;
+import com.gambino_serra.condomanager_condomino.View.DrawerMenu.StoricoInterventi.StoricoInterventi;
 import com.gambino_serra.condomanager_condomino.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -137,13 +135,13 @@ public class MainDrawer extends AppCompatActivity {
         // If mPendingRunnable is not null, then add to the message queue
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
-             }
+        }
 
         //Closing drawer on item click
         drawer.closeDrawers();
 
         // refresh toolbar menu
-       // invalidateOptionsMenu();
+        // invalidateOptionsMenu();
     }
 
     private Fragment getHomeFragment() {
@@ -189,7 +187,7 @@ public class MainDrawer extends AppCompatActivity {
         navigationView.getMenu().getItem(4).setChecked(false);
         navigationView.getMenu().getItem(5).setChecked(false);
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
-        }
+    }
 
     private void setUpNavigationView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu

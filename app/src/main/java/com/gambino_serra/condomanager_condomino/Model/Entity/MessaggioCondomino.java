@@ -1,6 +1,7 @@
 package com.gambino_serra.condomanager_condomino.Model.Entity;
 
 
+
 public class MessaggioCondomino {
 
     private String id;

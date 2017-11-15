@@ -55,4 +55,9 @@ public class FirebaseDB {
         firebase = new Firebase(DB + "Fornitori");
         return firebase;
     }
+
+    public static synchronized Firebase getSondaggi(){
+        firebase = new Firebase(DB + "Sondaggi");
+        return firebase;
+    }
 }

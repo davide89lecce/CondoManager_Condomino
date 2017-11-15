@@ -61,10 +61,7 @@
     <!-- title activity -->
     <string name="title_login">Login</string>
     <string name="title_register">Registration</string>
-    <string name="title_amministratore_home">Segnalazioni</string>
-    <string name="title_fornitore_home">Fornitore home</string>
     <string name="title_condomino_home">Condomino home</string>
-    <string name="title_details_segnalazione">Dettagli segnalazione</string>
 
     <!-- content_login -->
     <string name="enter_mail"> Enter mail</string>
