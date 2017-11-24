@@ -18,14 +18,15 @@
 
 
     <application
+        android:name="com.gambino_serra.condomanager_condomino.condomanager_condomino"
+        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="CondoManager Condomino"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="com.gambino_serra.condomanager_condomino.condomanager_condomino" >
+        android:theme="@style/AppTheme">
 
 
         <activity
